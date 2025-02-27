@@ -15,6 +15,6 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
-  base: '/portfolio_elodie/',  // Remplace 'nom-du-repo' par le nom de ton dépôt GitHub
+  base: '/elodie_portfolio/',  // Remplace 'nom-du-repo' par le nom de ton dépôt GitHub
 
 })
