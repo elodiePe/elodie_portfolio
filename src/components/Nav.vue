@@ -56,10 +56,10 @@ function isActive(pathOrName) {
           </RouterLink>
 
           <RouterLink
-            to="/tailwind"
+            to="/contact"
             class="flex items-center gap-2 px-3 py-2 rounded transform transition-transform duration-150 hover:scale-110"
-            :aria-current="isActive('tailwind') ? 'page' : null"
-            :class="{ 'flex items-center gap-3 px-2 py-2 rounded-md transition-colors duration-150 bg-accent text-brand shadow-md': isActive('tailwind') }"
+            :aria-current="isActive('contact') ? 'page' : null"
+            :class="{ 'flex items-center gap-3 px-2 py-2 rounded-md transition-colors duration-150 bg-accent text-brand shadow-md': isActive('contact') }"
           >
             <!-- <IconTooling class="w-5 h-5" /> -->
             <span class="hidden sm:inline text-lg">Contact me</span>
