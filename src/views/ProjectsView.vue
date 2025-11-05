@@ -12,6 +12,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <main class="mx-auto max-w-screen-lg px-4 md:pt-20 pb-20 md:pb-0 pt-8 sm:pt-0 ">
   <h1>Projects</h1>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     <Card
@@ -23,6 +24,7 @@ onMounted(() => {
       :projectId="project.id.toString()"
     />
   </div>
+    </main>
 </template>
 
 <style>

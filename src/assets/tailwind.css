@@ -1,9 +1,24 @@
 /* @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities"; */
-
 @tailwind base;
 @tailwind components;
-@tailwind utilities; 
+@tailwind utilities;
 
- 
+:root {
+  --color-brand: #422D79;
+  --color-accent: #FFFDEB;
+  --color-bg: #ffffff;
+  --color-foreground: #111827;
+}
+
+/* applique le background et la couleur de texte globalement */
+@layer base {
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-foreground);
+    min-height: 100vh; /* assure que le fond couvre toute la page */
+    @apply font-poppins;
+  }
+
+}

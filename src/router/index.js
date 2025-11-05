@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import TailwindVue from '../views/TailwindVue.vue'
+import ContactdVue from '../views/Contact.vue'
 import ProjectsView from '../views/ProjectsView.vue'
 import ProjectView from '@/views/ProjectView.vue'
 
@@ -13,9 +13,9 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: '/tailwind',
-      name: 'tailwind',
-      component: TailwindVue,
+      path: '/contact',
+      name: 'contact',
+      component: ContactdVue,
     },
     {
       path: '/projects',
