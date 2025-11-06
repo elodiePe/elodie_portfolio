@@ -2,41 +2,81 @@
     {
         "id": 1,
         "title": "Vaud Sneiter",
-        "description": "Description for project 1",
-        "image": "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
+        "description": "Conception d'une identité visuelle et d'une interface responsive pour une application de bien‑être locale, incluant recherche utilisateur, wireframes, prototypes Figma et tests d'utilisabilité. Objectif : améliorer l'engagement et la conversion grâce à une expérience simple et chaleureuse.",
+        "images": [
+            "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
+            "https://img.daisyui.com/images/stock/photo-1496181133206-80ce9b88a853.webp",
+            "https://img.daisyui.com/images/stock/photo-1496307042754-b4aa456c4a2d.webp"
+        ],
         "website": "https://www.google.com",
-        "figma": "https://www.figma.com"
+        "figma": "https://www.figma.com",
+        "tags": ["ux", "ui", "user research", "figma", "coding", "drawings"],
+  "date": "2023-11-15"
+
     },
     {
         "id": 2,
         "title": "Project 2",
         "description": "Description for project 2",
-        "image": "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
+        "images": [
+            "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
+            "https://img.daisyui.com/images/stock/photo-1544005313-94ddf0286df2.webp",
+            "https://img.daisyui.com/images/stock/photo-1496307042754-b4aa456c4a2d.webp"
+        ],
         "website": "https://www.google.com",
-        "figma": "https://www.figma.com"
+        "figma": "https://www.figma.com",
+        "tags":["ux","ui"]
     },
     {
         "id": 3,
         "title": "Project 2",
         "description": "Description for project 2",
-        "image": "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
+        "images": [
+            "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
+            "https://img.daisyui.com/images/stock/photo-1544005313-94ddf0286df2.webp",
+            "https://img.daisyui.com/images/stock/photo-1496307042754-b4aa456c4a2d.webp"
+        ],
         "website": "https://www.google.com",
-        "figma": "https://www.figma.com"
+        "figma": "https://www.figma.com",
+        "tags":["art","drawings"]
     },
     {
         "id": 4,
         "title": "Project 2",
         "description": "Description for project 2",
-        "image": "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
+        "images": [
+            "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
+            "https://img.daisyui.com/images/stock/photo-1544005313-94ddf0286df2.webp",
+            "https://img.daisyui.com/images/stock/photo-1496307042754-b4aa456c4a2d.webp"
+        ],
         "website": "https://www.google.com",
-        "figma": "https://www.figma.com"
+        "figma": "https://www.figma.com",
+        "tags":["ux","ui"]
     },
     {
         "id": 5,
         "title": "Project 2",
         "description": "Description for project 2",
-        "image": "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
+        "images": [
+            "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
+            "https://img.daisyui.com/images/stock/photo-1544005313-94ddf0286df2.webp",
+            "https://img.daisyui.com/images/stock/photo-1496307042754-b4aa456c4a2d.webp"
+        ],
         "website": "https://www.google.com",
-        "figma": "https://www.figma.com"
+        "figma": "https://www.figma.com",
+        "tags":["ux","ui"]
+    },
+     {
+        "id": 6,
+        "title": "Project 2",
+        "description": "Description for project 2",
+        "images": [
+            "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
+            "https://img.daisyui.com/images/stock/photo-1544005313-94ddf0286df2.webp",
+            "https://img.daisyui.com/images/stock/photo-1496307042754-b4aa456c4a2d.webp"
+        ],
+        "website": "https://www.google.com",
+        "figma": "https://www.figma.com",
+        "tags":["ux","ui"]
     }
 ]

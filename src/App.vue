@@ -2,10 +2,11 @@
 import { RouterLink, RouterView } from 'vue-router'
 
 import Nav from './components/Nav.vue'
+import Footer from './components/footer.vue'
 </script>
 
 <template>
-<div class="sm:hidden fixed inset-x-0 top-0 bg-brand shadow-md z-50">
+<div class="sm:hidden fixed inset-x-0 top-0 bg-brand shadow-md z-50 ">
   <div class="max-w-4xl mx-auto flex items-center h-14 px-4">
     <RouterLink to="/" class="flex items-center">
 
@@ -20,11 +21,11 @@ import Nav from './components/Nav.vue'
 
   <!-- <div class="w-3/4 mx-auto mt-4 "> -->
 
-  
-
 
 <RouterView />
   <!-- </div> -->
+
+  <Footer></Footer>
 
 </template>
 

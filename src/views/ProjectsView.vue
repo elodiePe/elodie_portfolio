@@ -1,35 +1,100 @@
 // filepath: /c:/Users/elodi/Desktop/portfolio_elodie/src/views/ProjectsView.vue
 <script setup>
-import { ref, onMounted } from 'vue';
-import Card from '../components/Card.vue';
-import projectsData from '../assets/projects.json';
+import { ref, computed } from 'vue'
+import Card from '../components/Card.vue'
+import projectsData from '../assets/projects.json'
+import Tag from '../components/TagFilter.vue'
 
-const projects = ref([]);
+// selected tag keys (normalized lower-case)
+const selected = ref([])
 
-onMounted(() => {
-  projects.value = projectsData;
-});
+// gather unique tags from projects and keep display form
+const tagMap = new Map()
+for (const p of projectsData) {
+  const tags = p.tags || []
+  for (const t of tags) {
+    const key = (t || '').toString().trim()
+    if (!key) continue
+    const norm = key.toLowerCase()
+    if (!tagMap.has(norm)) tagMap.set(norm, key)
+  }
+}
+
+// array of tag objects for rendering
+const allTags = Array.from(tagMap.entries()).map(([key, label]) => ({ key, label }))
+
+function toggleTag(key) {
+  const idx = selected.value.indexOf(key)
+  if (idx === -1) selected.value.push(key)
+  else selected.value.splice(idx, 1)
+}
+
+function clearFilters() {
+  selected.value = []
+}
+
+const filteredProjects = computed(() => {
+  // if no filters selected, show all
+  if (!selected.value.length) return projectsData
+  return projectsData.filter((p) => {
+    const tags = (p.tags || []).map((t) => t.toString().toLowerCase())
+    // check that every selected tag key is present in project's tags
+    return selected.value.every((sel) => tags.includes(sel))
+  })
+})
 </script>
 
 <template>
-  <main class="mx-auto max-w-screen-lg px-4 md:pt-20 pb-20 md:pb-0 pt-8 sm:pt-0 ">
-  <h1>Projects</h1>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    <Card
-      v-for="(project, index) in projects"
-      :key="index"
-      :title="project.title"
-      :description="project.description"
-      :image="project.image"
-      :projectId="project.id.toString()"
-    />
-  </div>
-    </main>
+  <main class="mx-auto max-w-screen-lg px-4 md:pt-20 pb-20 md:pb-0 pt-8 sm:pt-0">
+    <nav aria-label="Breadcrumb" class="mb-4 text-sm">
+      <ol class="flex items-center space-x-2">
+        <li>
+          <router-link to="/" class="text-gray-600 hover:underline">Home</router-link>
+        </li>
+        <li class="text-gray-400">/</li>
+        <li aria-current="page" class="text-gray-900">Projects</li>
+      </ol>
+    </nav>
+
+    <div class="flex items-center justify-between mb-4">
+      <h1 class="font-bold text-2xl">My Projects</h1>
+    </div>
+
+    <!-- tag filters -->
+    <div class="mb-6 flex flex-wrap gap-2 items-center">
+      <div class="flex flex-wrap gap-2">
+        <Tag
+          v-for="tag in allTags"
+          :key="tag.key"
+          :label="tag.label"
+          :active="selected.includes(tag.key)"
+          @click="toggleTag(tag.key)"
+          class="tag-button"
+        </Tag>
+      </div>
+
+      <div class="ml-auto">
+        <button v-if="selected.length" @click="clearFilters" class="text-sm text-gray-500 underline">Clear filters</button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <Card
+        v-for="(project, index) in filteredProjects"
+        :key="project.id || index"
+        :title="project.title"
+        :description="project.description"
+        :image="project.images[0]"
+        :projectId="project.id.toString()"
+      />
+      <p v-if="!filteredProjects.length" class="col-span-full text-center text-gray-500">
+        No projects available with the selected filters.
+      </p>
+    </div>
+  </main>
 </template>
 
 <style>
-.grid {
-  display: grid;
-  gap: 1rem;
-}
+/* small helper: ensure buttons don't shrink */
+.tag-button { white-space: nowrap }
 </style>

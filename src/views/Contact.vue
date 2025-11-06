@@ -38,13 +38,14 @@ async function onSubmit(e) {
   <main class="mx-auto max-w-screen-lg px-4 md:pt-20 pb-20 md:pb-0 pt-8 sm:pt-0">
     <div class="mb-6 flex justify-center md:justify-start">
       <div
-      class="w-full h-28 md:w-full md:h-32 rounded-lg shadow-sm bg-gradient-to-br from-brand to-accent"
-      aria-hidden="true"
+        class="w-full h-28 md:w-full md:h-32 rounded-lg shadow-sm bg-gradient-to-br from-brand to-accent relative overflow-hidden"
+        aria-hidden="true"
       >
-      <h1 class="text-4xl md:text-4xl font-bold text-center text-accent pt-10">Contact me</h1>
+
+        <h1 class="text-4xl md:text-4xl font-bold text-center text-accent pt-10 pointer-events-none">Contact me</h1>
+      </div>
     </div>
 
-    </div>
     <form ref="formRef" @submit="onSubmit" class="space-y-6 bg-base-100 p-6 rounded-lg shadow-md bg-white">
       <!-- Name + Email on the same line (responsive) -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

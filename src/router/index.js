@@ -6,6 +6,11 @@ import ProjectView from '@/views/ProjectView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  // ensure navigation scrolls to top for new pages (useful when clicking "View" cards)
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) return savedPosition
+    return { left: 0, top: 0 }
+  },
   routes: [
     {
       path: '/',
