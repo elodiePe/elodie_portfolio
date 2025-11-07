@@ -1,6 +1,7 @@
 // filepath: /c:/Users/elodi/Desktop/portfolio_elodie/src/views/ProjectsView.vue
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import Card from '../components/Card.vue'
 import projectsData from '../assets/projects.json'
 import Tag from '../components/TagFilter.vue'
@@ -23,7 +24,16 @@ for (const p of projectsData) {
 // array of tag objects for rendering
 const allTags = Array.from(tagMap.entries()).map(([key, label]) => ({ key, label }))
 
-function toggleTag(key) {
+function toggleTag(keyOrLabel) {
+  // accept either normalized key or label emitted by TagFilter
+  let key = (keyOrLabel || '').toString().toLowerCase().trim()
+  if (!tagMap.has(key)) {
+    // try to find matching key by label (case-insensitive)
+    for (const [k, v] of tagMap.entries()) {
+      if (v.toLowerCase() === key) { key = k; break }
+    }
+  }
+  if (!key) return
   const idx = selected.value.indexOf(key)
   if (idx === -1) selected.value.push(key)
   else selected.value.splice(idx, 1)
@@ -41,6 +51,25 @@ const filteredProjects = computed(() => {
     // check that every selected tag key is present in project's tags
     return selected.value.every((sel) => tags.includes(sel))
   })
+})
+
+// initialize from route query param `tags` (comma-separated keys)
+const route = useRoute()
+onMounted(() => {
+  const q = route.query.tags
+  if (q) {
+    const list = Array.isArray(q) ? q : String(q).split(',')
+    const normalized = list.map(s => String(s).toLowerCase().trim()).filter(Boolean)
+    // keep only known tags
+    selected.value = normalized.filter(k => tagMap.has(k))
+  }
+})
+
+// update when route changes
+watch(() => route.query.tags, (val) => {
+  if (!val) { selected.value = []; return }
+  const list = Array.isArray(val) ? val : String(val).split(',')
+  selected.value = list.map(s => String(s).toLowerCase().trim()).filter(k => tagMap.has(k))
 })
 </script>
 
@@ -68,9 +97,9 @@ const filteredProjects = computed(() => {
           :key="tag.key"
           :label="tag.label"
           :active="selected.includes(tag.key)"
-          @click="toggleTag(tag.key)"
+          @toggle="toggleTag"
           class="tag-button"
-        </Tag>
+        />
       </div>
 
       <div class="ml-auto">

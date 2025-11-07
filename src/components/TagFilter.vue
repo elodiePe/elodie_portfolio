@@ -2,7 +2,7 @@
     <!-- TagFilter acts like a toggle button for filtering. Use a button so it doesn't navigate. -->
     <button
         type="button"
-        class="inline-flex items-center justify-center px-3 py-1 text-sm rounded-full transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-1"
+        class="inline-flex items-center justify-center px-3 py-1 text-sm rounded-md transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-1"
         :class="active ? activeClasses[colorKey] : colorClasses"
         @click="onClick"
         :aria-pressed="active ? 'true' : 'false'"
