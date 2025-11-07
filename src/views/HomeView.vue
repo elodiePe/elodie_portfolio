@@ -28,10 +28,14 @@
           />
           <div >
             <h1 class="hidden md:block text-5xl font-semibold text-brand pb-4">Elodie Perring</h1>
-            <p class="text-justify">My passion is <span class="text-2xl font-semibold">creation</span>, whether it's developing brand identities, designing layouts, building websites and designing innovative products that ensure a smooth user experience. I aspire to one day turn this passion into a concrete career. I also practice painting, creating designs for clothing and photography.</p>
-          <div class="mt-6 w-full flex justify-center md:justify-start">
-            <router-link to="/projects" aria-label="See all projects">
-              <Button>See all projects</Button>
+            <p >My passion is <span class="text-2xl font-semibold">creation</span>, whether it's developing brand identities, designing layouts, building websites and designing innovative products that ensure a smooth user experience. I aspire to one day turn this passion into a concrete career. I also practice painting, creating designs for clothing and photography.</p>
+          <div class="mt-6 w-full flex flex-col md:flex-row items-center justify-center md:justify-start gap-4">
+            <router-link to="/projects" aria-label="See all projects" class="w-full md:w-auto">
+              <Button class="w-full md:w-auto">See all projects</Button>
+            </router-link>
+
+            <router-link to="/projects" aria-label="Start a project" class="w-full md:w-auto">
+              <Button :color="'mint'" class="w-full md:w-auto">Do you want to start a project with me?</Button>
             </router-link>
           </div>
           </div>
@@ -39,7 +43,7 @@
  
 
     <section class="mt-10 w-full">
-<p class="mb-4 text-justify">
+<p class="mb-4 ">
   I study Media Engineering (bachelor), where I learned about the web (UX/UI, front-end, back-end, digital marketing and project management). Before that I focused mostly on graphic design, painting and photography. I am currently doing a master's in User Experience Design. 
 </p>
 
@@ -53,6 +57,7 @@
       { title: 'Product Design', desc: 'User flows, wireframes and prototypes focused on usability and delightful interactions.' },
       { title: 'Illustration', desc: 'Hand-drawn and digital illustrations for editorial, merchandise and print.' },
       { title: 'Photography', desc: 'Styling, shooting and retouching to communicate mood and story.' },
+      { title: 'Print & Apparel', desc: 'Layout, textile patterns and production-ready artwork for garments and printed matter.' },
       { title: 'Print & Apparel', desc: 'Layout, textile patterns and production-ready artwork for garments and printed matter.' }
     ]"
     :key="i"
@@ -67,17 +72,7 @@
       aria-hidden="true"
       focusable="false"
     >
-      <rect x="0" y="0" width="100" height="100" fill="#f6d365">
-        <animate
-          attributeName="fill"
-          attributeType="XML"
-          dur="15s"
-          repeatCount="indefinite"
-          calcMode="linear"
-          values="#F3E8FF;#FCE7F3;#D1FAE5;#E0F2FE;#FEF3C7;#FFFFFF;#F3E8FF"
-          keyTimes="0;0.1666667;0.3333333;0.5;0.6666667;0.8333333;1"
-        />
-      </rect>
+      <rect x="0" y="0" width="100" height="100" :fill="['#FDE8D9','#FBD5E1','#DFF7E6','#E6F4FF','#FFF4CC','#F3E8FF','#FCE7F3'][i % 7]" />
     </svg>
 
     <!-- Content layer -->
