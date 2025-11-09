@@ -18,7 +18,7 @@
 <template>
   <main class="mx-auto max-w-screen-lg px-4 md:pt-20 pb-20 md:pb-0 pt-8 sm:pt-0">
     
-    <div class="flex flex-col md:flex-row items-center gap-10">
+    <div class="flex flex-col md:flex-row items-center gap-10 pt-4">
                   <h1 class="sm:hidden text-5xl font-semibold text-brand pt-8 text-center">Elodie Perring</h1>
 
  <img
@@ -41,8 +41,20 @@
           </div>
         </div>
  
+  <div class="w-full rounded-md overflow-hidden h-64 md:h-96 mt-10">
+      <div class="relative w-full h-full">
+        <img
+          v-for="p in projectsList.filter(p => [1,2,3].includes(Number(p.id)))"
+          :key="p.id"
+          :src="getFirstImage(p)"
+          :alt="p.title || ('Project ' + p.id)"
+          class="slide absolute inset-0 w-full h-full object-cover"
+        />
+      </div>
+    </div>
 
     <section class="mt-10 w-full">
+
 <p class="mb-4 ">
   I study Media Engineering (bachelor), where I learned about the web (UX/UI, front-end, back-end, digital marketing and project management). Before that I focused mostly on graphic design, painting and photography. I am currently doing a master's in User Experience Design. 
 </p>
@@ -76,14 +88,14 @@
     </svg>
 
     <!-- Content layer -->
-    <div class="relative z-10 h-full flex flex-col justify-center p-6 text-white">
+    <div class="relative z-10 h-full flex flex-col justify-center p-6 text-[#3b2418]">
       <h3 class="text-lg md:text-xl font-semibold leading-tight drop-shadow-sm">{{ cap.title }}</h3>
 
       <!-- description revealed on hover -->
       <p
-        class="mt-2 text-sm md:text-base max-h-0 opacity-0 group-hover:opacity-100 group-hover:max-h-40 transition-all duration-300 ease-in-out overflow-hidden"
+      class="mt-2 text-sm md:text-base max-h-0 opacity-0 group-hover:opacity-100 group-hover:max-h-40 transition-all duration-300 ease-in-out overflow-hidden"
       >
-        {{ cap.desc }}
+      {{ cap.desc }}
       </p>
     </div>
 
@@ -96,8 +108,7 @@
 </div>
 
 </section>
-
-</main>
+  </main>
 
 </template>
  <style>
