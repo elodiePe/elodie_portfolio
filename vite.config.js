@@ -36,7 +36,18 @@ function generateDuplicateIndexIndexHtmlPlugin(){
         '/projects/7',
         '/projects/8',
         '/projects/9',
-        '/projects/10'
+        '/projects/10',
+        '/projects/11',
+        '/projects/12',
+        '/projects/13',
+        '/projects/14',
+        '/projects/15',
+        '/projects/16',
+        '/projects/17',
+        '/projects/18',
+        '/projects/19',
+        '/projects/20',
+          
         // add more project IDs as needed
       ]
 
