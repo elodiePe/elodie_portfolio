@@ -1,82 +1,113 @@
 [
     {
         "id": 1,
-        "title": "Vaud Sneiter",
-        "description": "Conception d'une identité visuelle et d'une interface responsive pour une application de bien‑être locale, incluant recherche utilisateur, wireframes, prototypes Figma et tests d'utilisabilité. Objectif : améliorer l'engagement et la conversion grâce à une expérience simple et chaleureuse.",
+        "title": "Vaud Sentier",
+        "description": "VaudSentiers is a web application that invites tourists and residents to discover various places by following itineraries. I was in charge of the user experience and user interface design. </br> </br> To identify users needs, I did a quantitative survey. Once I had analysed the results, I identified key features. These included : <ol><li>- Searching for paths and places via a map or a search bar with filters.</li><li>- Starting navigation directly from the app.</li><li>- Sharing places and itineraries.</li><li>- Rating and commenting paths and itineraries.</li></ol>  </br> I then created low-fidelity prototypes, tested them, and improved the design based on feedback. </br> </br> After that, I made high-fidelity prototypes with colors and a graphic identity, using Google’s design system for consistency. I chose cheerful colors and used them to help users, with each search criteria having its own color.",
         "images": [
-            "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
-            "https://img.daisyui.com/images/stock/photo-1496181133206-80ce9b88a853.webp",
-            "https://img.daisyui.com/images/stock/photo-1496307042754-b4aa456c4a2d.webp"
+            "../assets/img/project_vaudsentier.png",
+            "../assets/img/project_vaudsentier_1.png"
         ],
-        "website": "https://www.google.com",
-        "figma": "https://www.figma.com",
-        "tags": ["ux", "ui", "user research", "figma", "coding", "drawings"],
-  "date": "2023-11-15"
-
+        "website": "https://www.vaudsentiers.ch",
+        "figma": "https://www.figma.com/design/Qfw43lvTlTthQ4UovmHn8v/RELLL---UI-UX?node-id=1564-17321&t=ejy0KVKyTaDJufvN-1",
+        "tags": [
+            "ux",
+            "ui",
+            "user research",
+            "figma"
+        ],
+        "info": "Background image by Ldgfr Photos (Adobe Stock)",
+        "date": "2024-06-15"
     },
     {
         "id": 2,
-        "title": "Project 2",
-        "description": "Description for project 2",
+        "title": "Life of eyes",
+        "description": "What emotions arise when we are surrounded by animals ? The sense of being watched and the intensity of their gaze is what I sought to capture in my artwork - <b>a representation of animals eyes staring at you </b>. <br/> <br/> To achieve this, I created eight 3D animal gazes using epoxy resin, expanded polystyrene, and acrylic paint. I meticulously painted the eyes on the polystyrene, then applied epoxy resin to mimic the cornea’s reflective surface. <br/> <br/> To enhance the feeling of being observed, I arranged the eyes close to one another on a black background, creating the impression that you’re surrounded by a multitude of animals, all gazing at you. I placed them in a rectangular white frame to further emphasize their presence and focus.",
         "images": [
-            "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
-            "https://img.daisyui.com/images/stock/photo-1544005313-94ddf0286df2.webp",
-            "https://img.daisyui.com/images/stock/photo-1496307042754-b4aa456c4a2d.webp"
+            "../assets/img/project_yeux.png",
+            "../assets/img/project_yeux_1.png"
         ],
-        "website": "https://www.google.com",
-        "figma": "https://www.figma.com",
-        "tags":["ux","ui"]
+        "tags": [
+            "art",
+            "painting"
+        ],
+        "date": "2021-06-20"
     },
     {
         "id": 3,
-        "title": "Project 2",
-        "description": "Description for project 2",
+        "title": "Card game",
+        "description": "<b> How to nurture a child’s love of animals ? </b> It’s a problem I’ve asked myself and I may have found the solution. Children are often very intrigued by unusual animals and they learn better and faster when they have fun. This is the reason why, in a team of four, we suggested to create a card game as an interactive and a fun way to spend quality family time . The card game we created regroups unusual animals in the world including important information about them. </br> </br> To create a card, information architecture is really important, even more so when the target audience is children, that’s why we’ve focused our work around information architecture. </br> </br> To help users understand the game and to have more information about these animals, I also created a prototype of an online wiki.",
         "images": [
-            "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
-            "https://img.daisyui.com/images/stock/photo-1544005313-94ddf0286df2.webp",
-            "https://img.daisyui.com/images/stock/photo-1496307042754-b4aa456c4a2d.webp"
+            "../assets/img/project_card.png",
+            "../assets/img/project_card_1.png"
         ],
-        "website": "https://www.google.com",
-        "figma": "https://www.figma.com",
-        "tags":["art","drawings"]
+        "tags": [
+            "ux",
+            "ui"
+        ],
+        "date": "2025-03-10",
+        "info": "Background image by Jacob Lund (Abobe stock)"
     },
     {
         "id": 4,
-        "title": "Project 2",
-        "description": "Description for project 2",
+        "title": "Unmatched",
+        "description": "Over the last few years, I have been learning flock printing on clothing, a technique that immediately captivated me. I have created my own brand called Unmatched with designs that I create that reflect my personality. ",
         "images": [
-            "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
-            "https://img.daisyui.com/images/stock/photo-1544005313-94ddf0286df2.webp",
-            "https://img.daisyui.com/images/stock/photo-1496307042754-b4aa456c4a2d.webp"
+            "../assets/img/project_mockup.png",
+            "../assets/img/project_mockup_1.png"
         ],
-        "website": "https://www.google.com",
-        "figma": "https://www.figma.com",
-        "tags":["ux","ui"]
+        "tags": [
+            "art",
+            "design",
+            "clothing"
+        ],
+        "date": "2024-01-15",
+        "info": "Mockup is made by Mr.Mockup"
     },
     {
         "id": 5,
-        "title": "Project 2",
-        "description": "Description for project 2",
+        "title": "Adopt your pet",
+        "description": "Adopt your pet is a Tinder for pets. The concept, born from the idea of 'A Tinder for pets', led us to create an app where SPCAs (Society for the Prevention of Cruelty to Animals) could list animals available for adoption, allowing users to swipe and find pets. I contributed to both the REST API development and front-end implementation using Vue.js. </br> </br> The application has these features : <ol> <li> - Communication between SPCAs and users</li> <li>- Liking and disliking pets by swiping </li> <li>- Filters If SPCAs : create, update, delete pets </li> </ol> </br> Although the project is complete, several improvements are needed, such as streamlining user access and optimizing image loading for better overall experience.    ",
         "images": [
-            "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
-            "https://img.daisyui.com/images/stock/photo-1544005313-94ddf0286df2.webp",
-            "https://img.daisyui.com/images/stock/photo-1496307042754-b4aa456c4a2d.webp"
+            "../assets/img/project_adoptyourpet.png",
+            "../assets/img/project_adoptyourpet_1.png"
         ],
-        "website": "https://www.google.com",
-        "figma": "https://www.figma.com",
-        "tags":["ux","ui"]
+        "website": "http://devmobil-adopteunanimal.onrender.com/",
+        "tags": [
+            "ui",
+            "coding"
+        ],
+        "date": "2024-12-05",
+        "info": "Background image by myself."
     },
-     {
+    {
         "id": 6,
-        "title": "Project 2",
-        "description": "Description for project 2",
+        "title": "AI video : advertisement",
+        "description": "As part of a course about artificial intelligence, I had the chance to test a few AI. In a group of three, we realised a advertisement for a Pizzeria in Florence, Italy, using only AI. We had this idea : Pizzas smells so good, that it  brings statues to life. </br> </br> To begin with, we created the script using ChatGPT with an iterative approach tweaking the prompts until all parts of the story were to our satisfaction. Once we had the script we could start to prompt images for the storyboard. </br> </br> Of a second step, we used MidJourney to create the images for the storyboard. The most challenging aspect was to achieve a coherent graphic atmosphere between images. We discovered that the trick was to use the exact same sentence in each prompt. Once images were created, we started to animated them, with Runway.</br> </br> Finally, we edited the video on Adobe Premier Pro and added a sound atmosphere. We also used ElevenLabs to create an Italian voice for our ad’s slogan. ",
         "images": [
-            "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
-            "https://img.daisyui.com/images/stock/photo-1544005313-94ddf0286df2.webp",
-            "https://img.daisyui.com/images/stock/photo-1496307042754-b4aa456c4a2d.webp"
+            "../assets/img/project_videoAI.png",
+            "https://youtu.be/gscp1yHJeHY"
         ],
-        "website": "https://www.google.com",
-        "figma": "https://www.figma.com",
-        "tags":["ux","ui"]
+        "tags": [
+            "video",
+            "AI"
+        ],
+        "date": "2025-01-21"
+    },
+    {
+        "id": 7,
+        "title": "Bruno Pesenti",
+        "description": "The last few years I had the privilege to collaborate with Bruno Pesenti, a watchmaker in Geneva, Switzerland. Throughout my collaboration with him, I was tasked with documenting and promoting his exceptional watch collection and craftsmanship. This involved creating a comprehensive print catalog of his collection, developing his brand identity through a custom-design logo, and building a website to serve as his digital presence. </br> </br> For the catalog, I took a hands-on approach to reflect Bruno Pesenti's personality in every detail. I wrote clear, detailed product descriptions, took elegant photographs designed a visually appealing layout with clean typography and elegant colors, and selected high-quality paper to enhance the presentation. The result is a catalog that showcases Bruno's work while reinforcing his brand's identity and the artistry of his timepieces. </br> </br> I designed and developed a website to showcase Bruno Pesenti’s work in a visually appealing and user-friendly way. Hand-coded with HTML and CSS, the site is fully customized and responsive. Through both the catalog and the website, I aimed to create a cohesive representation of Bruno Pesenti’s brand and work, helping to bring his rare knowledge to a broader audience. I still maintain and update the website as needed.",
+        "images": [
+            "../assets/img/project_brunopesenti.png",
+            "../assets/img/project_brunopesenti_1.png",
+            "../assets/img/project_brunopesenti_2.png"
+        ],
+        "website": "https://www.brunopesenti.ch",
+        "tags": [
+            "ux",
+            "ui",
+            "coding",
+            "design"
+        ]
     }
 ]

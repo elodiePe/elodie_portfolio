@@ -71,6 +71,17 @@ watch(() => route.query.tags, (val) => {
   const list = Array.isArray(val) ? val : String(val).split(',')
   selected.value = list.map(s => String(s).toLowerCase().trim()).filter(k => tagMap.has(k))
 })
+
+    const getFirstImage = (p) => {
+      // try common fields: images array, thumbnail, image
+      const img = (p.images && p.images[0]) || p.thumbnail || p.image
+      if (img) {
+        // if relative path to assets, make sure it's resolved by Vite
+        try { return new URL(img, import.meta.url).href } catch { return img }
+      }
+      // fallback placeholder
+      return new URL('../assets/project-1-placeholder.jpg', import.meta.url).href
+    }
 </script>
 
 <template>
@@ -113,7 +124,7 @@ watch(() => route.query.tags, (val) => {
         :key="project.id || index"
         :title="project.title"
         :description="project.description"
-        :image="project.images[0]"
+        :image="getFirstImage(project)"
         :projectId="project.id.toString()"
       />
       <p v-if="!filteredProjects.length" class="col-span-full text-center text-gray-500">
