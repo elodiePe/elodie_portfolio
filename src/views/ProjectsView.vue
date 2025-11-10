@@ -3,7 +3,7 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import Card from '../components/Card.vue'
-import projectsData from '../assets/projects.json'
+import projectsData from '../data/projects-resolved.js'
 import Tag from '../components/TagFilter.vue'
 
 // selected tag keys (normalized lower-case)

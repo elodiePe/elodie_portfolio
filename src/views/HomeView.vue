@@ -1,5 +1,5 @@
 <script setup>
-    import projects from '../assets/projects.json'
+  import projects from '../data/projects-resolved.js'
       import Button from '../components/Button.vue'
     const projectsList = Array.isArray(projects) ? projects : []
 

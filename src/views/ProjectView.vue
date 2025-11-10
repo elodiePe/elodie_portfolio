@@ -256,7 +256,7 @@
 </template>
 
 <script>
-import projectsData from "../assets/projects.json";
+import projectsData from "../data/projects-resolved.js";
 import Button from "../components/Button.vue";
 import Tag from "../components/Tag.vue";
 import Card from "../components/Card.vue";
