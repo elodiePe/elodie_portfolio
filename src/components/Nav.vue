@@ -10,7 +10,11 @@ const router = useRouter();
 
 function isActive(pathOrName) {
   // Accept either route name or path
-  return route.name === pathOrName || route.path.startsWith(pathOrName);
+  return (
+    route.name === pathOrName ||
+    // treat pathOrName as a top-level path segment (e.g. 'projects' -> '/projects')
+    (typeof route.path === 'string' && route.path.startsWith(`/${pathOrName}`))
+  )
 }
 </script>
 

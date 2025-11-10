@@ -81,7 +81,7 @@
     },
     {
         "id": 6,
-        "title": "AI video : advertisement",
+        "title": "AI video : ad",
         "description": "As part of a course about artificial intelligence, I had the chance to test a few AI. In a group of three, we realised a advertisement for a Pizzeria in Florence, Italy, using only AI. We had this idea : Pizzas smells so good, that it  brings statues to life. </br> </br> To begin with, we created the script using ChatGPT with an iterative approach tweaking the prompts until all parts of the story were to our satisfaction. Once we had the script we could start to prompt images for the storyboard. </br> </br> Of a second step, we used MidJourney to create the images for the storyboard. The most challenging aspect was to achieve a coherent graphic atmosphere between images. We discovered that the trick was to use the exact same sentence in each prompt. Once images were created, we started to animated them, with Runway.</br> </br> Finally, we edited the video on Adobe Premier Pro and added a sound atmosphere. We also used ElevenLabs to create an Italian voice for our ad’s slogan. ",
         "images": [
             "../assets/img/project_videoAI.png",
@@ -109,5 +109,123 @@
             "coding",
             "design"
         ]
+    },
+    {
+        "id": 8,
+        "title": "Swissquote",
+        "description": "Swissquote is a Swiss banking group, specializing in the provision of financial services including trading, investment solutions and banking services.  The project was to conduct usability testing on their currently in-development application. </br> </br> I established hypotheses, prepared questions and tasks to submit to two test users with different profiles. During interviews, I had two responsibilities, the moderator and the observer. </br> </br> Thanks to this test, we identified problems to be solved as well as proposed solutions. ",
+        "images": [
+            "../assets/img/project_swissquote.png"
+
+        ],
+        "tags": [
+            "ux",
+            "user research"
+        ],
+        "date": "2024-11-30"
+    },
+     {
+        "id": 9,
+        "title": "The tiger painting",
+        "description": "Ici il y aura la description de la peinture",
+        "images": [
+            "../assets/img/project_painting_tiger.png"
+        ],
+        "tags": [
+            "art",
+            "painting"
+        ],
+        "date": "2020-09-10"
+    },
+         {
+        "id": 10,
+        "title": "The kookaburra painting",
+        "description": "Ici il y aura la description de la peinture",
+        "images": [
+            "../assets/img/project_painting_cookaborra.png"
+        ],
+        "tags": [
+            "art",
+            "painting"
+        ],
+        "date": "2020-09-10"
+    },
+         {
+        "id": 11,
+        "title": "The crocodile painting",
+        "description": "Ici il y aura la description de la peinture",
+        "images": [
+            "../assets/img/project_painting_croc.png"
+        ],
+        "tags": [
+            "art",
+            "painting"
+        ],
+        "date": "2020-09-10"
+    },
+         {
+        "id": 12,
+        "title": "The from painting",
+        "description": "Ici il y aura la description de la peinture",
+        "images": [
+            "../assets/img/project_painting_frog.png"
+        ],
+        "tags": [
+            "art",
+            "painting"
+        ],
+        "date": "2020-09-10"
+    },
+         {
+        "id":13,
+        "title": "The guard painting",
+        "description": "Ici il y aura la description de la peinture",
+        "images": [
+            "../assets/img/project_painting_guard.png"
+        ],
+        "tags": [
+            "art",
+            "painting"
+        ],
+        "date": "2020-09-10"
+    },
+         {
+        "id": 14,
+        "title": "The lion painting",
+        "description": "Ici il y aura la description de la peinture",
+        "images": [
+            "../assets/img/project_painting_lion.png"
+        ],
+        "tags": [
+            "art",
+            "painting"
+        ],
+        "date": "2020-09-10"
+    },
+         {
+        "id": 15,
+        "title": "The portrait painting",
+        "description": "Ici il y aura la description de la peinture",
+        "images": [
+            "../assets/img/project_painting_portrait.png"
+        ],
+        "tags": [
+            "art",
+            "painting"
+        ],
+        "date": "2020-09-10"
+    },
+         {
+        "id": 9,
+        "title": "The turtle painting",
+        "description": "Ici il y aura la description de la peinture",
+        "images": [
+            "../assets/img/project_painting_turtle.png"
+        ],
+        "tags": [
+            "art",
+            "painting"
+        ],
+        "date": "2020-09-10"
     }
 ]

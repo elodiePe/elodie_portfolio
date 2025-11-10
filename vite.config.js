@@ -49,6 +49,12 @@ function generateDuplicateIndexIndexHtmlPlugin(){
         }
         fs.copyFileSync(indexPath, path.resolve(routeDir, 'index.html'))
       })
+      // ensure public/404.html (if present) is copied to dist root (some hosts use it)
+      const public404 = path.resolve(__dirname, 'public', '404.html')
+      const out404 = path.resolve(__dirname, 'dist', '404.html')
+      if (fs.existsSync(public404)) {
+        fs.copyFileSync(public404, out404)
+      }
     }
   };
 

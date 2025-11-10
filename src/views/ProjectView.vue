@@ -121,7 +121,7 @@
         </div>
 
         <!-- prev / next buttons -->
-        <button
+        <button v-if="project.images.length > 1"
           @click="prev"
           aria-label="Previous"
           style="
@@ -140,7 +140,7 @@
           &lt;
         </button>
 
-        <button
+        <button v-if="project.images.length > 1"
           @click="next"
           aria-label="Next"
           style="
@@ -170,7 +170,7 @@
             bottom: -8px;
           "
         >
-          <button
+          <button v-if="project.images.length > 1"
             v-for="(img, idx) in project.images"
             :key="idx"
             @click="goTo(idx)"

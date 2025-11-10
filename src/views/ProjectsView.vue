@@ -1,7 +1,7 @@
 // filepath: /c:/Users/elodi/Desktop/portfolio_elodie/src/views/ProjectsView.vue
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import Card from '../components/Card.vue'
 import projectsData from '../data/projects-resolved.js'
 import Tag from '../components/TagFilter.vue'
@@ -53,8 +53,36 @@ const filteredProjects = computed(() => {
   })
 })
 
+// Pagination state
+const page = ref(1)
+const pageSize = 12
+
+const totalPages = computed(() => Math.max(1, Math.ceil(filteredProjects.value.length / pageSize)))
+
+const pagedProjects = computed(() => {
+  const start = (page.value - 1) * pageSize
+  return filteredProjects.value.slice(start, start + pageSize)
+})
+
+const pageItems = computed(() => {
+  const total = totalPages.value
+  const current = page.value
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1)
+
+  const items = []
+  items.push(1)
+  if (current > 4) items.push('...')
+  const start = Math.max(2, current - 1)
+  const end = Math.min(total - 1, current + 1)
+  for (let i = start; i <= end; i++) items.push(i)
+  if (current < total - 3) items.push('...')
+  items.push(total)
+  return items
+})
+
 // initialize from route query param `tags` (comma-separated keys)
 const route = useRoute()
+const router = useRouter()
 onMounted(() => {
   const q = route.query.tags
   if (q) {
@@ -62,6 +90,12 @@ onMounted(() => {
     const normalized = list.map(s => String(s).toLowerCase().trim()).filter(Boolean)
     // keep only known tags
     selected.value = normalized.filter(k => tagMap.has(k))
+  }
+  // initialize page from query param if present
+  const qp = route.query.page
+  if (qp) {
+    const n = Number(qp)
+    if (!Number.isNaN(n) && n >= 1) page.value = Math.min(n, totalPages.value)
   }
 })
 
@@ -71,6 +105,32 @@ watch(() => route.query.tags, (val) => {
   const list = Array.isArray(val) ? val : String(val).split(',')
   selected.value = list.map(s => String(s).toLowerCase().trim()).filter(k => tagMap.has(k))
 })
+
+// keep local page in sync with query param
+watch(() => route.query.page, (val) => {
+  if (!val) { page.value = 1; return }
+  const n = Number(Array.isArray(val) ? val[0] : val)
+  if (!Number.isNaN(n) && n >= 1) page.value = Math.min(n, totalPages.value)
+})
+
+// when selected filters change, reset page to 1 and update query (preserve tags)
+watch(selected, () => {
+  page.value = 1
+  const q = { ...route.query }
+  if (selected.value.length) q.tags = selected.value.join(',')
+  else delete q.tags
+  // reset page in query
+  q.page = 1
+  router.replace({ query: q }).catch(() => {})
+})
+
+function goToPage(n) {
+  const target = Math.max(1, Math.min(Math.floor(n), totalPages.value))
+  page.value = target
+  const q = { ...route.query }
+  q.page = target
+  router.replace({ query: q }).catch(() => {})
+}
 
     const getFirstImage = (p) => {
       // try common fields: images array, thumbnail, image
@@ -117,10 +177,12 @@ watch(() => route.query.tags, (val) => {
         <button v-if="selected.length" @click="clearFilters" class="text-sm text-gray-500 underline">Clear filters</button>
       </div>
     </div>
+          <hr class="my-6 border-t border-gray-200" style="height:1px; background:transparent;"/>
+
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       <Card
-        v-for="(project, index) in filteredProjects"
+        v-for="(project, index) in pagedProjects"
         :key="project.id || index"
         :title="project.title"
         :description="project.description"
@@ -130,6 +192,34 @@ watch(() => route.query.tags, (val) => {
       <p v-if="!filteredProjects.length" class="col-span-full text-center text-gray-500">
         No projects available with the selected filters.
       </p>
+    </div>
+
+    <!-- pagination controls -->
+    <div v-if="totalPages > 1" class="mt-6 flex items-center justify-between">
+      <div class="text-sm text-gray-600">
+        Showing
+        <span class="font-medium">{{ ( (page-1)*pageSize + 1 ) }}</span>
+        -
+        <span class="font-medium">{{ Math.min(page*pageSize, filteredProjects.length) }}</span>
+        of <span class="font-medium">{{ filteredProjects.length }}</span>
+      </div>
+
+      <nav aria-label="Pagination" class="flex items-center gap-2">
+        <button @click="goToPage(page-1)" :disabled="page<=1" class="px-3 py-1 rounded border disabled:opacity-50 hover:bg-brand hover:text-accent">Prev</button>
+
+        <button
+          v-for="item in pageItems"
+          :key="String(item)"
+          v-if="item !== '...'"
+          @click="goToPage(item)"
+          :class="['px-3 py-1 rounded border', item===page ? 'bg-brand text-white' : '']"
+        >
+          {{ item }}
+        </button>
+        <span v-for="item in pageItems" :key="'dot-'+String(item)" v-if="item === '...'" class="px-2">…</span>
+
+        <button @click="goToPage(page+1)" :disabled="page>=totalPages" class="px-3 py-1 rounded border disabled:opacity-50 hover:bg-brand hover:text-accent">Next</button>
+      </nav>
     </div>
   </main>
 </template>
