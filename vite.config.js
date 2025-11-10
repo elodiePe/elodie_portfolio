@@ -27,8 +27,17 @@ function generateDuplicateIndexIndexHtmlPlugin(){
         '/',
         '/contact',
         '/projects',
-        '/projects/1', // Exemple d'ID de projet
-        '/projects/2' // Exemple d'ID de projet
+        '/projects/1', 
+        '/projects/2',
+        '/projects/3',
+        '/projects/4',
+        '/projects/5',
+        '/projects/6',
+        '/projects/7',
+        '/projects/8',
+        '/projects/9',
+        '/projects/10'
+        // add more project IDs as needed
       ]
 
       routes.forEach(route => {
