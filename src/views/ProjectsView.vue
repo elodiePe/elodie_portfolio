@@ -37,6 +37,13 @@ function toggleTag(keyOrLabel) {
   const idx = selected.value.indexOf(key)
   if (idx === -1) selected.value.push(key)
   else selected.value.splice(idx, 1)
+  // reset to first page when filters change and update URL immediately
+  page.value = 1
+  const q = { ...route.query }
+  if (selected.value.length) q.tags = selected.value.join(',')
+  else delete q.tags
+  q.page = 1
+  router.replace({ query: q }).catch(() => {})
 }
 
 function clearFilters() {
@@ -180,7 +187,7 @@ function goToPage(n) {
           <hr class="my-6 border-t border-gray-200" style="height:1px; background:transparent;"/>
 
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
       <Card
         v-for="(project, index) in pagedProjects"
         :key="project.id || index"

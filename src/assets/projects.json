@@ -227,5 +227,21 @@
             "painting"
         ],
         "date": "2020-09-10"
+    },
+    {
+        "id": 16,
+        "title": "UEFA x Amazon",
+        "description": "As part of a School project in collaboration of both big compagnies : Uefa and Amazon, I had the chance to participate in a project to create a strategy to promote women coaching in football. </br> </br> In a team of eight, we created a campaign called Tomorrow's Football, with the objective to encourage young women to become a coach. We created a website, a social media campaign and an anime interactive serie. </br> </br> I was in charge of the creation of the serie. </br> </br> The serie is called 'Coach like a women' and follow to story of a young women that become a football coach of her siste's football team. Each episode is interactive, meaning they are created partially by the audience. We conduct an interview with a real person that explain what they want for the episode. </br> </br> To bring another aspect of the serie, the serie is drawed. The begining of the first episode has been created.",
+        "images": [
+            "../assets/img/project_uefa_amazon.png",
+            "https://youtu.be/-g_J-_V3QI8"
+        ],
+        "tags": [
+            "art",
+            "painting",
+            "ux"
+        ],
+        "website": "https://tomorrowsfootball.ch/",
+        "date": "2025-03-10"
     }
 ]
