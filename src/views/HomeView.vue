@@ -1,5 +1,5 @@
 <script setup>
-    import projects from '../assets/projects.json'
+  import projects from '../data/projects-resolved.js'
       import Button from '../components/Button.vue'
       
     const projectsList = Array.isArray(projects) ? projects : []
@@ -7,12 +7,19 @@
     const getFirstImage = (p) => {
       // try common fields: images array, thumbnail, image
       const img = (p.images && p.images[0]) || p.thumbnail || p.image
-      if (img) {
-        // if relative path to assets, make sure it's resolved by Vite
-        try { return new URL(img, import.meta.url).href } catch { return img }
-      }
+
       // fallback placeholder
-      return new URL('../assets/project-1-placeholder.jpg', import.meta.url).href
+      const placeholder = new URL('../assets/project-1-placeholder.jpg', import.meta.url).href
+      if (!img) return placeholder
+
+      // If it's already a resolved URL (import.meta.glob produced), return as-is
+      if (typeof img === 'string' && (img.startsWith('http') || img.startsWith('blob:') || img.startsWith('data:') || img.startsWith('//'))) return img
+
+      // If it's a public-root path (e.g. /assets/...), return as-is
+      if (typeof img === 'string' && img.startsWith('/')) return img
+
+      // Try to resolve relative paths via Vite
+      try { return new URL(img, import.meta.url).href } catch { return img }
     }
         const scrollToCollaboration = () => {
       if (typeof document === 'undefined') return
@@ -82,8 +89,7 @@
       { title: 'Print', desc: 'Layout, textile patterns and production-ready artwork for garments and printed matter.', tag: 'print' }
       
     ]"
-    @click="$router.push({ path: '/projects', query: { tags: cap.tag } })"
-    @keyup.enter="$router.push({ path: '/projects', query: { tags: cap.tag} })"
+
     role="button"
     tabindex="0"
     :key="i"
