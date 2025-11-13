@@ -1,6 +1,6 @@
 <template>
   <main
-    class="mx-auto max-w-screen-lg px-4 md:pt-20 pb-20 md:pb-0 pt-8 sm:pt-0"
+    class="mx-auto max-w-screen-lg px-4 pb-20 md:pb-0 pt-6 md:pt-14 "
   >
   
     <nav aria-label="Breadcrumb" class="mb-4 text-sm">
@@ -97,7 +97,7 @@
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
-                  style="width:100%; height:60vh; border-radius:12px; border:1px solid #e5e7eb;"
+                  class="w-full h-[35vh] md:h-[60vh] rounded-xl border border-gray-200"
                 ></iframe>
               </div>
 

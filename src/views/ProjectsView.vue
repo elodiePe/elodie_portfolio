@@ -24,7 +24,7 @@ for (const p of projectsData) {
 // array of tag objects for rendering
 const allTags = Array.from(tagMap.entries()).map(([key, label]) => ({ key, label }))
 
-function toggleTag(keyOrLabel) {
+async function toggleTag(keyOrLabel) {
   // accept either normalized key or label emitted by TagFilter
   let key = (keyOrLabel || '').toString().toLowerCase().trim()
   if (!tagMap.has(key)) {
@@ -43,7 +43,13 @@ function toggleTag(keyOrLabel) {
   if (selected.value.length) q.tags = selected.value.join(',')
   else delete q.tags
   q.page = 1
-  router.replace({ query: q }).catch(() => {})
+  try {
+    await router.replace({ query: q })
+  } catch (e) {
+    /* ignore */
+  }
+  // ensure page is at top for UX
+  try { window.scrollTo({ top: 0, behavior: 'smooth' }) } catch {}
 }
 
 function clearFilters() {
@@ -53,10 +59,12 @@ function clearFilters() {
 const filteredProjects = computed(() => {
   // if no filters selected, show all
   if (!selected.value.length) return projectsData
+
+  // OR logic: show projects that match ANY selected tag (union)
   return projectsData.filter((p) => {
     const tags = (p.tags || []).map((t) => t.toString().toLowerCase())
-    // check that every selected tag key is present in project's tags
-    return selected.value.every((sel) => tags.includes(sel))
+    // check that at least one selected tag key is present in project's tags
+    return selected.value.some((sel) => tags.includes(sel))
   })
 })
 
@@ -122,21 +130,21 @@ watch(() => route.query.page, (val) => {
 
 // when selected filters change, reset page to 1 and update query (preserve tags)
 watch(selected, () => {
+  // ensure pagination resets when selected changes from any source
   page.value = 1
-  const q = { ...route.query }
-  if (selected.value.length) q.tags = selected.value.join(',')
-  else delete q.tags
-  // reset page in query
-  q.page = 1
-  router.replace({ query: q }).catch(() => {})
 })
 
-function goToPage(n) {
+async function goToPage(n) {
   const target = Math.max(1, Math.min(Math.floor(n), totalPages.value))
   page.value = target
   const q = { ...route.query }
   q.page = target
-  router.replace({ query: q }).catch(() => {})
+  try {
+    await router.replace({ query: q })
+  } catch (e) {
+    /* ignore */
+  }
+  try { window.scrollTo({ top: 0, behavior: 'smooth' }) } catch {}
 }
 
     const getFirstImage = (p) => {
@@ -152,7 +160,8 @@ function goToPage(n) {
 </script>
 
 <template>
-  <main class="mx-auto max-w-screen-lg px-4 md:pt-20 pb-20 md:pb-0 pt-8 sm:pt-0">
+  <main class="mx-auto max-w-screen-lg px-4 pb-20 md:pb-0 pt-6 md:pt-14 
+">
     <nav aria-label="Breadcrumb" class="mb-4 text-sm">
       <ol class="flex items-center space-x-2">
         <li>

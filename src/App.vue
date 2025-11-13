@@ -6,7 +6,7 @@ import Footer from './components/Footer.vue'
 </script>
 
 <template>
-<div class="sm:hidden fixed inset-x-0 top-0 bg-brand shadow-md z-50 ">
+<div class="md:hidden fixed inset-x-0 top-0 bg-brand shadow-md z-50">
   <div class="max-w-4xl mx-auto flex items-center h-14 px-4">
     <RouterLink to="/" class="flex items-center">
 
@@ -15,7 +15,7 @@ import Footer from './components/Footer.vue'
     </RouterLink>
   </div>
 </div>
-<div class="pt-10 sm:pt-0"></div>
+<div class="pt-10 md:pt-4"></div>
        <Nav></Nav>
 
 

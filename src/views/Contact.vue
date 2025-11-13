@@ -35,7 +35,7 @@ async function onSubmit(e) {
 </script>
 
 <template>
-  <main class="mx-auto max-w-screen-lg px-4 md:pt-20 pb-20 md:pb-0 pt-8 sm:pt-0">
+  <main class="mx-auto max-w-screen-lg px-4 pb-20 md:pb-0  pt-6 md:pt-16">
     <div class="mb-6 flex justify-center md:justify-start">
       <div
         class="w-full h-28 md:w-full md:h-32 rounded-lg shadow-sm bg-gradient-to-br from-brand to-accent relative overflow-hidden"

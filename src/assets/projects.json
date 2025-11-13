@@ -132,7 +132,6 @@
             "../assets/img/project_painting_tiger.png"
         ],
         "tags": [
-            "art",
             "painting"
         ],
         "date": "2020-09-10"
@@ -145,7 +144,6 @@
             "../assets/img/project_painting_cookaborra.png"
         ],
         "tags": [
-            "art",
             "painting"
         ],
         "date": "2020-09-10"
@@ -158,7 +156,6 @@
             "../assets/img/project_painting_croc.png"
         ],
         "tags": [
-            "art",
             "painting"
         ],
         "date": "2020-09-10"
@@ -171,7 +168,6 @@
             "../assets/img/project_painting_frog.png"
         ],
         "tags": [
-            "art",
             "painting"
         ],
         "date": "2020-09-10"
@@ -184,7 +180,6 @@
             "../assets/img/project_painting_guard.png"
         ],
         "tags": [
-            "art",
             "painting"
         ],
         "date": "2020-09-10"
@@ -197,7 +192,6 @@
             "../assets/img/project_painting_lion.png"
         ],
         "tags": [
-            "art",
             "painting"
         ],
         "date": "2020-09-10"
@@ -210,7 +204,6 @@
             "../assets/img/project_painting_portrait.png"
         ],
         "tags": [
-            "art",
             "painting"
         ],
         "date": "2020-09-10"
@@ -223,7 +216,6 @@
             "../assets/img/project_painting_turtle.png"
         ],
         "tags": [
-            "art",
             "painting"
         ],
         "date": "2020-09-10"
@@ -237,11 +229,42 @@
             "https://youtu.be/-g_J-_V3QI8"
         ],
         "tags": [
-            "art",
-            "painting",
+            "drawing",
             "ux"
         ],
         "website": "https://tomorrowsfootball.ch/",
         "date": "2025-03-10"
+    },
+    {
+        "id": 17,
+        "title": "Animal photography",
+        "description": "Photography has always been one of my passions. I have a particular fondness for the animal theme, which I love to capture both in photography and painting.",
+        "images": [
+            "../assets/img/project_photography_1.png",
+            "../assets/img/project_photography_2.png",
+            "../assets/img/project_photography_3.png",
+            "../assets/img/project_photography_4.png"
+        ],
+        "tags": [
+            "photography"
+        ],
+        "date": "2020-09-10"
+    },
+    {
+        "id": 18,
+        "title": "Landscape photography",
+        "description": "Photography has always been one of my passions. I have a particular fondness for the landscape theme, which I love to capture both in photography and painting.",
+        "images": [
+            "../assets/img/project_photography_landscape_1.png",
+            "../assets/img/project_photography_landscape_2.png",
+            "../assets/img/project_photography_landscape_3.png",
+            "../assets/img/project_photography_landscape_4.png"
+        ],
+        "tags": [
+            "logo",
+            "branding"
+
+        ],
+        "date": "2020-09-10"
     }
 ]
