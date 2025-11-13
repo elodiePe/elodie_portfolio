@@ -115,9 +115,8 @@
       <p
       class="mt-2 text-sm md:text-base max-h-0 opacity-0 group-hover:opacity-100 group-hover:max-h-40 transition-all duration-300 ease-in-out overflow-hidden" 
       v-html="cap.desc">
-      
       </p>
-            <Button class="mt-2 text-sm md:text-base max-h-0 opacity-0 group-hover:opacity-100 group-hover:max-h-40 transition-all duration-300 ease-in-out overflow-hidden" color="lavender" @click="$router.push({ path: '/projects', query: { tags: cap.tag } })">See projects</Button>
+      
 
     </div>
 
