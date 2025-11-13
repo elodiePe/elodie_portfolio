@@ -113,21 +113,18 @@
 
       <!-- description revealed on hover -->
       <p
-      class="mt-2 text-sm md:text-base max-h-0 opacity-0 group-hover:opacity-100 group-hover:max-h-40 transition-all duration-300 ease-in-out overflow-hidden" 
-      v-html="cap.desc">
+        class="mt-2 text-sm md:text-base max-h-0 opacity-0 group-hover:opacity-100 group-hover:max-h-40 transition-all duration-300 ease-in-out overflow-hidden"
+        v-html="cap.desc">
       </p>
+
       <Button
-        class="mt-2 text-sm md:text-base max-h-0 opacity-0 group-hover:opacity-100 group-hover:max-h-40 transition-all duration-300 ease-in-out overflow-hidden pointer-events-none group-hover:pointer-events-auto"
+        class="mt-4 w-full md:w-auto mx-auto text-center hidden group-hover:inline-block transition-opacity duration-300 ease-in-out"
         color="lavender"
-        @click="(function(e){
-          if (typeof window === 'undefined') return;
-          const s = window.getComputedStyle(e.currentTarget);
-          if (s.opacity === '0' || s.maxHeight === '0px') return;
-          $router.push({ path: '/projects', query: { tags: cap.tag } });
-        })($event)"
+        @click="$router.push({ path: '/projects', query: { tags: cap.tag } })"
       >
         See projects
       </Button>
+
 
     </div>
 
