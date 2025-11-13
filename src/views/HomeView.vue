@@ -75,12 +75,12 @@
   <div
     v-for="(cap, i) in [
       { title: 'Brand & Identity', desc: 'Logo systems, visual languages and brand guidelines to give projects a clear personality.', tag: 'logo,branding' },
-      { title: 'Web Design', desc: 'Responsive interfaces, accessible layouts and pixel-perfect mockups for modern browsers.', tag: 'webdesign' },
-      { title: 'Product Design', desc: 'User flows, wireframes and prototypes focused on usability and delightful interactions.', tag: 'productdesign' },
-      { title: 'Illustration', desc: 'Hand-drawn and digital illustrations for editorial, merchandise and print.', tag: 'illustration' },
+      { title: 'Web Design', desc: 'Responsive interfaces, accessible layouts and pixel-perfect mockups for modern browsers. user flows, wireframes and prototypes focused on usability and delightful interactions and its user', tag: 'webdesign,ux, ui' },
+      { title: 'Project managment', desc: 'Hand-drawn and digital illustrations for editorial, merchandise and print.', tag: 'managment' },
       { title: 'Photography & painting', desc: 'I  have been painting since I was six years old. I mainly create acrylic paintings. </br> Photography is also one of my passions. I have a particular fondness for the animal theme, which I love to capture both in photography and painting.', tag: 'photography,painting' },
-      { title: 'Print & Apparel', desc: 'Layout, textile patterns and production-ready artwork for garments and printed matter.', tag: 'printapparel' },
-      { title: 'Print & Apparel', desc: 'Layout, textile patterns and production-ready artwork for garments and printed matter.' }
+      { title: 'Clothing design', desc: 'Layout, textile patterns and production-ready artwork for garments and printed matter.', tag: 'clothing' },
+      { title: 'Print', desc: 'Layout, textile patterns and production-ready artwork for garments and printed matter.', tag: 'print' }
+      
     ]"
     @click="$router.push({ path: '/projects', query: { tags: cap.tag } })"
     @keyup.enter="$router.push({ path: '/projects', query: { tags: cap.tag} })"
