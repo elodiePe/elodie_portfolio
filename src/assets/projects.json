@@ -1,8 +1,8 @@
 [
     {
         "id": 1,
-        "title": "Vaud Sentier",
-        "description": "VaudSentiers is a web application that invites tourists and residents to discover various places by following itineraries. I was in charge of the user experience and user interface design. </br> </br> To identify users needs, I did a quantitative survey. Once I had analysed the results, I identified key features. These included : <ol><li>- Searching for paths and places via a map or a search bar with filters.</li><li>- Starting navigation directly from the app.</li><li>- Sharing places and itineraries.</li><li>- Rating and commenting paths and itineraries.</li></ol>  </br> I then created low-fidelity prototypes, tested them, and improved the design based on feedback. </br> </br> After that, I made high-fidelity prototypes with colors and a graphic identity, using Google’s design system for consistency. I chose cheerful colors and used them to help users, with each search criteria having its own color.",
+        "title": "Vaud Sentier: application design",
+        "description": "VaudSentiers is a web application that invites tourists and residents to discover various places by following itineraries. <b>I was in charge of the user experience and user interface design.</b>  </br> </br> To identify users needs, I did a quantitative survey. Once I had analysed the results, I identified key features. These included : <ol><li>- Searching for paths and places via a map or a search bar with filters.</li><li>- Starting navigation directly from the app.</li><li>- Sharing places and itineraries.</li><li>- Rating and commenting paths and itineraries.</li></ol>  </br> I then created low-fidelity prototypes, tested them, and improved the design based on feedbacks. </br> </br> After that, I made high-fidelity prototypes with colors and a graphic identity, using Google’s design system for consistency. I chose cheerful colors and used them to help users, with each search criteria having its own color.",
         "images": [
             "../assets/img/project_vaudsentier.png",
             "../assets/img/project_vaudsentier_1.png"
@@ -15,8 +15,29 @@
             "user research",
             "figma"
         ],
-        "info": "Background image by Ldgfr Photos (Adobe Stock)",
-        "date": "2024-06-15"
+        "info": "Background image of the first image by Ldgfr Photos (Adobe Stock)",
+        "date": "2024-06-15",
+        "inthesameprojectas": [
+            32
+        ]
+    },
+    {
+        "id": 32,
+        "title": "Vaud Sentier : branding",
+        "description": "VaudSentiers is a web application that invites tourists and residents to discover various places by following itineraries. For the 'Vaud Sentiers' project, I was responsible for the branding, including the logo design, the graphic charter, and the editorial line. The logo is composed of the silhouette of the Canton of Vaud and the brand name 'Vaud Sentiers'. The name is a play on words, as it phonetically echoes 'vos sentiers' (your paths) in French, while emphasizing that the application is centered on the Canton of Vaud. </br> </br> To reflect the identity of the Canton of Vaud, I incorporated the green and white of the cantonal flag into the silhouette. Furthermore, green was chosen as the primary color because it effectively represents nature and discovery. The supporting colors in the palette were selected from the same tonal range and chromatic spectrum to ensure a harmonious blend with the primary brand color.",
+        "images": [
+            "../assets/img/project_vaudsentier-logo-1.png",
+            "../assets/img/project_vaudsentier-logo-2.png",
+            "../assets/img/project_vaudsentier-logo-3.png"
+        ],
+        "tags": [
+            "branding"
+        ],
+        "figma": "https://www.figma.com/proto/Qfw43lvTlTthQ4UovmHn8v/RELLL---UI-UX?page-id=221%3A6800&node-id=911-11226&p=f&viewport=648%2C639%2C0.22&t=KukiUh71ptefVvu1-1&scaling=min-zoom&content-scaling=fixed",
+        "date": "2024-06-15",
+        "inthesameprojectas": [
+            1
+        ]
     },
     {
         "id": 2,
@@ -24,28 +45,36 @@
         "description": "What emotions arise when we are surrounded by animals ? The sense of being watched and the intensity of their gaze is what I sought to capture in my artwork - <b>a representation of animals eyes staring at you </b>. <br/> <br/> To achieve this, I created eight 3D animal gazes using epoxy resin, expanded polystyrene, and acrylic paint. I meticulously painted the eyes on the polystyrene, then applied epoxy resin to mimic the cornea’s reflective surface. <br/> <br/> To enhance the feeling of being observed, I arranged the eyes close to one another on a black background, creating the impression that you’re surrounded by a multitude of animals, all gazing at you. I placed them in a rectangular white frame to further emphasize their presence and focus.",
         "images": [
             "../assets/img/project_yeux.png",
-            "../assets/img/project_yeux_1.png"
+            "../assets/img/project_yeux_1.png",
+            "../assets/img/project_yeux-1.png"
         ],
         "tags": [
-            "art",
-            "painting"
+            "art"
         ],
         "date": "2021-06-20"
     },
     {
         "id": 3,
-        "title": "Card game",
+        "title": "WildClash : a card game",
         "description": "<b> How to nurture a child’s love of animals ? </b> It’s a problem I’ve asked myself and I may have found the solution. Children are often very intrigued by unusual animals and they learn better and faster when they have fun. This is the reason why, in a team of four, we suggested to create a card game as an interactive and a fun way to spend quality family time . The card game we created regroups unusual animals in the world including important information about them. </br> </br> To create a card, information architecture is really important, even more so when the target audience is children, that’s why we’ve focused our work around information architecture. </br> </br> To help users understand the game and to have more information about these animals, I also created a prototype of an online wiki.",
         "images": [
             "../assets/img/project_card.png",
-            "../assets/img/project_card_1.png"
+            "../assets/img/project_card_1.png",
+            "../assets/img/project_card_3.png"
         ],
         "tags": [
             "ux",
             "ui"
         ],
         "date": "2025-03-10",
-        "info": "Background image by Jacob Lund (Abobe stock)"
+        "info": "Background image by Jacob Lund (Abobe stock)",
+        "buttons": [
+            {
+                "label": "Download the game rules",
+                "url": "/files/wildclash-rules.pdf",
+                "color": "peach"
+            }
+        ]
     },
     {
         "id": 4,
@@ -95,20 +124,63 @@
     },
     {
         "id": 7,
-        "title": "Bruno Pesenti",
-        "description": "The last few years I had the privilege to collaborate with Bruno Pesenti, a watchmaker in Geneva, Switzerland. Throughout my collaboration with him, I was tasked with documenting and promoting his exceptional watch collection and craftsmanship. This involved creating a comprehensive print catalog of his collection, developing his brand identity through a custom-design logo, and building a website to serve as his digital presence. </br> </br> For the catalog, I took a hands-on approach to reflect Bruno Pesenti's personality in every detail. I wrote clear, detailed product descriptions, took elegant photographs designed a visually appealing layout with clean typography and elegant colors, and selected high-quality paper to enhance the presentation. The result is a catalog that showcases Bruno's work while reinforcing his brand's identity and the artistry of his timepieces. </br> </br> I designed and developed a website to showcase Bruno Pesenti’s work in a visually appealing and user-friendly way. Hand-coded with HTML and CSS, the site is fully customized and responsive. Through both the catalog and the website, I aimed to create a cohesive representation of Bruno Pesenti’s brand and work, helping to bring his rare knowledge to a broader audience. I still maintain and update the website as needed.",
+        "title": "Bruno Pesenti's website",
+        "description": "Over the last few years, I have had the privilege of collaborating with Bruno Pesenti, an independent watchmaker based in Geneva, Switzerland. Throughout this partnership, I was tasked with documenting and promoting his exceptional collection and artisanal craftsmanship. My work encompassed the creation of a comprehensive print catalog, the development of a bespoke brand identity and logo, and the design of a dedicated digital presence. </br> </br> I designed and developed a custom website to showcase Mr. Pesenti’s work through a visually immersive and user-friendly interface. Hand-coded using HTML, CSS, and JavaScript within the Vue.js framework, the platform is fully responsive across desktop and mobile devices. </br> </br>The website also features an integrated booking service, allowing clients to reserve pieces and manage payments for both products and deliveries. Supporting a global clientele, the site is available in French, English, and Italian. To facilitate easy content management, I implemented an intuitive administrative interface that enables Mr. Pesenti to add, edit, or delete inventory and manage bookings independently. I continue to maintain and update the platform to ensure it remains a high-performance tool for his business. ",
         "images": [
-            "../assets/img/project_brunopesenti.png",
-            "../assets/img/project_brunopesenti_1.png",
-            "../assets/img/project_brunopesenti_2.png"
+            "../assets/img/project_brunopesenti-website-1.png",
+            "../assets/img/project_brunopesenti-website-2.png",
+            "../assets/img/project_brunopesenti-website-3.png"
         ],
         "website": "https://www.brunopesenti.ch",
         "tags": [
-            "ux",
-            "ui",
-            "coding",
-            "design"
+            "UX",
+            "UI",
+            "Coding"
+        ],
+        "date": "2026-01-15",
+        "inthesameprojectas": [
+            33,
+            34
         ]
+    },
+    {
+        "id": 33,
+        "title": "Le Cabinotier's catalog",
+        "description": "The last few years I had the privilege to collaborate with Bruno Pesenti, a watchmaker in Geneva, Switzerland. Throughout my collaboration with him, I was tasked with documenting and promoting his exceptional watch collection and craftsmanship. This involved creating a comprehensive print catalog of his collection, developing his brand identity through a custom-design logo, and building a website to serve as his digital presence.  </br> </br> For the catalog, I took a hands-on approach to reflect Bruno Pesenti's personality in every detail. I wrote clear, detailed product descriptions, took elegant photographs designed a visually appealing layout with clean typography and elegant colors, and selected high-quality paper to enhance the presentation. The result is a catalog that showcases Bruno's work while reinforcing his brand's identity and the artistry of his timepieces. </br> </br>Because color has a profound impact on emotion and sensation, the palette choice was central to the project. I opted for a selection of sober, dark tones—specifically deep blacks and rich browns—which intuitively represent the luxury and sophistication inherent in the watchmaking domain. Typography played an equally vital role in shaping the reader's experience. I selected 'Minion Variable Concept', a serif font that enhances legibility by creating an invisible horizontal flow, providing a classic aesthetic that guides the eye across the technical descriptions. </br> </br>To ensure the physical object reflected the high-end nature of the content, material selection was paramount. For the cover, I chose a 200 g/m² stock with a 'Soft Touch' matte lamination, providing a premium, tactile finish that enhances the printed colors. The interior pages utilize 115 g/m² semi-matte coated paper to ensure the highest quality reproduction of the photography. 'Le Cabinotier' is more than a catalog; it is a testament to Geneva's watchmaking heritage, brought to life through meticulous layout, high-quality imagery, and refined material choices.</br> </br>I continue to collaborate with Bruno Pesenti on various projects, including the maintenance and updating of his website, ensuring that his digital presence remains as polished and professional as his physical products. ",
+        "images": [
+            "../assets/img/project_brunopesenti-catalogue-1.png",
+            "../assets/img/project_brunopesenti-catalogue-2.png",
+            "../assets/img/project_brunopesenti-catalogue-3.png"
+        ],
+        "tags": [
+            "Graphism",
+            "Print",
+            "Photography"
+        ],
+        "inthesameprojectas": [
+            7,
+            34
+        ],
+        "website": "https://www.brunopesenti.ch/catalogue",
+        "date": "2022-06-15"
+    },
+    {
+        "id": 34,
+        "title": "Business Card and logo for Bruno Pesenti",
+        "description": "The last few years I had the privilege to collaborate with Bruno Pesenti, a watchmaker in Geneva, Switzerland. Throughout my collaboration with him, I was tasked with documenting and promoting his exceptional watch collection and craftsmanship. This involved creating a comprehensive print catalog of his collection, developing his brand identity through a custom-design logo, and building a website to serve as his digital presence. </br> </br> I opted for a simple logo that allows the theme of watchmaking to be easily understood at a glance. The logo represents the hands of a watch or clock set to 10:10. Why 10:10? Simply because this is the industry standard; you may have noticed that in the vast majority of horological photography, watches are set to this specific time for aesthetic balance. Regarding the colors, I chose sober tones that work effectively on both dark and light backgrounds, reflecting the luxury of the watchmaking world while staying true to its antique heritage. The result is a logo that effectively represents Bruno Pesenti's brand identity. </br> </br> I continue to collaborate with Bruno Pesenti on various projects, including the maintenance and updating of his website, ensuring that his digital presence remains as polished and professional as his physical products.",
+        "images": [
+            "../assets/img/project_brunopesenti-carteVisite-1.png",
+            "../assets/img/project_brunopesenti-carteVisite-2.png"
+        ],
+        "tags": [
+            "Branding"
+        ],
+        "inthesameprojectas": [
+            33,
+            7
+        ],
+        "website": "https://www.brunopesenti.ch",
+        "date": "2022-06-15"
     },
     {
         "id": 8,
@@ -116,7 +188,6 @@
         "description": "Swissquote is a Swiss banking group, specializing in the provision of financial services including trading, investment solutions and banking services.  The project was to conduct usability testing on their currently in-development application. </br> </br> I established hypotheses, prepared questions and tasks to submit to two test users with different profiles. During interviews, I had two responsibilities, the moderator and the observer. </br> </br> Thanks to this test, we identified problems to be solved as well as proposed solutions. ",
         "images": [
             "../assets/img/project_swissquote.png"
-
         ],
         "tags": [
             "ux",
@@ -124,7 +195,7 @@
         ],
         "date": "2024-11-30"
     },
-     {
+    {
         "id": 9,
         "title": "The tiger painting",
         "description": "Ici il y aura la description de la peinture",
@@ -136,7 +207,7 @@
         ],
         "date": "2020-09-10"
     },
-         {
+    {
         "id": 10,
         "title": "The kookaburra painting",
         "description": "Ici il y aura la description de la peinture",
@@ -148,7 +219,7 @@
         ],
         "date": "2020-09-10"
     },
-         {
+    {
         "id": 11,
         "title": "The crocodile painting",
         "description": "Ici il y aura la description de la peinture",
@@ -160,7 +231,7 @@
         ],
         "date": "2020-09-10"
     },
-         {
+    {
         "id": 12,
         "title": "The from painting",
         "description": "Ici il y aura la description de la peinture",
@@ -172,8 +243,8 @@
         ],
         "date": "2020-09-10"
     },
-         {
-        "id":13,
+    {
+        "id": 13,
         "title": "The guard painting",
         "description": "Ici il y aura la description de la peinture",
         "images": [
@@ -184,7 +255,7 @@
         ],
         "date": "2020-09-10"
     },
-         {
+    {
         "id": 14,
         "title": "The lion painting",
         "description": "Ici il y aura la description de la peinture",
@@ -196,24 +267,12 @@
         ],
         "date": "2020-09-10"
     },
-         {
+    {
         "id": 15,
         "title": "The portrait painting",
         "description": "Ici il y aura la description de la peinture",
         "images": [
             "../assets/img/project_painting_portrait.png"
-        ],
-        "tags": [
-            "painting"
-        ],
-        "date": "2020-09-10"
-    },
-         {
-        "id": 9,
-        "title": "The turtle painting",
-        "description": "Ici il y aura la description de la peinture",
-        "images": [
-            "../assets/img/project_painting_turtle.png"
         ],
         "tags": [
             "painting"
@@ -263,7 +322,18 @@
         "tags": [
             "logo",
             "branding"
-
+        ],
+        "date": "2020-09-10"
+    },
+    {
+        "id": 19,
+        "title": "The turtle painting",
+        "description": "Ici il y aura la description de la peinture",
+        "images": [
+            "../assets/img/project_painting_turtle.png"
+        ],
+        "tags": [
+            "painting"
         ],
         "date": "2020-09-10"
     }

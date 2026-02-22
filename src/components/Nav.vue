@@ -83,11 +83,14 @@ function isActive(pathOrName) {
             <!-- <IconTooling class="w-5 h-5" /> -->
             <span class="hidden sm:inline text-lg">Contact me</span>
           </RouterLink>
+          
         </div>
-
+        
         <!-- right side placeholder (logo / actions) - optional -->
         <div class="flex items-center gap-2">
-          <!-- keep empty or add desktop-only actions here -->
+          <a href="https://linkedin.com/in/elodie-perring" target="_blank" rel="noopener noreferrer" class="inline-block">
+            <img src="../assets/img/linkedin.svg" alt="LinkedIn" class="w-8 h-8 hover:opacity-80 transition-opacity" />
+          </a>
         </div>
       </div>
     </div>

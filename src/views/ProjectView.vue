@@ -26,23 +26,16 @@
     <div v-if="project">
       <div class="flex items-center justify-between mb-4">
         <h1 class="font-bold text-2xl">{{ project.title }}</h1>
-        <div class="hidden sm:flex sm:flex-row sm:space-x-2 items-center">
-              <Button
-          v-if="project && project.figma"
-          :href="project.figma"
-          :label="'View Figma'"
-          target="_blank"
-          :color="'lavender'"
-          :external="true"
-        />
-        <Button
-          v-if="project && project.website"
-          :href="project.website"
-          :label="'View Website'"
-          target="_blank"
-          :color="'mint'"
-          :external="true"
-        />
+        <div class="hidden sm:flex sm:flex-row sm:space-x-2 items-center" v-if="projectButtons.length">
+          <Button
+            v-for="(btn, i) in projectButtons"
+            :key="`top-btn-${i}`"
+            :href="btn.url"
+            :label="btn.label"
+            target="_blank"
+            :color="btn.color || 'mint'"
+            :external="true"
+          />
         </div>
     
       </div>
@@ -196,21 +189,14 @@
           ></div>
         </div>
       </div>
-      <div class="flex sm:hidden justify-center items-center space-x-2 mt-6">
+      <div class="flex sm:hidden justify-center items-center space-x-2 mt-6" v-if="projectButtons.length">
         <Button
-          v-if="project && project.figma"
-          :href="project.figma"
-          :label="'View Figma'"
+          v-for="(btn, i) in projectButtons"
+          :key="`mobile-btn-${i}`"
+          :href="btn.url"
+          :label="btn.label"
           target="_blank"
-          :color="'lavender'"
-          :external="true"
-        />
-        <Button
-          v-if="project && project.website"
-          :href="project.website"
-          :label="'View Website'"
-          target="_blank"
-          :color="'mint'"
+          :color="btn.color || 'mint'"
           :external="true"
         />
       </div>
@@ -235,24 +221,22 @@
     <p>Project not found.</p>
   </div>
 
+    
 
-
-  <div class="mt-8">
-    <h2 class="text-xl font-bold mb-4">Similar Projects</h2>
-    <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4">
-      <Card
-        v-for="(project, index) in similarProjects"
-        :key="index"
-        :title="project.title"
-        :description="project.description"
-        :image="getFirstImage(project)"
-        :projectId="project.id.toString()"
-      />
+    <div class="mt-8">
+      <h2 class="text-xl font-bold mb-4">Similar Projects</h2>
+      <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4">
+        <Card
+          v-for="(p, index) in similarProjects"
+          :key="`similar-${p.id}-${index}`"
+          :title="p.title"
+          :description="p.description"
+          :image="getFirstImage(p)"
+          :projectId="p.id.toString()"
+        />
+      </div>
     </div>
-  </div>
-
-
-</main>
+  </main>
 </template>
 
 <script>
@@ -306,18 +290,88 @@ export default {
     }
   },
   computed: {
-    similarProjects() {
-      // return projects that share at least one tag with the current project
+    // NEW
+    sameProjectProjects() {
       if (!this.project) return [];
+
+      const currentId = String(this.project.id);
+
+      // Direct links from current project: inthesameprojectas: [33, 7]
+      const directIds = Array.isArray(this.project.inthesameprojectas)
+        ? this.project.inthesameprojectas.map((v) => String(v))
+        : [];
+
+      // Reverse links: other projects that include current project id
+      const reverseIds = projectsData
+        .filter((p) => String(p.id) !== currentId)
+        .filter((p) => Array.isArray(p.inthesameprojectas))
+        .filter((p) => p.inthesameprojectas.map((v) => String(v)).includes(currentId))
+        .map((p) => String(p.id));
+
+      const wantedIds = [...new Set([...directIds, ...reverseIds])];
+
+      return wantedIds
+        .map((id) => projectsData.find((p) => String(p.id) === id))
+        .filter(Boolean)
+        .filter((p) => String(p.id) !== currentId)
+        .slice(0, 8);
+    },
+
+    similarProjects() {
+      if (!this.project) return [];
+
+      // 1) Same-project items first
+      const same = this.sameProjectProjects || [];
+      const sameIds = new Set(same.map((p) => String(p.id)));
+
+      // 2) Then tag-based similar (excluding already included same-project items)
       const baseTags = (this.project.tags || []).map((t) => t.toString().toLowerCase());
-      if (!baseTags.length) return this.otherProjects.slice(0, 8);
 
-      const matches = this.otherProjects.filter((p) => {
-        const ptags = (p.tags || []).map((t) => t.toString().toLowerCase());
-        return ptags.some((t) => baseTags.includes(t));
-      });
+      const candidates = this.otherProjects.filter(
+        (p) => !sameIds.has(String(p.id))
+      );
 
-      return (matches.length ? matches : this.otherProjects).slice(0, 8);
+      let tagMatches = [];
+      if (baseTags.length) {
+        tagMatches = candidates.filter((p) => {
+          const ptags = (p.tags || []).map((t) => t.toString().toLowerCase());
+          return ptags.some((t) => baseTags.includes(t));
+        });
+      }
+
+      const rest = tagMatches.length ? tagMatches : candidates;
+
+      return [...same, ...rest].slice(0, 8);
+    },
+    projectButtons() {
+      if (!this.project) return [];
+
+      // accepte buttons ET boutons (tolérant)
+      const rawButtons = Array.isArray(this.project.buttons)
+        ? this.project.buttons
+        : Array.isArray(this.project.boutons)
+        ? this.project.boutons
+        : [];
+
+      if (rawButtons.length) {
+        return rawButtons
+          .filter((b) => b && b.label && b.url)
+          .map((b) => ({
+            label: String(b.label),
+            url: String(b.url),
+            color: b.color || "mint",
+          }));
+      }
+
+      // fallback ancien format
+      const out = [];
+      if (this.project.figma) {
+        out.push({ label: "View Figma", url: this.project.figma, color: "lavender" });
+      }
+      if (this.project.website) {
+        out.push({ label: "View Website", url: this.project.website, color: "mint" });
+      }
+      return out;
     }
   },
   methods: {

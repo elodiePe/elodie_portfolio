@@ -43,7 +43,18 @@ const router = createRouter({
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       component: NotFound,
-    }
+    },
+    //     {
+    //   path: '/download/:file',
+    //   name: 'download',
+    //   beforeEnter: (to) => {
+    //     const base = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '')
+    //     const file = encodeURIComponent(String(to.params.file || ''))
+    //     const fileUrl = `./assets/files/${file}`
+    //     window.open(fileUrl, '_blank')
+    //     return false
+    //   },
+    // },
   ],
 })
 
