@@ -35,6 +35,7 @@
             target="_blank"
             :color="btn.color || 'mint'"
             :external="true"
+               
           />
         </div>
     
@@ -90,7 +91,8 @@
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
-                  class="w-full h-[35vh] md:h-[60vh] rounded-xl border border-gray-200"
+                  class="w-full rounded-xl border border-gray-200"
+                  style="height:auto; max-height:60vh; aspect-ratio:1867 / 1272;"
                 ></iframe>
               </div>
 
@@ -98,7 +100,7 @@
                 <video
                   controls
                   :src="readImg(img)"
-                  style="display:block; margin:0 auto; width:100%; max-height:60vh; object-fit:contain; border-radius:12px; border:1px solid #e5e7eb;"
+                  style="display:block; margin:0 auto; width:100%; height:auto; aspect-ratio:1867 / 1272; object-fit:contain; border-radius:12px;"
                 ></video>
               </div>
 
@@ -189,7 +191,7 @@
           ></div>
         </div>
       </div>
-      <div class="flex sm:hidden justify-center items-center space-x-2 mt-6" v-if="projectButtons.length">
+      <div class="flex sm:hidden flex-wrap justify-center items-center gap-2 mt-6" v-if="projectButtons.length">
         <Button
           v-for="(btn, i) in projectButtons"
           :key="`mobile-btn-${i}`"
@@ -198,6 +200,7 @@
           target="_blank"
           :color="btn.color || 'mint'"
           :external="true"
+          class="whitespace-nowrap"
         />
       </div>
              
@@ -225,7 +228,7 @@
 
     <div class="mt-8">
       <h2 class="text-xl font-bold mb-4">Similar Projects</h2>
-      <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4">
+      <div v-if="similarProjects.length" class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4">
         <Card
           v-for="(p, index) in similarProjects"
           :key="`similar-${p.id}-${index}`"
@@ -235,6 +238,7 @@
           :projectId="p.id.toString()"
         />
       </div>
+      <p v-else class="text-sm text-gray-600">No similar projects.</p>
     </div>
   </main>
 </template>
@@ -339,9 +343,7 @@ export default {
         });
       }
 
-      const rest = tagMatches.length ? tagMatches : candidates;
-
-      return [...same, ...rest].slice(0, 8);
+      return [...same, ...tagMatches].slice(0, 8);
     },
     projectButtons() {
       if (!this.project) return [];

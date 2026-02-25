@@ -16,7 +16,7 @@
             "figma"
         ],
         "info": "Background image of the first image by Ldgfr Photos (Adobe Stock)",
-        "date": "2024-06-15",
+        "date": "2024-06-11",
         "inthesameprojectas": [
             32
         ]
@@ -34,7 +34,7 @@
             "branding"
         ],
         "figma": "https://www.figma.com/proto/Qfw43lvTlTthQ4UovmHn8v/RELLL---UI-UX?page-id=221%3A6800&node-id=911-11226&p=f&viewport=648%2C639%2C0.22&t=KukiUh71ptefVvu1-1&scaling=min-zoom&content-scaling=fixed",
-        "date": "2024-06-15",
+        "date": "2024-06-11",
         "inthesameprojectas": [
             1
         ]
@@ -70,8 +70,8 @@
         "info": "Background image by Jacob Lund (Abobe stock)",
         "buttons": [
             {
-                "label": "Download the game rules",
-                "url": "/files/wildclash-rules.pdf",
+                "label": "View the game rules",
+                "url": "elodie_portfolio/files/wildclash-rules.pdf",
                 "color": "peach"
             }
         ]
@@ -85,9 +85,8 @@
             "../assets/img/project_mockup_1.png"
         ],
         "tags": [
-            "art",
-            "design",
-            "clothing"
+            "graphism",
+            "design"
         ],
         "date": "2024-01-15",
         "info": "Mockup is made by Mr.Mockup"
@@ -98,9 +97,9 @@
         "description": "Adopt your pet is a Tinder for pets. The concept, born from the idea of 'A Tinder for pets', led us to create an app where SPCAs (Society for the Prevention of Cruelty to Animals) could list animals available for adoption, allowing users to swipe and find pets. I contributed to both the REST API development and front-end implementation using Vue.js. </br> </br> The application has these features : <ol> <li> - Communication between SPCAs and users</li> <li>- Liking and disliking pets by swiping </li> <li>- Filters If SPCAs : create, update, delete pets </li> </ol> </br> Although the project is complete, several improvements are needed, such as streamlining user access and optimizing image loading for better overall experience.    ",
         "images": [
             "../assets/img/project_adoptyourpet.png",
-            "../assets/img/project_adoptyourpet_1.png"
+            "../assets/img/project_adoptyourpet_1.png",
+            "https://youtu.be/Mkt4ksmEyAg"
         ],
-        "website": "http://devmobil-adopteunanimal.onrender.com/",
         "tags": [
             "ui",
             "coding"
@@ -111,7 +110,7 @@
     {
         "id": 6,
         "title": "AI video : ad",
-        "description": "As part of a course about artificial intelligence, I had the chance to test a few AI. In a group of three, we realised a advertisement for a Pizzeria in Florence, Italy, using only AI. We had this idea : Pizzas smells so good, that it  brings statues to life. </br> </br> To begin with, we created the script using ChatGPT with an iterative approach tweaking the prompts until all parts of the story were to our satisfaction. Once we had the script we could start to prompt images for the storyboard. </br> </br> Of a second step, we used MidJourney to create the images for the storyboard. The most challenging aspect was to achieve a coherent graphic atmosphere between images. We discovered that the trick was to use the exact same sentence in each prompt. Once images were created, we started to animated them, with Runway.</br> </br> Finally, we edited the video on Adobe Premier Pro and added a sound atmosphere. We also used ElevenLabs to create an Italian voice for our ad’s slogan. ",
+        "description": "As part of a course about artificial intelligence, I had the chance to test a few AI. In a team of three, we realised a advertisement for a Pizzeria in Florence, Italy, using only AI. We had this idea : Pizzas smells so good, that it  brings statues to life. </br> </br> To begin with, we created the script using ChatGPT with an iterative approach tweaking the prompts until all parts of the story were to our satisfaction. Once we had the script we could start to prompt images for the storyboard. </br> </br> Of a second step, we used MidJourney to create the images for the storyboard. The most challenging aspect was to achieve a coherent graphic atmosphere between images. We discovered that the trick was to use the exact same sentence in each prompt. Once images were created, we started to animated them, with Runway.</br> </br> Finally, we edited the video on Adobe Premier Pro and added a sound atmosphere. We also used ElevenLabs to create an Italian voice for our ad’s slogan. ",
         "images": [
             "../assets/img/project_videoAI.png",
             "https://youtu.be/gscp1yHJeHY"
@@ -183,22 +182,55 @@
         "date": "2022-06-15"
     },
     {
+        "id": 16,
+        "title": "UEFA x Amazon",
+        "description": "As part of a School project in collaboration of both big compagnies : Uefa and Amazon, I had the chance to participate in a project to create a strategy to promote women coaching in football. </br> </br> In a team of eight, we created a campaign called Tomorrow's Football, with the objective to encourage young women to become a coach. We created a website, a social media campaign and an anime interactive serie. </br> </br> I was in charge of the creation of the serie.  </br> The serie is called 'Coach like a women' and follow to story of a young women that become a football coach of her sister's football team. Each episode is interactive, meaning they are created partially by the audience. We conduct an interview with a real person that explain what they want for the episode. </br> </br> To bring another aspect of the serie, the serie is drawed. The begining of the first episode has been created.",
+        "images": [
+            "../assets/img/project_uefa_amazon.png",
+            "../assets/img/project_tomorrowsfootball-website.png",
+            "https://youtu.be/-g_J-_V3QI8"
+        ],
+        "tags": [
+            "drawing",
+            "ux"
+        ],
+                "buttons": [
+                          {
+                    "label": "View the website",
+                    "url": "https://tomorrowsfootball.ch/",
+                    "color": "mint"
+                },
+            {
+                "label": "View the serie's concept",
+                "url": "elodie_portfolio/files/tomorrowsfootball-serie-concept.pdf",
+                "color": "peach"
+            },
+                {
+                    "label": "View the serie's storyboard",
+                    "url": "elodie_portfolio/files/tomorrowsfootball-serie-storyboard.pdf",
+                    "color": "peach"
+                }
+          
+        ],
+        "website": "https://tomorrowsfootball.ch/",
+        "date": "2025-04-01"
+    },
+    
+    {
         "id": 8,
-        "title": "Swissquote",
-        "description": "Swissquote is a Swiss banking group, specializing in the provision of financial services including trading, investment solutions and banking services.  The project was to conduct usability testing on their currently in-development application. </br> </br> I established hypotheses, prepared questions and tasks to submit to two test users with different profiles. During interviews, I had two responsibilities, the moderator and the observer. </br> </br> Thanks to this test, we identified problems to be solved as well as proposed solutions. ",
+        "title": "SwissQuote",
+        "description": "Swissquote is a Swiss banking group, specializing in the provision of financial services including trading, investment solutions and banking services.  The project was to conduct usability testing on their in-development application. </br> </br> I established hypotheses, prepared questions and tasks to submit to two test users with different profiles. During interviews, I had two responsibilities, I started as the moderator and then the observer. </br> </br> Thanks to this test, we identified problems to be solved as well as proposed solutions.</br>Unfortunately, I cannot share the results of the test, but I can say that it was a very enriching experience that allowed me to put into practice the knowledge I had acquired in class and to learn a lot about the process of usability testing.",
         "images": [
             "../assets/img/project_swissquote.png"
         ],
         "tags": [
-            "ux",
-            "user research"
-        ],
+            "user research"],
         "date": "2024-11-30"
     },
     {
         "id": 9,
         "title": "The tiger painting",
-        "description": "Ici il y aura la description de la peinture",
+        "description": "Acrylic on canvas, 30x30cm.",
         "images": [
             "../assets/img/project_painting_tiger.png"
         ],
@@ -210,7 +242,7 @@
     {
         "id": 10,
         "title": "The kookaburra painting",
-        "description": "Ici il y aura la description de la peinture",
+        "description": "Acrylic on canvas, 100x100cm.",
         "images": [
             "../assets/img/project_painting_cookaborra.png"
         ],
@@ -222,7 +254,7 @@
     {
         "id": 11,
         "title": "The crocodile painting",
-        "description": "Ici il y aura la description de la peinture",
+        "description": "Acrylic on canvas, 50x30cm.",
         "images": [
             "../assets/img/project_painting_croc.png"
         ],
@@ -233,8 +265,8 @@
     },
     {
         "id": 12,
-        "title": "The from painting",
-        "description": "Ici il y aura la description de la peinture",
+        "title": "The frog painting",
+        "description": "Acrylic on canvas, 30x30cm.",
         "images": [
             "../assets/img/project_painting_frog.png"
         ],
@@ -245,8 +277,8 @@
     },
     {
         "id": 13,
-        "title": "The guard painting",
-        "description": "Ici il y aura la description de la peinture",
+        "title": "The swedish guard painting",
+        "description": "Acrylic on canvas, 30x20cm.",
         "images": [
             "../assets/img/project_painting_guard.png"
         ],
@@ -270,71 +302,192 @@
     {
         "id": 15,
         "title": "The portrait painting",
-        "description": "Ici il y aura la description de la peinture",
+        "description": "Acrylic on canvas, 100x100cm.",
         "images": [
-            "../assets/img/project_painting_portrait.png"
+            "../assets/img/project_painting_portrait.png",
+            "../assets/img/project_painting_portrait-2.png",
+            "../assets/img/project_painting_portrait-3.png",
+            "../assets/img/project_painting_portrait-4.png"
+            
         ],
         "tags": [
             "painting"
         ],
-        "date": "2020-09-10"
-    },
-    {
-        "id": 16,
-        "title": "UEFA x Amazon",
-        "description": "As part of a School project in collaboration of both big compagnies : Uefa and Amazon, I had the chance to participate in a project to create a strategy to promote women coaching in football. </br> </br> In a team of eight, we created a campaign called Tomorrow's Football, with the objective to encourage young women to become a coach. We created a website, a social media campaign and an anime interactive serie. </br> </br> I was in charge of the creation of the serie. </br> </br> The serie is called 'Coach like a women' and follow to story of a young women that become a football coach of her siste's football team. Each episode is interactive, meaning they are created partially by the audience. We conduct an interview with a real person that explain what they want for the episode. </br> </br> To bring another aspect of the serie, the serie is drawed. The begining of the first episode has been created.",
-        "images": [
-            "../assets/img/project_uefa_amazon.png",
-            "https://youtu.be/-g_J-_V3QI8"
-        ],
-        "tags": [
-            "drawing",
-            "ux"
-        ],
-        "website": "https://tomorrowsfootball.ch/",
-        "date": "2025-03-10"
+        "date": "2019-09-10"
     },
     {
         "id": 17,
-        "title": "Animal photography",
-        "description": "Photography has always been one of my passions. I have a particular fondness for the animal theme, which I love to capture both in photography and painting.",
+        "title": "Kookaburra B&W collection",
+        "description": "",
         "images": [
-            "../assets/img/project_photography_1.png",
-            "../assets/img/project_photography_2.png",
-            "../assets/img/project_photography_3.png",
-            "../assets/img/project_photography_4.png"
+   
+            "../assets/img/project_photography-kookabura-bw-1.png",
+            "../assets/img/project_photography-kookabura-bw-2.png",
+            "../assets/img/project_photography-kookabura-bw-3.png",
+            "../assets/img/project_photography-kookabura-bw-4.png",
+            "../assets/img/project_photography-kookabura-bw-5.png",
+            "../assets/img/project_photography-kookabura-bw-6.png",
+            "../assets/img/project_photography-kookabura-bw-7.png",
+            "../assets/img/project_photography-kookabura-bw-8.png",
+            "../assets/img/project_photography-kookabura-bw-9.png"
         ],
         "tags": [
             "photography"
         ],
-        "date": "2020-09-10"
-    },
-    {
-        "id": 18,
-        "title": "Landscape photography",
-        "description": "Photography has always been one of my passions. I have a particular fondness for the landscape theme, which I love to capture both in photography and painting.",
-        "images": [
-            "../assets/img/project_photography_landscape_1.png",
-            "../assets/img/project_photography_landscape_2.png",
-            "../assets/img/project_photography_landscape_3.png",
-            "../assets/img/project_photography_landscape_4.png"
-        ],
-        "tags": [
-            "logo",
-            "branding"
+        "inthesameprojectas": [
+            50,
+            10
         ],
         "date": "2020-09-10"
     },
-    {
-        "id": 19,
-        "title": "The turtle painting",
-        "description": "Ici il y aura la description de la peinture",
+        {
+        "id": 50,
+        "title": "Kookaburra Color collection",
+        "description": "",
         "images": [
-            "../assets/img/project_painting_turtle.png"
+     
+            "../assets/img/project_photography-kookabura-color-1.png",
+            "../assets/img/project_photography-kookabura-color-2.png",
+            "../assets/img/project_photography-kookabura-color-3.png",
+            "../assets/img/project_photography-kookabura-color-4.png",
+            "../assets/img/project_photography-kookabura-color-5.png",
+            "../assets/img/project_photography-kookabura-color-6.png",
+            "../assets/img/project_photography-kookabura-color-7.png",
+            "../assets/img/project_photography-kookabura-color-8.png"
         ],
         "tags": [
-            "painting"
+            "photography"
+        ],
+        "inthesameprojectas": [
+            17,
+            10
         ],
         "date": "2020-09-10"
-    }
+    },
+   
+
+{
+    "id": 20,
+    "title": "Toffee: painting",
+    "description": "Acrylic on canvas.",
+    "images": [
+        "../assets/img/project_toffee-1.png",
+        "../assets/img/project_toffee-2.png",
+        "../assets/img/project_toffee-3.png"
+    ],
+    "tags": [
+        "painting"
+    ],
+    "date": "2026-01-01"
+
+},
+{
+    "id": 21,
+    "title": "Koala B&W collection",
+    "description": "",
+    "images": [
+
+
+        "../assets/img/project_photography-koala-bw-3.png",
+        "../assets/img/project_photography-koala-bw-4.png",
+                "../assets/img/project_photography-koala-bw-1.png",
+        "../assets/img/project_photography-koala-bw-2.png"
+    ],
+    "tags": [
+        "photography"
+    ],
+    "inthesameprojectas":[
+        22
+    ],
+    "date": "2026-01-01"
+},
+{
+    "id": 22,
+    "title": "Koala Color collection",
+    "description": "",
+    "images": [
+
+
+        "../assets/img/project_photography-koala-color-3.png",
+        "../assets/img/project_photography-koala-color-4.png",
+                "../assets/img/project_photography-koala-color-1.png",
+        "../assets/img/project_photography-koala-color-2.png"
+    ],
+    "tags": [
+        "photography"
+    ],
+    "inthesameprojectas": [
+        21
+    ],
+    "date": "2026-01-01"
+},
+{
+    "id": 23,
+    "title": "The Noisy Miner ",
+
+    "images": [
+        "../assets/img/project_photography-NoisyMiner-1.png",
+        "../assets/img/project_photography-NoisyMiner-2.png",
+        "../assets/img/project_photography-NoisyMiner-3.png"
+    ],
+    "tags": [
+        "photography"
+    ],
+    "date": "2020-09-10"
+},
+{
+    "id": 24,
+    "title": "The duck : 1",
+    "images": [
+        "../assets/img/project_photography-canard.png"
+    ],
+     "tags": [
+        "photography"
+    ],
+    "date": "2020-09-10"
+},
+{
+    "id": 25,
+    "title": "The duck : 2",
+    "images": [
+        "../assets/img/project_photography-canard-2.png"
+    ],
+     "tags": [
+        "photography"
+    ],
+    "date": "2020-09-10"
+},
+{
+    "id": 26,
+    "title": "Daisy",
+    "images": [
+        "../assets/img/project_photography-flower-marguerite.png"
+    ],
+     "tags": [
+        "photography"
+    ],
+    "date": "2020-09-10"
+},
+{
+    "id": 27,
+    "title": "Rose: 1",
+    "images": [
+        "../assets/img/project_photography-flower-rose.png"
+    ],
+     "tags": [
+        "photography"
+    ],
+    "date": "2020-09-10"
+},
+{
+    "id": 28,
+    "title": "Rose: 2",
+    "images": [
+        "../assets/img/project_photography-flower-rose-2.png"
+    ],
+     "tags": [
+        "photography"
+    ],
+    "date": "2020-09-10"
+}
 ]

@@ -56,16 +56,24 @@ function clearFilters() {
   selected.value = []
 }
 
+function getProjectTimestamp(project) {
+  if (!project || !project.date) return Number.NEGATIVE_INFINITY
+  const time = new Date(project.date).getTime()
+  return Number.isNaN(time) ? Number.NEGATIVE_INFINITY : time
+}
+
 const filteredProjects = computed(() => {
-  // if no filters selected, show all
-  if (!selected.value.length) return projectsData
+  // if no filters selected, show all (newest first)
+  if (!selected.value.length) {
+    return [...projectsData].sort((a, b) => getProjectTimestamp(b) - getProjectTimestamp(a))
+  }
 
   // OR logic: show projects that match ANY selected tag (union)
   return projectsData.filter((p) => {
     const tags = (p.tags || []).map((t) => t.toString().toLowerCase())
     // check that at least one selected tag key is present in project's tags
     return selected.value.some((sel) => tags.includes(sel))
-  })
+  }).sort((a, b) => getProjectTimestamp(b) - getProjectTimestamp(a))
 })
 
 // Pagination state
