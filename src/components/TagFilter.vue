@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, useSSRContext } from 'vue'
 
 const props = defineProps({
     label: { type: String, default: '' },
@@ -61,19 +61,18 @@ const kindToPalette = {
 
 // map common tag names (lowercased) or keywords to a palette key
 const tagToPalette = {
-    art: 'pink',
-    painting: 'pink',
+ux: 'sky',
+    ui: 'sky',
+
+    branding: 'peach',
+    graphism: 'peach',
+
     photography: 'pink',
-    drawings: 'pink',
-    'ux': 'sky',
-    'ui': 'sky',
-    'user research': 'sky',
-    figma: 'sky',
+    painting: 'pink',
+
     coding: 'mint',
-    html: 'mint',
-    css: 'mint',
-    javascript: 'mint',
-    js: 'mint'
+
+    video: 'lavender'
 }
 
 const computedLabel = computed(() => props.label || defaultLabels[props.kind] || 'Tag')

@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "title": "Vaud Sentier: application design",
+        "title": "Vaud Sentiers: application design",
         "description": "VaudSentiers is a web application that invites tourists and residents to discover various places by following itineraries. <b>I was in charge of the user experience and user interface design.</b>  </br> </br> To identify users needs, I did a quantitative survey. Once I had analysed the results, I identified key features. These included : <ol><li>- Searching for paths and places via a map or a search bar with filters.</li><li>- Starting navigation directly from the app.</li><li>- Sharing places and itineraries.</li><li>- Rating and commenting paths and itineraries.</li></ol>  </br> I then created low-fidelity prototypes, tested them, and improved the design based on feedbacks. </br> </br> After that, I made high-fidelity prototypes with colors and a graphic identity, using Google’s design system for consistency. I chose cheerful colors and used them to help users, with each search criteria having its own color.",
         "images": [
             "../assets/img/project_vaudsentier.png",
@@ -11,19 +11,18 @@
         "figma": "https://www.figma.com/design/Qfw43lvTlTthQ4UovmHn8v/RELLL---UI-UX?node-id=1564-17321&t=ejy0KVKyTaDJufvN-1",
         "tags": [
             "ux",
-            "ui",
-            "user research",
-            "figma"
+            "ui"
+          
         ],
         "info": "Background image of the first image by Ldgfr Photos (Adobe Stock)",
         "date": "2024-06-11",
         "inthesameprojectas": [
-            32
+            2
         ]
     },
     {
-        "id": 32,
-        "title": "Vaud Sentier : branding",
+        "id": 2,
+        "title": "Vaud Sentiers : branding",
         "description": "VaudSentiers is a web application that invites tourists and residents to discover various places by following itineraries. For the 'Vaud Sentiers' project, I was responsible for the branding, including the logo design, the graphic charter, and the editorial line. The logo is composed of the silhouette of the Canton of Vaud and the brand name 'Vaud Sentiers'. The name is a play on words, as it phonetically echoes 'vos sentiers' (your paths) in French, while emphasizing that the application is centered on the Canton of Vaud. </br> </br> To reflect the identity of the Canton of Vaud, I incorporated the green and white of the cantonal flag into the silhouette. Furthermore, green was chosen as the primary color because it effectively represents nature and discovery. The supporting colors in the palette were selected from the same tonal range and chromatic spectrum to ensure a harmonious blend with the primary brand color.",
         "images": [
             "../assets/img/project_vaudsentier-logo-1.png",
@@ -40,7 +39,7 @@
         ]
     },
     {
-        "id": 2,
+        "id": 3,
         "title": "Life of eyes",
         "description": "What emotions arise when we are surrounded by animals ? The sense of being watched and the intensity of their gaze is what I sought to capture in my artwork - <b>a representation of animals eyes staring at you </b>. <br/> <br/> To achieve this, I created eight 3D animal gazes using epoxy resin, expanded polystyrene, and acrylic paint. I meticulously painted the eyes on the polystyrene, then applied epoxy resin to mimic the cornea’s reflective surface. <br/> <br/> To enhance the feeling of being observed, I arranged the eyes close to one another on a black background, creating the impression that you’re surrounded by a multitude of animals, all gazing at you. I placed them in a rectangular white frame to further emphasize their presence and focus.",
         "images": [
@@ -49,12 +48,12 @@
             "../assets/img/project_yeux-1.png"
         ],
         "tags": [
-            "art"
+            "painting"
         ],
         "date": "2021-06-20"
     },
     {
-        "id": 3,
+        "id": 4,
         "title": "WildClash : a card game",
         "description": "<b> How to nurture a child’s love of animals ? </b> It’s a problem I’ve asked myself and I may have found the solution. Children are often very intrigued by unusual animals and they learn better and faster when they have fun. This is the reason why, in a team of four, we suggested to create a card game as an interactive and a fun way to spend quality family time . The card game we created regroups unusual animals in the world including important information about them. </br> </br> To create a card, information architecture is really important, even more so when the target audience is children, that’s why we’ve focused our work around information architecture. </br> </br> To help users understand the game and to have more information about these animals, I also created a prototype of an online wiki.",
         "images": [
@@ -64,35 +63,37 @@
         ],
         "tags": [
             "ux",
-            "ui"
+            "ui","graphism"
         ],
         "date": "2025-03-10",
         "info": "Background image by Jacob Lund (Abobe stock)",
         "buttons": [
             {
                 "label": "View the game rules",
-                "url": "elodie_portfolio/files/wildclash-rules.pdf",
+                "url": "https://elodiepe.github.io/elodie_portfolio/files/tomorrowsfootball-serie-concept.pdf",
                 "color": "peach"
             }
         ]
     },
     {
-        "id": 4,
+        "id": 5,
         "title": "Unmatched",
-        "description": "Over the last few years, I have been learning flock printing on clothing, a technique that immediately captivated me. I have created my own brand called Unmatched with designs that I create that reflect my personality. ",
+        "description": "Over the last few years, I have been learning flock printing on clothing, a technique that immediately captivated me. I have created my own brand called Unmatched with designs that I create that reflect my personality. </br> </br> For this project, I designed a fine and colorful visual identity that captures the essence of individuality and self-expression. </br>The logo features a chameleon, but not a hidden one—instead, it boldly comes to the surface, symbolizing how Unmatched celebrates standing out and being unapologetically yourself. The chameleon is rendered in vibrant, eye-catching colors that reflect the dynamic nature of the brand and the diverse designs created for the clothing line. This visual approach reinforces the brand message: rather than blending in, Unmatched encourages authenticity and self-confidence through colorful, distinctive fashion choices.",
         "images": [
+            "../assets/img/project_unmatched-logo.png",
             "../assets/img/project_mockup.png",
             "../assets/img/project_mockup_1.png"
         ],
         "tags": [
             "graphism",
-            "design"
+            "Branding"
         ],
+    
         "date": "2024-01-15",
         "info": "Mockup is made by Mr.Mockup"
     },
     {
-        "id": 5,
+        "id": 6,
         "title": "Adopt your pet",
         "description": "Adopt your pet is a Tinder for pets. The concept, born from the idea of 'A Tinder for pets', led us to create an app where SPCAs (Society for the Prevention of Cruelty to Animals) could list animals available for adoption, allowing users to swipe and find pets. I contributed to both the REST API development and front-end implementation using Vue.js. </br> </br> The application has these features : <ol> <li> - Communication between SPCAs and users</li> <li>- Liking and disliking pets by swiping </li> <li>- Filters If SPCAs : create, update, delete pets </li> </ol> </br> Although the project is complete, several improvements are needed, such as streamlining user access and optimizing image loading for better overall experience.    ",
         "images": [
@@ -108,7 +109,7 @@
         "info": "Background image by myself."
     },
     {
-        "id": 6,
+        "id": 7,
         "title": "AI video : ad",
         "description": "As part of a course about artificial intelligence, I had the chance to test a few AI. In a team of three, we realised a advertisement for a Pizzeria in Florence, Italy, using only AI. We had this idea : Pizzas smells so good, that it  brings statues to life. </br> </br> To begin with, we created the script using ChatGPT with an iterative approach tweaking the prompts until all parts of the story were to our satisfaction. Once we had the script we could start to prompt images for the storyboard. </br> </br> Of a second step, we used MidJourney to create the images for the storyboard. The most challenging aspect was to achieve a coherent graphic atmosphere between images. We discovered that the trick was to use the exact same sentence in each prompt. Once images were created, we started to animated them, with Runway.</br> </br> Finally, we edited the video on Adobe Premier Pro and added a sound atmosphere. We also used ElevenLabs to create an Italian voice for our ad’s slogan. ",
         "images": [
@@ -116,13 +117,12 @@
             "https://youtu.be/gscp1yHJeHY"
         ],
         "tags": [
-            "video",
-            "AI"
+            "video"
         ],
         "date": "2025-01-21"
     },
     {
-        "id": 7,
+        "id": 8,
         "title": "Bruno Pesenti's website",
         "description": "Over the last few years, I have had the privilege of collaborating with Bruno Pesenti, an independent watchmaker based in Geneva, Switzerland. Throughout this partnership, I was tasked with documenting and promoting his exceptional collection and artisanal craftsmanship. My work encompassed the creation of a comprehensive print catalog, the development of a bespoke brand identity and logo, and the design of a dedicated digital presence. </br> </br> I designed and developed a custom website to showcase Mr. Pesenti’s work through a visually immersive and user-friendly interface. Hand-coded using HTML, CSS, and JavaScript within the Vue.js framework, the platform is fully responsive across desktop and mobile devices. </br> </br>The website also features an integrated booking service, allowing clients to reserve pieces and manage payments for both products and deliveries. Supporting a global clientele, the site is available in French, English, and Italian. To facilitate easy content management, I implemented an intuitive administrative interface that enables Mr. Pesenti to add, edit, or delete inventory and manage bookings independently. I continue to maintain and update the platform to ensure it remains a high-performance tool for his business. ",
         "images": [
@@ -138,12 +138,12 @@
         ],
         "date": "2026-01-15",
         "inthesameprojectas": [
-            33,
-            34
+            9,
+            10
         ]
     },
     {
-        "id": 33,
+        "id": 9,
         "title": "Le Cabinotier's catalog",
         "description": "The last few years I had the privilege to collaborate with Bruno Pesenti, a watchmaker in Geneva, Switzerland. Throughout my collaboration with him, I was tasked with documenting and promoting his exceptional watch collection and craftsmanship. This involved creating a comprehensive print catalog of his collection, developing his brand identity through a custom-design logo, and building a website to serve as his digital presence.  </br> </br> For the catalog, I took a hands-on approach to reflect Bruno Pesenti's personality in every detail. I wrote clear, detailed product descriptions, took elegant photographs designed a visually appealing layout with clean typography and elegant colors, and selected high-quality paper to enhance the presentation. The result is a catalog that showcases Bruno's work while reinforcing his brand's identity and the artistry of his timepieces. </br> </br>Because color has a profound impact on emotion and sensation, the palette choice was central to the project. I opted for a selection of sober, dark tones—specifically deep blacks and rich browns—which intuitively represent the luxury and sophistication inherent in the watchmaking domain. Typography played an equally vital role in shaping the reader's experience. I selected 'Minion Variable Concept', a serif font that enhances legibility by creating an invisible horizontal flow, providing a classic aesthetic that guides the eye across the technical descriptions. </br> </br>To ensure the physical object reflected the high-end nature of the content, material selection was paramount. For the cover, I chose a 200 g/m² stock with a 'Soft Touch' matte lamination, providing a premium, tactile finish that enhances the printed colors. The interior pages utilize 115 g/m² semi-matte coated paper to ensure the highest quality reproduction of the photography. 'Le Cabinotier' is more than a catalog; it is a testament to Geneva's watchmaking heritage, brought to life through meticulous layout, high-quality imagery, and refined material choices.</br> </br>I continue to collaborate with Bruno Pesenti on various projects, including the maintenance and updating of his website, ensuring that his digital presence remains as polished and professional as his physical products. ",
         "images": [
@@ -152,19 +152,18 @@
             "../assets/img/project_brunopesenti-catalogue-3.png"
         ],
         "tags": [
-            "Graphism",
-            "Print",
-            "Photography"
+            "Branding",
+            "graphism"
         ],
         "inthesameprojectas": [
-            7,
-            34
+             10,
+            8
         ],
         "website": "https://www.brunopesenti.ch/catalogue",
         "date": "2022-06-15"
     },
     {
-        "id": 34,
+        "id": 10,
         "title": "Business Card and logo for Bruno Pesenti",
         "description": "The last few years I had the privilege to collaborate with Bruno Pesenti, a watchmaker in Geneva, Switzerland. Throughout my collaboration with him, I was tasked with documenting and promoting his exceptional watch collection and craftsmanship. This involved creating a comprehensive print catalog of his collection, developing his brand identity through a custom-design logo, and building a website to serve as his digital presence. </br> </br> I opted for a simple logo that allows the theme of watchmaking to be easily understood at a glance. The logo represents the hands of a watch or clock set to 10:10. Why 10:10? Simply because this is the industry standard; you may have noticed that in the vast majority of horological photography, watches are set to this specific time for aesthetic balance. Regarding the colors, I chose sober tones that work effectively on both dark and light backgrounds, reflecting the luxury of the watchmaking world while staying true to its antique heritage. The result is a logo that effectively represents Bruno Pesenti's brand identity. </br> </br> I continue to collaborate with Bruno Pesenti on various projects, including the maintenance and updating of his website, ensuring that his digital presence remains as polished and professional as his physical products.",
         "images": [
@@ -172,17 +171,19 @@
             "../assets/img/project_brunopesenti-carteVisite-2.png"
         ],
         "tags": [
-            "Branding"
+            "Branding",
+            "graphism"
         ],
         "inthesameprojectas": [
-            33,
-            7
+            9,
+            8
+    
         ],
         "website": "https://www.brunopesenti.ch",
         "date": "2022-06-15"
     },
     {
-        "id": 16,
+        "id": 11,
         "title": "UEFA x Amazon",
         "description": "As part of a School project in collaboration of both big compagnies : Uefa and Amazon, I had the chance to participate in a project to create a strategy to promote women coaching in football. </br> </br> In a team of eight, we created a campaign called Tomorrow's Football, with the objective to encourage young women to become a coach. We created a website, a social media campaign and an anime interactive serie. </br> </br> I was in charge of the creation of the serie.  </br> The serie is called 'Coach like a women' and follow to story of a young women that become a football coach of her sister's football team. Each episode is interactive, meaning they are created partially by the audience. We conduct an interview with a real person that explain what they want for the episode. </br> </br> To bring another aspect of the serie, the serie is drawed. The begining of the first episode has been created.",
         "images": [
@@ -192,7 +193,8 @@
         ],
         "tags": [
             "drawing",
-            "ux"
+            "ux",
+            "video"
         ],
                 "buttons": [
                           {
@@ -202,12 +204,12 @@
                 },
             {
                 "label": "View the serie's concept",
-                "url": "elodie_portfolio/files/tomorrowsfootball-serie-concept.pdf",
+                "url": "https://elodiepe.github.io/elodie_portfolio/files/tomorrowsfootball-serie-concept.pdf",
                 "color": "peach"
             },
                 {
                     "label": "View the serie's storyboard",
-                    "url": "elodie_portfolio/files/tomorrowsfootball-serie-storyboard.pdf",
+                    "url": "https://elodiepe.github.io/elodie_portfolio/files/tomorrowsfootball-serie-storyboard.pdf",
                     "color": "peach"
                 }
           
@@ -217,18 +219,18 @@
     },
     
     {
-        "id": 8,
+        "id": 12,
         "title": "SwissQuote",
         "description": "Swissquote is a Swiss banking group, specializing in the provision of financial services including trading, investment solutions and banking services.  The project was to conduct usability testing on their in-development application. </br> </br> I established hypotheses, prepared questions and tasks to submit to two test users with different profiles. During interviews, I had two responsibilities, I started as the moderator and then the observer. </br> </br> Thanks to this test, we identified problems to be solved as well as proposed solutions.</br>Unfortunately, I cannot share the results of the test, but I can say that it was a very enriching experience that allowed me to put into practice the knowledge I had acquired in class and to learn a lot about the process of usability testing.",
         "images": [
             "../assets/img/project_swissquote.png"
         ],
         "tags": [
-            "user research"],
+            "ux"],
         "date": "2024-11-30"
     },
     {
-        "id": 9,
+        "id": 13,
         "title": "The tiger painting",
         "description": "Acrylic on canvas, 30x30cm.",
         "images": [
@@ -240,7 +242,7 @@
         "date": "2020-09-10"
     },
     {
-        "id": 10,
+        "id": 14,
         "title": "The kookaburra painting",
         "description": "Acrylic on canvas, 100x100cm.",
         "images": [
@@ -252,7 +254,7 @@
         "date": "2020-09-10"
     },
     {
-        "id": 11,
+        "id": 15,
         "title": "The crocodile painting",
         "description": "Acrylic on canvas, 50x30cm.",
         "images": [
@@ -264,7 +266,7 @@
         "date": "2020-09-10"
     },
     {
-        "id": 12,
+        "id": 16,
         "title": "The frog painting",
         "description": "Acrylic on canvas, 30x30cm.",
         "images": [
@@ -276,7 +278,7 @@
         "date": "2020-09-10"
     },
     {
-        "id": 13,
+        "id": 17,
         "title": "The swedish guard painting",
         "description": "Acrylic on canvas, 30x20cm.",
         "images": [
@@ -288,7 +290,7 @@
         "date": "2020-09-10"
     },
     {
-        "id": 14,
+        "id": 18,
         "title": "The lion painting",
         "description": "Ici il y aura la description de la peinture",
         "images": [
@@ -300,7 +302,7 @@
         "date": "2020-09-10"
     },
     {
-        "id": 15,
+        "id": 19,
         "title": "The portrait painting",
         "description": "Acrylic on canvas, 100x100cm.",
         "images": [
@@ -316,7 +318,7 @@
         "date": "2019-09-10"
     },
     {
-        "id": 17,
+        "id": 20,
         "title": "Kookaburra B&W collection",
         "description": "",
         "images": [
@@ -335,13 +337,13 @@
             "photography"
         ],
         "inthesameprojectas": [
-            50,
-            10
+            21,
+            14
         ],
         "date": "2020-09-10"
     },
         {
-        "id": 50,
+        "id": 21,
         "title": "Kookaburra Color collection",
         "description": "",
         "images": [
@@ -359,15 +361,15 @@
             "photography"
         ],
         "inthesameprojectas": [
-            17,
-            10
+            20,
+            14
         ],
         "date": "2020-09-10"
     },
    
 
 {
-    "id": 20,
+    "id": 22,
     "title": "Toffee: painting",
     "description": "Acrylic on canvas.",
     "images": [
@@ -382,7 +384,7 @@
 
 },
 {
-    "id": 21,
+    "id": 23,
     "title": "Koala B&W collection",
     "description": "",
     "images": [
@@ -397,12 +399,12 @@
         "photography"
     ],
     "inthesameprojectas":[
-        22
+        24
     ],
     "date": "2026-01-01"
 },
 {
-    "id": 22,
+    "id": 24,
     "title": "Koala Color collection",
     "description": "",
     "images": [
@@ -417,12 +419,12 @@
         "photography"
     ],
     "inthesameprojectas": [
-        21
+        23
     ],
     "date": "2026-01-01"
 },
 {
-    "id": 23,
+    "id": 25,
     "title": "The Noisy Miner ",
 
     "images": [
@@ -436,7 +438,7 @@
     "date": "2020-09-10"
 },
 {
-    "id": 24,
+    "id": 26,
     "title": "The duck : 1",
     "images": [
         "../assets/img/project_photography-canard.png"
@@ -447,7 +449,7 @@
     "date": "2020-09-10"
 },
 {
-    "id": 25,
+    "id": 27,
     "title": "The duck : 2",
     "images": [
         "../assets/img/project_photography-canard-2.png"
@@ -458,7 +460,7 @@
     "date": "2020-09-10"
 },
 {
-    "id": 26,
+    "id": 28,
     "title": "Daisy",
     "images": [
         "../assets/img/project_photography-flower-marguerite.png"
@@ -469,7 +471,7 @@
     "date": "2020-09-10"
 },
 {
-    "id": 27,
+    "id": 29,
     "title": "Rose: 1",
     "images": [
         "../assets/img/project_photography-flower-rose.png"
@@ -480,7 +482,7 @@
     "date": "2020-09-10"
 },
 {
-    "id": 28,
+    "id": 30,
     "title": "Rose: 2",
     "images": [
         "../assets/img/project_photography-flower-rose-2.png"
@@ -489,5 +491,52 @@
         "photography"
     ],
     "date": "2020-09-10"
+},
+{
+    "id": 31,
+    "title": "Le Cabinotier: collection",
+    "images": [
+        "../assets/img/project_photography-horlogerie.png",
+        "../assets/img/project_photography-horlogerie-2.png",   
+        "../assets/img/project_photography-horlogerie-3.png",
+        "../assets/img/project_photography-horlogerie-4.png",
+        "../assets/img/project_photography-horlogerie-5.png",
+        "../assets/img/project_photography-horlogerie-6.png",
+        "../assets/img/project_photography-horlogerie-7.png"
+    ],
+     "tags": [
+        "photography"
+    ],
+    "inthesameprojectas": [
+        
+        9
+    ],
+    "date": "2020-09-10"
+},
+{
+ "id":32,
+    "title": "Ateliers colibri ",
+    "description": "Ateliers Colibri is inspired by the Native American hummingbird legend: a small hummingbird faced a devastating forest fire and tirelessly carried water droplets to fight it, despite others calling it foolish. When asked why, the hummingbird replied that it was doing its part. For this project, I designed a logo that embodies this powerful message of collective action and individual contribution. </br> The visual identity captures the essence of the legend through thoughtful design choices. I created a logo featuring a stylized hummingbird in warm and golden tones to evoke the mythological and natural aspects of the story. These colors reinforce the themes of warmth, hope, and resilience while making the design instantly recognizable and memorable.  </br> The logo's purpose is to inspire people to become part of Mélanie's mission: through workshops and her blog, she coaches individuals in creating natural homemade products. Just as the hummingbird made a difference through persistent effort, Ateliers Colibri empowers each person to do their part—together forming an ocean from individual streams.",
+    "images": [
+        "../assets/img/project_colibri-logo.png"
+    ],
+     "tags": [
+        "Branding"
+    ],
+    "date": "2022-12-10"
+
+},
+{
+ "id":33,
+    "title": "Mythologia shop",
+    "description": "While creating an online website about Greek mythology, I had the opportunity to develop a visual identity for this project. I chose to create a logo that represents both Greek mythology and the commercial aspect of the project. </br>The logo is composed of an ancient Greece silhouette with graphic elements that evoke the gods and heroes of Greek mythology.</br> I used warm and golden colors to reinforce the mythological aspect and give an impression of wealth and mystery. The result is a logo that reflects the project's identity while being easily recognizable and memorable.",
+    "images": [
+        "../assets/img/project_mythologia-logo.png"
+    ],
+     "tags": [
+        "Branding"
+    ],
+    "date": "2023-09-15"
+
 }
 ]

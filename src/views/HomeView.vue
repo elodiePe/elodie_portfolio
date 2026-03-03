@@ -66,8 +66,7 @@ const scrollToCollaboration = () => {
           My passion is <span class="text-2xl font-semibold">creation</span>,
           whether it's developing brand identities, designing layouts, building
           websites and designing innovative products that ensure a smooth user
-          experience. I aspire to one day turn this passion into a concrete
-          career. I also practice painting, creating designs for clothing and
+          experience.</p><p> I also practice painting, creating designs for clothing and
           photography.
         </p>
  
@@ -116,32 +115,32 @@ const scrollToCollaboration = () => {
           v-for="(cap, i) in [
             {
               title: 'Brand & Identity',
-              desc: 'Logo systems, visual languages and brand guidelines to give projects a clear personality.',
-              tag: 'logo,branding',
+              desc: 'I create distinctive brand identities that express each project’s personality and values. This includes logo systems, color palettes, typography, and brand guidelines, all crafted to ensure consistency, recognition, and meaningful communication across print and digital touchpoints.',
+              tag: 'branding',
             },
             {
               title: 'Web Design',
-              desc: 'User flows, wireframes and prototypes focused on usability and delightful interactions and its user <br> </br> ',
-              tag: 'webdesign,ux, ui',
+              desc: 'I design user-centered websites for desktop and mobile, from structure to final interface. My process includes user flows, wireframes, and interactive prototypes, with a focus on usability, accessibility, and visual consistency to create clear and engaging digital experiences. ',
+              tag: 'ux, ui, coding',
             },
-            {
-              title: 'Project managment',
-              desc: 'Group project, individual project, agile and scrum',
-              tag: 'managment',
-            },
+            // {
+            //   title: 'Project managment',
+            //   desc: 'Group project, individual project, agile and scrum',
+            //   tag: 'managment',
+            // },
             {
               title: 'Photography & painting',
               desc: 'I  have been painting since I was six years old. I mainly create acrylic paintings. </br> Photography is also one of my passions. I have a particular fondness for the animal theme, which I love to capture both in photography and painting.',
-              tag: 'photography,painting',
+              tag: 'photography,painting, drawing',
             },
-            {
-              title: 'Clothing design',
-              desc: 'Recently, I have been working on creating design for clothing and textiles.',
-              tag: 'clothing',
-            },
+            // {
+            //   title: 'Clothing design',
+            //   desc: 'Recently, I have been working on creating design for clothing and textiles.',
+            //   tag: 'clothing',
+            // },
             {
               title: 'Graphism',
-              desc: 'Layout, print, booklets',
+              desc: 'I create thoughtful graphic design for both print and digital media, including editorial layouts, posters, brochures, and booklets. My focus is on clear visual hierarchy, strong typography, and cohesive compositions that communicate ideas effectively while reflecting each project’s unique identity.',
               tag: 'graphism',
             },
           ]"
@@ -190,7 +189,7 @@ const scrollToCollaboration = () => {
 
             <!-- description revealed on hover -->
             <p
-              class="mt-2 text-sm md:text-base max-h-0 opacity-0 group-hover:opacity-100 group-hover:max-h-40 transition-all duration-300 ease-in-out overflow-hidden"
+              class="mt-2 text-sm md:text-base max-h-0 opacity-0 group-hover:opacity-100 group-hover:max-h-96 transition-all duration-300 ease-in-out overflow-hidden"
               v-html="cap.desc"
             ></p>
 

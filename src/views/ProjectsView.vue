@@ -21,8 +21,48 @@ for (const p of projectsData) {
   }
 }
 
-// array of tag objects for rendering
-const allTags = Array.from(tagMap.entries()).map(([key, label]) => ({ key, label }))
+const tagColorPriority = {
+  sky: 1,
+  mint: 2,
+  peach: 3,
+  pink: 4,
+  lavender: 5,
+  neutral: 6,
+}
+
+const tagToPalette = {
+  ux: 'sky',
+  ui: 'sky',
+  branding: 'peach',
+  graphism: 'peach',
+  photography: 'pink',
+  painting: 'pink',
+  coding: 'mint',
+  video: 'lavender',
+}
+
+function getTagPalette(label) {
+  const normalized = (label || '').toString().toLowerCase().trim()
+  if (!normalized) return 'neutral'
+  if (tagToPalette[normalized]) return tagToPalette[normalized]
+
+  if (normalized.includes('ux') || normalized.includes('ui') || normalized.includes('user research') || normalized.includes('figma')) return 'sky'
+  if (normalized.includes('art') || normalized.includes('paint') || normalized.includes('photo') || normalized.includes('draw')) return 'pink'
+  if (normalized.includes('code') || normalized.includes('html') || normalized.includes('css') || normalized.includes('js') || normalized.includes('javascript')) return 'mint'
+
+  return 'neutral'
+}
+
+// array of tag objects for rendering, grouped by color then alphabetically
+const allTags = computed(() => {
+  return Array.from(tagMap.entries())
+    .map(([key, label]) => ({ key, label, palette: getTagPalette(label) }))
+    .sort((a, b) => {
+      const byPalette = (tagColorPriority[a.palette] || 99) - (tagColorPriority[b.palette] || 99)
+      if (byPalette !== 0) return byPalette
+      return a.label.localeCompare(b.label)
+    })
+})
 
 async function toggleTag(keyOrLabel) {
   // accept either normalized key or label emitted by TagFilter
@@ -62,18 +102,41 @@ function getProjectTimestamp(project) {
   return Number.isNaN(time) ? Number.NEGATIVE_INFINITY : time
 }
 
+function getProjectGroupPriority(project) {
+  const tags = (project?.tags || []).map((t) => t.toString().toLowerCase().trim())
+
+  // 1) UX/UI/Development together
+  if (tags.some((t) => ['ux', 'ui', 'coding', 'development', 'developpment'].includes(t))) return 1
+  // 2) Branding
+  if (tags.includes('branding')) return 2
+  // 3) Pictures / Photography
+  if (tags.some((t) => ['pictures', 'picture', 'photo', 'photography'].includes(t))) return 3
+  // 4) Painting
+  if (tags.includes('painting')) return 4
+
+  return 5
+}
+
+function sortProjectsForDisplay(list) {
+  return [...list].sort((a, b) => {
+    const byGroup = getProjectGroupPriority(a) - getProjectGroupPriority(b)
+    if (byGroup !== 0) return byGroup
+    return getProjectTimestamp(b) - getProjectTimestamp(a)
+  })
+}
+
 const filteredProjects = computed(() => {
-  // if no filters selected, show all (newest first)
+  // if no filters selected, show all (grouped order then newest first)
   if (!selected.value.length) {
-    return [...projectsData].sort((a, b) => getProjectTimestamp(b) - getProjectTimestamp(a))
+    return sortProjectsForDisplay(projectsData)
   }
 
   // OR logic: show projects that match ANY selected tag (union)
-  return projectsData.filter((p) => {
+  return sortProjectsForDisplay(projectsData.filter((p) => {
     const tags = (p.tags || []).map((t) => t.toString().toLowerCase())
     // check that at least one selected tag key is present in project's tags
     return selected.value.some((sel) => tags.includes(sel))
-  }).sort((a, b) => getProjectTimestamp(b) - getProjectTimestamp(a))
+  }))
 })
 
 // Pagination state
