@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from "vue";
 import projects from "../data/projects-resolved.js";
 import Button from "../components/Button.vue";
 
@@ -42,6 +43,17 @@ const scrollToCollaboration = () => {
     el.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 };
+const openCapIndex = ref(null);
+
+function toggleCap(i) {
+  if (typeof window !== "undefined" && window.innerWidth < 768) {
+    openCapIndex.value = openCapIndex.value === i ? null : i;
+  }
+}
+
+function isCapOpen(i) {
+  return openCapIndex.value === i;
+}
 </script>
 
 <template>
@@ -147,6 +159,9 @@ const scrollToCollaboration = () => {
           role="button"
           tabindex="0"
           :key="i"
+          @click="toggleCap(i)"
+          @keydown.enter.prevent="toggleCap(i)"
+          @keydown.space.prevent="toggleCap(i)"
           class="group relative overflow-hidden rounded-lg cursor-pointer transform transition-all duration-300 hover:scale-105 shadow-lg"
         >
           <!-- SVG background that cycles colours every 5s (three colours => 15s cycle) -->
@@ -189,16 +204,27 @@ const scrollToCollaboration = () => {
 
             <!-- description revealed on hover -->
             <p
-              class="mt-2 text-sm md:text-base max-h-0 opacity-0 group-hover:opacity-100 group-hover:max-h-96 transition-all duration-300 ease-in-out overflow-hidden"
+              class="mt-2 text-sm md:text-base overflow-hidden transition-all duration-300 ease-in-out
+                 md:max-h-0 md:opacity-0 md:group-hover:opacity-100 md:group-hover:max-h-96"
+              :class="isCapOpen(i) ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'"
               v-html="cap.desc"
             ></p>
 
+            <!-- Mobile button: only exists when box is open -->
             <Button
-              class="mt-4 w-full md:w-auto mx-auto text-center hidden group-hover:inline-block transition-opacity duration-300 ease-in-out"
+              v-if="isCapOpen(i)"
+              class="mt-4 w-full text-center md:hidden"
               color="lavender"
-              @click="
-                $router.push({ path: '/projects', query: { tags: cap.tag } })
-              "
+              @click.stop="$router.push({ path: '/projects', query: { tags: cap.tag } })"
+            >
+              See projects
+            </Button>
+
+            <!-- Desktop button: hover behavior -->
+            <Button
+              class="mt-4 w-full md:w-auto mx-auto text-center hidden md:group-hover:inline-block transition-opacity duration-300 ease-in-out"
+              color="lavender"
+              @click.stop="$router.push({ path: '/projects', query: { tags: cap.tag } })"
             >
               See projects
             </Button>

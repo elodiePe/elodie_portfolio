@@ -21,11 +21,13 @@
         <li aria-current="page" class="text-gray-900">
           {{ project ? project.title : "..." }}
         </li>
+  
       </ol>
     </nav>
     <div v-if="project">
       <div class="flex items-center justify-between mb-4">
         <h1 class="font-bold text-2xl">{{ project.title }}</h1>
+
         <div class="hidden sm:flex sm:flex-row sm:space-x-2 items-center" v-if="projectButtons.length">
           <Button
             v-for="(btn, i) in projectButtons"
