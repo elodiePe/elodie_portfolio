@@ -282,7 +282,7 @@ async function goToPage(n) {
     </div>
 
     <!-- pagination controls -->
-    <div v-if="totalPages > 1" class="mt-6 flex items-center justify-between">
+    <div v-if="totalPages > 1" class="mt-10 flex flex-col items-center justify-center gap-4">
       <div class="text-sm text-gray-600">
         Showing
         <span class="font-medium">{{ ( (page-1)*pageSize + 1 ) }}</span>

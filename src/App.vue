@@ -24,7 +24,8 @@ import Footer from './components/Footer.vue'
 
     <Nav />
 
-    <main class="flex-1">
+    <!-- add top padding for fixed bars -->
+    <main class="flex-1 pt-12 md:pt-5">
       <RouterView />
     </main>
 
