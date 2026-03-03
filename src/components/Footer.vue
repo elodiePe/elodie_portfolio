@@ -89,7 +89,9 @@ const year = ref(new Date().getFullYear())
 @media (max-width: 767px) {
     .site-footer{
         padding-bottom : 4rem;
+        padding-top:0rem;
     }
+    
   .footer-shell {
     border-radius: 0; /* keep mobile flat */
   }
