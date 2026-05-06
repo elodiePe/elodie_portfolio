@@ -6,9 +6,9 @@
           <!-- <p class="brand">Elodie Portfolio</p> -->
 
           <nav class="footer-nav" aria-label="Footer navigation">
-            <RouterLink to="/elodie_portfolio/">Home</RouterLink>
-            <RouterLink to="/elodie_portfolio/projects">Projects</RouterLink>
-            <RouterLink to="/elodie_portfolio/contact">Contact</RouterLink>
+            <RouterLink to="/">Home</RouterLink>
+            <RouterLink to="/projects">Projects</RouterLink>
+            <RouterLink to="/contact">Contact</RouterLink>
           </nav>
 
           <div class="meta">
