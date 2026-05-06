@@ -68,7 +68,7 @@ function isActive(pathOrName) {
             }"
           >
             <!-- <IconDocumentation class="w-5 h-5" /> -->
-            <span class="hidden sm:inline text-lg">Projects</span>
+            <span class="hidden sm:inline text-lg">My projects</span>
           </RouterLink>
 
           <RouterLink
@@ -88,7 +88,7 @@ function isActive(pathOrName) {
         
         <!-- right side placeholder (logo / actions) - optional -->
         <div class="flex items-center gap-2">
-          <a href="https://linkedin.com/in/elodie-perring" target="_blank" rel="noopener noreferrer" class="inline-block">
+          <a href="https://ch.linkedin.com/in/elodie-perring" target="_blank" rel="noopener noreferrer" class="inline-block">
             <img src="../assets/img/linkedin.svg" alt="LinkedIn" class="w-8 h-8 hover:opacity-80 transition-opacity" />
           </a>
         </div>
@@ -115,7 +115,7 @@ function isActive(pathOrName) {
           }"
         >
           <button
-            class="btn btn-ghost btn-circle p-2"
+            class=""
             :class="{
               'text-accent': !isActive('home'),
               'text-brand': isActive('home'),
@@ -127,14 +127,14 @@ function isActive(pathOrName) {
               >person</span
             >
           </button>
-          <!-- <span
+          <span
             class="font-sm"
             :class="{
               'text-accent': !isActive('home'),
               'text-brand': isActive('home'),
             }"
-            >Profile</span
-          > -->
+            >My profile</span
+          >
         </RouterLink>
 
         <!-- Projects -->
@@ -147,7 +147,7 @@ function isActive(pathOrName) {
           }"
         >
           <button
-            class="btn btn-ghost btn-circle p-2"
+            class=""
             :class="{
               'text-accent': !isActive('projects'),
               'text-brand': isActive('projects'),
@@ -158,14 +158,14 @@ function isActive(pathOrName) {
               >cases</span
             >
           </button>
-          <!-- <span
+          <span
             class="font-sm"
             :class="{
               'text-accent': !isActive('projects'),
               'text-brand': isActive('projects'),
             }"
-            >Projects</span
-          > -->
+            >My projects</span
+          >
         </RouterLink>
 
         <!-- Tailwind / About -->
@@ -178,7 +178,7 @@ function isActive(pathOrName) {
           }"
         >
           <button
-            class="btn btn-ghost btn-circle p-2"
+            class=""
             :class="{
               'text-accent': !isActive('contact'),
               'text-brand': isActive('contact'),
@@ -190,13 +190,13 @@ function isActive(pathOrName) {
               >mail</span
             >
           </button>
-          <!-- <span
+          <span
             :class="{
               'text-accent': !isActive('contact'),
               'text-brand': isActive('contact'),
             }"
-            >Contact</span
-          > -->
+            >Contact me</span
+          >
         </RouterLink>
       </div>
     </div>

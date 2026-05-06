@@ -3,19 +3,18 @@
     <div class="mx-auto max-w-screen-lg">
       <div class="footer-shell">
         <div class="container">
-          <p class="brand">Elodie Portfolio</p>
+          <!-- <p class="brand">Elodie Portfolio</p> -->
 
           <nav class="footer-nav" aria-label="Footer navigation">
-            <a href="/">Home</a>
-            <a href="/projects">Projects</a>
-            <a href="/contact">Contact</a>
+            <RouterLink to="/elodie_portfolio/">Home</RouterLink>
+            <RouterLink to="/elodie_portfolio/projects">Projects</RouterLink>
+            <RouterLink to="/elodie_portfolio/contact">Contact</RouterLink>
           </nav>
 
           <div class="meta">
             <small>© {{ year }} Elodie — All rights reserved.</small>
             <div class="social" aria-label="Social links">
-              <a href="#" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
-              <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
+              <a href="https://ch.linkedin.com/in/elodie-perring" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
             </div>
           </div>
         </div>
