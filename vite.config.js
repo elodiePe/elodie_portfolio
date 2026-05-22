@@ -60,13 +60,39 @@ function generateDuplicateIndexIndexHtmlPlugin(){
         }
         fs.copyFileSync(indexPath, path.resolve(routeDir, 'index.html'))
       })
-      // ensure public/404.html (if present) is copied to dist root (some hosts use it)
+      // ensure public/404.html and favicon.ico are copied to dist root
       const public404 = path.resolve(__dirname, 'public', '404.html')
       const out404 = path.resolve(__dirname, 'dist', '404.html')
       if (fs.existsSync(public404)) {
         fs.copyFileSync(public404, out404)
       }
-    }
+      
+      // copy favicon.ico explicitly
+      const publicFavicon = path.resolve(__dirname, 'public', 'favicon.ico')
+      const outFavicon = path.resolve(__dirname, 'dist', 'favicon.ico')
+      if (fs.existsSync(publicFavicon)) {
+        fs.copyFileSync(publicFavicon, outFavicon)
+      }
+        // copy logo SVG as favicon
+        const logoSvg = path.resolve(__dirname, 'src', 'assets', 'elodie_logo_portfolio.svg')
+        const outFaviconSvg = path.resolve(__dirname, 'dist', 'favicon.svg')
+        if (fs.existsSync(logoSvg)) {
+          fs.copyFileSync(logoSvg, outFaviconSvg)
+        }
+      
+        // also copy white logo for future use
+        const logoWhiteSvg = path.resolve(__dirname, 'src', 'assets', 'elodie_logo_portfolio_white.svg')
+        const outFaviconWhite = path.resolve(__dirname, 'dist', 'favicon-white.svg')
+        if (fs.existsSync(logoWhiteSvg)) {
+          fs.copyFileSync(logoWhiteSvg, outFaviconWhite)
+        }
+
+        // remove any legacy favicon.ico copied from public/
+        const legacyFavicon = path.resolve(__dirname, 'dist', 'favicon.ico')
+        if (fs.existsSync(legacyFavicon)) {
+          fs.rmSync(legacyFavicon, { force: true })
+        }
+      }
   };
 
 }
@@ -81,6 +107,6 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
-  base: '/elodie_portfolio/',  // Remplace 'nom-du-repo' par le nom de ton dépôt GitHub
-
+  // base: '/elodie_portfolio/',  // Remplace 'nom-du-repo' par le nom de ton dépôt GitHub
+  base: '/', 
 })

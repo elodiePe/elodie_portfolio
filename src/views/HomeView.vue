@@ -240,13 +240,13 @@ function isCapOpen(i) {
     </section>
     <section
       id="collaboration"
-      class="mt-12 rounded-lg p-8 dark:bg-gray-800 flex flex-col md:flex-row items-center justify-between gap-6"
+      class="mt-12 rounded-lg p-8 bg-gray-800 flex flex-col md:flex-row items-center justify-between gap-6"
     >
       <div class="flex-1">
         <h2 class="text-2xl md:text-3xl font-semibold text-accent mb-2">
           Start a project with me?
         </h2>
-        <p class="text-sm md:text-base text-gray-700 dark:text-gray-300">
+        <p class="text-sm md:text-base text-gray-300">
           I’m open to freelance and collaborative projects focused on custom
           creation. My expertise ranges from building professional assets like
           Identity and Web Design, to crafting one-of-a-kind physical pieces
@@ -259,7 +259,7 @@ function isCapOpen(i) {
             ><a href="/projects?tags=painting">custom artwork</a></b
           >.
         </p>
-        <p class="text-sm md:text-base text-gray-700 dark:text-gray-300">
+        <p class="text-sm md:text-base text-gray-300">
           Tell me about your idea and we’ll discuss how to make it happen.
         </p>
       </div>
