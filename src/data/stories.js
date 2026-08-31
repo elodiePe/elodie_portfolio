@@ -7,6 +7,9 @@
 //   audio  : optional URL to a pre-recorded MP3 (e.g. ElevenLabs). When set,
 //            the player uses this instead of the browser voice for premium
 //            quality. Leave null to use the free built-in browser voice.
+//            To record ElevenLabs voices, see ELEVENLABS_SCRIPTS.md at the repo
+//            root — it has the emotion-tagged scripts and the exact steps to
+//            drop the finished MP3 URL into the `audio` field below.
 //
 // To add a project, copy an entry and fill it in. Split ideas into short
 // sentences — the player highlights one sentence at a time as it speaks.
