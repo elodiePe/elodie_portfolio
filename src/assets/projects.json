@@ -7,6 +7,7 @@
             "https://elodiepe.github.io/portfolio-images/project_vaudsentier.png",
             "https://elodiepe.github.io/portfolio-images/project_vaudsentier_1.png"
         ],
+        "audio": "https://elodiepe.github.io/portfolio-images/vaudsentier_audio.wav",
         "website": "https://www.vaudsentiers.ch",
         "figma": "https://www.figma.com/design/Qfw43lvTlTthQ4UovmHn8v/RELLL---UI-UX?node-id=1564-17321&t=ejy0KVKyTaDJufvN-1",
         "tags": [
@@ -32,6 +33,7 @@
         "tags": [
             "branding"
         ],
+        
         "figma": "https://www.figma.com/proto/Qfw43lvTlTthQ4UovmHn8v/RELLL---UI-UX?page-id=221%3A6800&node-id=911-11226&p=f&viewport=648%2C639%2C0.22&t=KukiUh71ptefVvu1-1&scaling=min-zoom&content-scaling=fixed",
         "date": "2024-06-11",
         "inthesameprojectas": [
@@ -88,6 +90,8 @@
             "graphism",
             "Branding"
         ],
+        "website": "https://www.unmatched.ch",
+        "audio": "https://elodiepe.github.io/portfolio-images/unmatched_audio.wav",
     
         "date": "2024-01-15",
         "info": "Mockup is made by Mr.Mockup"
@@ -186,6 +190,7 @@
         "id": 11,
         "title": "UEFA x Amazon",
         "description": "As part of a School project in collaboration of both big compagnies : Uefa and Amazon, I had the chance to participate in a project to create a strategy to promote women coaching in football. </br> </br> In a team of eight, we created a campaign called Tomorrow's Football, with the objective to encourage young women to become a coach. We created a website, a social media campaign and an anime interactive serie. </br> </br> I was in charge of the creation of the serie.  </br> The serie is called 'Coach like a women' and follow to story of a young women that become a football coach of her sister's football team. Each episode is interactive, meaning they are created partially by the audience. We conduct an interview with a real person that explain what they want for the episode. </br> </br> To bring another aspect of the serie, the serie is drawed. The begining of the first episode has been created.",
+        "audio": "https://elodiepe.github.io/portfolio-images/uefaamazon_audio.wav",
         "images": [
             "https://elodiepe.github.io/portfolio-images/project_uefa_amazon.png",
             "https://elodiepe.github.io/portfolio-images/project_tomorrowsfootball-website.png",
@@ -566,6 +571,7 @@
             "https://elodiepe.github.io/portfolio-images/jonkoping.jpg"
         ],
 "tags":["Research", "UX"],
+"audio": "https://elodiepe.github.io/portfolio-images/passwordmanager_audio.wav",
 "buttons": [
             {
                 "label": "View the thesis",
@@ -587,6 +593,7 @@
         "https://elodiepe.github.io/portfolio-images/houzly_6.png"
     ],
     "website": "https://www.myhouzly.com",
+    "audio": "https://elodiepe.github.io/portfolio-images/myhouzly_audio.wav",
     "tags": [
         "AI",
         "UX",

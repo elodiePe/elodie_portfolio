@@ -235,17 +235,9 @@
         />
       </div>
              
-   <!-- Interactive, spoken storytelling version of the description (opt-in) -->
-  <div v-if="story" class="mt-6">
-    <button
-      type="button"
-      class="story-trigger"
-      @click="storyOpen = true"
-    >
-      <span aria-hidden="true">🎧</span>
-      <span>Interactive description</span>
-      <span class="story-trigger-sub">Let me tell you the story</span>
-    </button>
+   <!-- Interactive, spoken storytelling version of the description (opt-in, inline) -->
+  <div v-if="hasInteractive" class="mt-6">
+    <StoryPlayer :project="project" :story="story" />
   </div>
 
    <!-- Use v-html to render markup stored in the project's description (e.g. <br/>).
@@ -284,14 +276,6 @@
       </div>
       <p v-else class="text-sm text-gray-600">No similar projects.</p>
     </div>
-
-    <!-- Interactive storytelling overlay -->
-    <InteractiveStory
-      :open="storyOpen"
-      :project="project"
-      :story="story"
-      @close="storyOpen = false"
-    />
   </div>
 </template>
 
@@ -300,11 +284,11 @@ import projectsData from "../data/projects-resolved.js";
 import Button from "../components/Button.vue";
 import Tag from "../components/Tag.vue";
 import Card from "../components/Card.vue";
-import InteractiveStory from "../components/InteractiveStory.vue";
+import StoryPlayer from "../components/StoryPlayer.vue";
 import { getStory } from "../data/stories.js";
 
 export default {
-  components: { Button, Tag, Card, InteractiveStory },
+  components: { Button, Tag, Card, StoryPlayer },
   props: ["id"],
   data() {
     return {
@@ -313,7 +297,6 @@ export default {
       autoplayInterval: null,
       otherProjects: [],
       isPaused: false,
-      storyOpen: false,
     };
   },
   mounted() {
@@ -352,6 +335,9 @@ export default {
   computed: {
     story() {
       return this.project ? getStory(this.project.id) : null;
+    },
+    hasInteractive() {
+      return !!(this.story || (this.project && this.project.audio));
     },
     // NEW
     sameProjectProjects() {
@@ -580,37 +566,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.story-trigger {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1.1rem;
-  border-radius: 9999px;
-  border: 2px solid var(--color-brand);
-  background: var(--color-brand);
-  color: var(--color-accent);
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.15s ease, background 0.15s ease;
-}
-.story-trigger:hover {
-  transform: translateY(-1px);
-  background: #6b21a8;
-}
-.story-trigger:focus-visible {
-  outline: 2px solid var(--color-brand);
-  outline-offset: 2px;
-}
-.story-trigger-sub {
-  font-weight: 400;
-  font-size: 0.8rem;
-  opacity: 0.85;
-}
-@media (prefers-reduced-motion: reduce) {
-  .story-trigger {
-    transition: none;
-  }
-}
-</style>

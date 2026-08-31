@@ -115,21 +115,44 @@ Because sometimes the real discovery isn't in the data — it's in the conversat
 
 ---
 
+## Project 36 — MyHouzly: family finance & household app
+
+```text
+[cheerful] Okay, gather round the kitchen table — this one's for the whole family.
+Meet MyHouzly: a full-stack app that turns running a household into something that actually… [playful] works.
+The big idea? Help parents teach kids about money, [sarcastic] without the weekly "where did your allowance go" interrogation.
+Every child gets their own account. Allowance lands automatically each week — no more digging for coins.
+Chores pay out in real money or points, so suddenly emptying the dishwasher has… [amused] stakes.
+Kids can set savings goals that even earn interest, and teens get a supervised stock portfolio — a gentle first taste of investing, with a grown-up watching the wheel.
+Parents stay firmly in charge: approving chores, sharing permissions between co-parents, and switching on whatever household modules they need — meal planning, laundry rotation, shared shopping lists.
+[proud] And behind the scenes, I built a proper full-stack beast: one TypeScript codebase feeding both a React website and a React Native mobile app, a single Express, Prisma and PostgreSQL API, real subscription billing, push notifications, and privacy handling that keeps everything GDPR-friendly.
+Oh, and the interface grows up with the child — the same app makes sense for a curious six-year-old and a savvy sixteen-year-old.
+[warm] From pocket money to portfolios, all in one tidy place.
+```
+
+---
+
 ## How to put the MP3 into the site
 
 1. Generate and download the MP3 from ElevenLabs (see settings above).
 2. Host it somewhere public. Easiest: drop it into your existing
    `elodiepe.github.io/portfolio-images` repo, so the URL looks like
    `https://elodiepe.github.io/portfolio-images/story-01-vaudsentiers.mp3`.
-3. Open `src/data/stories.js` and set that project's `audio` field to the URL:
+3. Add the URL as an `audio` field for that project. You can put it in EITHER
+   place — the player checks both:
+
+   - in `src/data/stories.js` (next to the script), or
+   - directly in `src/assets/projects.json` on that project (this is what was
+     done for Unmatched: `"audio": "https://…/unmatched_audio.wav"`).
 
    ```js
+   // src/data/stories.js
    1: {
      audio: "https://elodiepe.github.io/portfolio-images/story-01-vaudsentiers.mp3",
      script: "Bonjour, and welcome! ...",   // leave the clean script as-is
    },
    ```
 
-4. Rebuild / redeploy. The overlay now shows an audio player using your
-   ElevenLabs voice, and keeps the transcript below as synced captions. If
-   `audio` is left `null`, it falls back to the free browser voice.
+4. Rebuild / redeploy. The player now uses your ElevenLabs voice with a
+   progress bar, and keeps the transcript under "Show transcript" as captions.
+   If no `audio` is set, it falls back to the free browser voice.

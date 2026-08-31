@@ -93,6 +93,21 @@ export const stories = {
       "But the best part came after: talking with each participant and finally understanding how their mind worked. " +
       "Because sometimes the real discovery isn't in the data — it's in the conversation.",
   },
+
+  36: {
+    audio: null,
+    script:
+      "Okay, gather round the kitchen table — this one's for the whole family. " +
+      "Meet MyHouzly: a full-stack app that turns running a household into something that actually… works. " +
+      "The big idea? Help parents teach kids about money, without the weekly 'where did your allowance go' interrogation. " +
+      "Every child gets their own account. Allowance lands automatically each week — no more digging for coins. " +
+      "Chores pay out in real money or points, so suddenly emptying the dishwasher has… stakes. " +
+      "Kids can set savings goals that even earn interest, and teens get a supervised stock portfolio — a gentle first taste of investing, with a grown-up watching the wheel. " +
+      "Parents stay firmly in charge: approving chores, sharing permissions between co-parents, and switching on whatever household modules they need — meal planning, laundry rotation, shared shopping lists. " +
+      "And behind the scenes, I built a proper full-stack beast: one TypeScript codebase feeding both a React website and a React Native mobile app, a single Express, Prisma and PostgreSQL API, real subscription billing, push notifications, and privacy handling that keeps everything GDPR-friendly. " +
+      "Oh, and the interface grows up with the child — the same app makes sense for a curious six-year-old and a savvy sixteen-year-old. " +
+      "From pocket money to portfolios, all in one tidy place.",
+  },
 };
 
 export function getStory(id) {
