@@ -36,12 +36,13 @@ const palettes = {
 }
 
 // classes to use when the tag is active/selected (stronger background, white text)
+// Backgrounds chosen to keep white text at >= 4.5:1 contrast (WCAG AA)
 const activeClasses = {
     lavender: 'bg-purple-800 text-white',
-    pink: 'bg-pink-600 text-white',
-    mint: 'bg-emerald-600 text-white',
+    pink: 'bg-pink-700 text-white',
+    mint: 'bg-emerald-700 text-white',
     sky: 'bg-sky-700 text-white',
-    peach: 'bg-amber-600 text-white',
+    peach: 'bg-amber-700 text-white',
     neutral: 'bg-gray-800 text-white'
 }
 

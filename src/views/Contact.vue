@@ -35,13 +35,11 @@ async function onSubmit(e) {
 </script>
 
 <template>
-  <main class="mx-auto max-w-screen-lg px-4 pb-20 md:pb-0  pt-6 md:pt-16">
+  <div class="mx-auto max-w-screen-lg px-4 pb-20 md:pb-0  pt-6 md:pt-16">
     <div class="mb-6 flex justify-center md:justify-start">
       <div
-        class="w-full h-28 md:w-full md:h-32 rounded-lg shadow-sm bg-gradient-to-br from-brand to-accent relative overflow-hidden"
-        aria-hidden="true"
+        class="w-full h-28 md:w-full md:h-32 rounded-lg shadow-sm bg-gradient-to-br from-brand to-purple-800 relative overflow-hidden"
       >
-
         <h1 class="text-4xl md:text-4xl font-bold text-center text-accent pt-10 pointer-events-none">Contact me</h1>
       </div>
     </div>
@@ -50,45 +48,51 @@ async function onSubmit(e) {
       <!-- Name + Email on the same line (responsive) -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label class="block text-sm font-medium mb-1">
+          <label for="from_name" class="block text-sm font-medium mb-1">
             Name <span class="text-red-500" aria-hidden="true">*</span>
           </label>
           <input
+            id="from_name"
             name="from_name"
             required
             autocomplete="name"
             aria-required="true"
+            aria-describedby="from_name_help"
             placeholder="Your full name"
             class="input input-bordered w-full bg-white"
           />
-          <p class="text-xs text-gray-500 mt-1">Please enter the name I can address you by.</p>
+          <p id="from_name_help" class="text-xs text-gray-600 mt-1">Please enter the name I can address you by.</p>
         </div>
 
         <div>
-          <label class="block text-sm font-medium mb-1">
+          <label for="from_email" class="block text-sm font-medium mb-1">
             Email <span class="text-red-500" aria-hidden="true">*</span>
           </label>
           <input
+            id="from_email"
             name="from_email"
             type="email"
             required
             autocomplete="email"
             aria-required="true"
+            aria-describedby="from_email_help"
             placeholder="you@example.com"
             class="input input-bordered w-full bg-white"
           />
-          <p class="text-xs text-gray-500 mt-1">I will only use this to reply to your message.</p>
+          <p id="from_email_help" class="text-xs text-gray-600 mt-1">I will only use this to reply to your message.</p>
         </div>
       </div>
 
       <!-- Subject -->
       <div>
-        <label class="block text-sm font-medium mb-1">
+        <label for="title" class="block text-sm font-medium mb-1">
           Subject <span class="text-red-500" aria-hidden="true">*</span>
         </label>
         <input
+          id="title"
           name="title"
           required
+          aria-required="true"
           placeholder="What is this about?"
           class="input input-bordered w-full bg-white"
         />
@@ -96,17 +100,20 @@ async function onSubmit(e) {
 
       <!-- Message -->
       <div>
-        <label class="block text-sm font-medium mb-1">
+        <label for="message" class="block text-sm font-medium mb-1">
           Message <span class="text-red-500" aria-hidden="true">*</span>
         </label>
         <textarea
+          id="message"
           name="message"
           required
+          aria-required="true"
           rows="6"
+          aria-describedby="message_help"
           placeholder="Write your message..."
           class="textarea textarea-bordered w-full bg-white"
         ></textarea>
-        <p class="text-xs text-gray-500 mt-1">Aim for a clear subject and a concise message — I'll get back to you shortly.</p>
+        <p id="message_help" class="text-xs text-gray-600 mt-1">Aim for a clear subject and a concise message — I'll get back to you shortly.</p>
       </div>
 
       <!-- Actions + status -->
@@ -143,5 +150,5 @@ async function onSubmit(e) {
         </div>
       </div>
     </form>
-  </main>
+  </div>
 </template>

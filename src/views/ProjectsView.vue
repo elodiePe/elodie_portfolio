@@ -231,7 +231,7 @@ async function goToPage(n) {
 </script>
 
 <template>
-  <main class="mx-auto max-w-screen-lg px-4 pb-20 md:pb-0 pt-6 md:pt-14 
+  <div class="mx-auto max-w-screen-lg px-4 pb-20 md:pb-0 pt-6 md:pt-14
 ">
     <nav aria-label="Breadcrumb" class="mb-4 text-sm">
       <ol class="flex items-center space-x-2">
@@ -299,6 +299,8 @@ async function goToPage(n) {
           :key="String(item)"
           v-if="item !== '...'"
           @click="goToPage(item)"
+          :aria-current="item === page ? 'page' : undefined"
+          :aria-label="`Go to page ${item}`"
           :class="['px-3 py-1 rounded border', item===page ? 'bg-brand text-white' : '']"
         >
           {{ item }}
@@ -308,7 +310,7 @@ async function goToPage(n) {
         <button @click="goToPage(page+1)" :disabled="page>=totalPages" class="px-3 py-1 rounded border disabled:opacity-50 hover:bg-brand hover:text-accent">Next</button>
       </nav>
     </div>
-  </main>
+  </div>
 </template>
 
 <style>

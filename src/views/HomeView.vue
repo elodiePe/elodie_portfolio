@@ -57,7 +57,7 @@ function isCapOpen(i) {
 </script>
 
 <template>
-  <main
+  <div
     class="mx-auto max-w-screen-lg px-4 md:pt-10 pb-20 md:pb-0 pt-0 sm:pt-0"
   >
     <div class="flex flex-col md:flex-row items-center gap-10 pt-10">
@@ -156,12 +156,8 @@ function isCapOpen(i) {
               tag: 'graphism',
             },
           ]"
-          role="button"
-          tabindex="0"
           :key="i"
           @click="toggleCap(i)"
-          @keydown.enter.prevent="toggleCap(i)"
-          @keydown.space.prevent="toggleCap(i)"
           class="group relative overflow-hidden rounded-lg cursor-pointer transform transition-all duration-300 hover:scale-105 shadow-lg"
         >
           <!-- SVG background that cycles colours every 5s (three colours => 15s cycle) -->
@@ -196,16 +192,17 @@ function isCapOpen(i) {
           <div
             class="relative z-10 h-full flex flex-col justify-center p-6 text-[#3b2418]"
           >
-            <h3
+            <h2
               class="text-lg md:text-xl font-semibold leading-tight drop-shadow-sm"
             >
               {{ cap.title }}
-            </h3>
+            </h2>
 
             <!-- description revealed on hover -->
             <p
               class="mt-2 text-sm md:text-base overflow-hidden transition-all duration-300 ease-in-out
-                 md:max-h-0 md:opacity-0 md:group-hover:opacity-100 md:group-hover:max-h-96"
+                 md:max-h-0 md:opacity-0 md:group-hover:opacity-100 md:group-hover:max-h-96
+                 md:group-focus-within:opacity-100 md:group-focus-within:max-h-96"
               :class="isCapOpen(i) ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'"
               v-html="cap.desc"
             ></p>
@@ -220,9 +217,9 @@ function isCapOpen(i) {
               See projects
             </Button>
 
-            <!-- Desktop button: hover behavior -->
+            <!-- Desktop button: always available (keyboard-focusable), reveals description via focus-within -->
             <Button
-              class="mt-4 w-full md:w-auto mx-auto text-center hidden md:group-hover:inline-block transition-opacity duration-300 ease-in-out"
+              class="mt-4 w-full md:w-auto mx-auto text-center hidden md:inline-block transition-opacity duration-300 ease-in-out"
               color="lavender"
               @click.stop="$router.push({ path: '/projects', query: { tags: cap.tag } })"
             >
@@ -282,7 +279,7 @@ function isCapOpen(i) {
         >
       </div>
     </section>
-  </main>
+  </div>
 </template>
 <style>
 .slide {
@@ -320,6 +317,18 @@ function isCapOpen(i) {
   100% {
     opacity: 0;
     transform: scale(0.98);
+  }
+}
+
+/* Respect users who prefer reduced motion: show the first slide, no animation */
+@media (prefers-reduced-motion: reduce) {
+  .slide {
+    animation: none;
+    opacity: 0;
+    transform: none;
+  }
+  .slide:nth-of-type(1) {
+    opacity: 1;
   }
 }
 

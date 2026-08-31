@@ -1,8 +1,8 @@
 <template>
-  <main
+  <div
     class="mx-auto max-w-screen-lg px-4 pb-20 md:pb-0 pt-6 md:pt-14 "
   >
-  
+
     <nav aria-label="Breadcrumb" class="mb-4 text-sm">
       <ol class="flex items-center space-x-2">
 
@@ -63,8 +63,13 @@
 
       <div
         class="relative"
+        role="group"
+        aria-roledescription="carousel"
+        :aria-label="`${project.title} images`"
         @mouseenter="stopAutoplay"
         @mouseleave="startAutoplay"
+        @focusin="stopAutoplay"
+        @focusout="startAutoplay"
         style="max-width: 100%; margin-top: 1rem"
       >
         <!-- viewport -->
@@ -90,6 +95,7 @@
               <div v-if="isYouTubeUrl(img)">
                 <iframe
                   :src="getYouTubeEmbedUrl(img)"
+                  :title="`${project.title} — video ${idx + 1}`"
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
@@ -109,7 +115,7 @@
               <div v-else>
                 <img
                   :src="readImg(img)"
-                  :alt="project.title"
+                  :alt="project.images.length > 1 ? `${project.title} — image ${idx + 1} of ${project.images.length}` : project.title"
                   style="display: block; margin: 0 auto; max-width: 100%; max-height: 60vh; object-fit: contain; border-radius: 12px;"
                 />
               </div>
@@ -161,12 +167,35 @@
           style="
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 8px;
             margin-top: 8px;
             position: relative;
             bottom: -8px;
           "
         >
+          <button
+            v-if="project.images.length > 1"
+            @click="toggleAutoplay"
+            :aria-label="isPaused ? 'Play image slideshow' : 'Pause image slideshow'"
+            style="
+              margin-right: 6px;
+              background: rgba(0, 0, 0, 0.6);
+              color: white;
+              border: none;
+              width: 26px;
+              height: 26px;
+              border-radius: 50%;
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+              font-size: 12px;
+              line-height: 1;
+            "
+          >
+            <span aria-hidden="true">{{ isPaused ? '▶' : '❚❚' }}</span>
+          </button>
           <button v-if="project.images.length > 1"
             v-for="(img, idx) in project.images"
             :key="idx"
@@ -242,7 +271,7 @@
       </div>
       <p v-else class="text-sm text-gray-600">No similar projects.</p>
     </div>
-  </main>
+  </div>
 </template>
 
 <script>
@@ -260,6 +289,7 @@ export default {
       currentIndex: 0,
       autoplayInterval: null,
       otherProjects: [],
+      isPaused: false,
     };
   },
   mounted() {
@@ -399,9 +429,18 @@ export default {
       if (idx >= len) idx = len - 1;
       this.currentIndex = idx;
     },
+    prefersReducedMotion() {
+      return (
+        typeof window !== "undefined" &&
+        typeof window.matchMedia === "function" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      );
+    },
     startAutoplay() {
       this.stopAutoplay();
-      // Only start if we have images
+      // Do not auto-advance if the user paused it or prefers reduced motion
+      if (this.isPaused || this.prefersReducedMotion()) return;
+      // Only start if we have more than one image
       if (
         this.project &&
         this.project.images &&
@@ -416,6 +455,15 @@ export default {
       if (this.autoplayInterval) {
         clearInterval(this.autoplayInterval);
         this.autoplayInterval = null;
+      }
+    },
+    // Explicit pause/play toggle so keyboard and touch users can stop the motion
+    toggleAutoplay() {
+      this.isPaused = !this.isPaused;
+      if (this.isPaused) {
+        this.stopAutoplay();
+      } else {
+        this.startAutoplay();
       }
     },
    

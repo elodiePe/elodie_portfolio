@@ -1,6 +1,8 @@
 <template>
+    <!-- Render a real link only when an href is provided; otherwise a non-interactive label -->
     <a
-        :href="href || '#'"
+        v-if="href"
+        :href="href"
         :target="target"
         :rel="computedRel"
         class="inline-flex items-center justify-center px-2 py-0.5 text-xs rounded-md transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-offset-1"
@@ -8,6 +10,13 @@
     >
         <slot>{{ computedLabel }}</slot>
     </a>
+    <span
+        v-else
+        class="inline-flex items-center justify-center px-2 py-0.5 text-xs rounded-md"
+        :class="colorClasses"
+    >
+        <slot>{{ computedLabel }}</slot>
+    </span>
 </template>
 
 <script setup>

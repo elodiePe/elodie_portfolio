@@ -114,19 +114,15 @@ function isActive(pathOrName) {
             'bg-accent text-brand shadow-md rounded-md': isActive('home'),
           }"
         >
-          <button
-            class=""
+          <span
+            class="material-icons"
+            aria-hidden="true"
             :class="{
               'text-accent': !isActive('home'),
               'text-brand': isActive('home'),
             }"
-            aria-label="Home"
-            title="Home"
+            >person</span
           >
-            <span class="material-icons" role="img" aria-label="Home"
-              >person</span
-            >
-          </button>
           <span
             class="font-sm"
             :class="{
@@ -146,18 +142,15 @@ function isActive(pathOrName) {
             'bg-accent text-brand shadow-md rounded-md': isActive('projects'),
           }"
         >
-          <button
-            class=""
+          <span
+            class="material-icons"
+            aria-hidden="true"
             :class="{
               'text-accent': !isActive('projects'),
               'text-brand': isActive('projects'),
             }"
-            aria-label="Projects"
+            >cases</span
           >
-            <span class="material-icons" role="img" aria-label="Home"
-              >cases</span
-            >
-          </button>
           <span
             class="font-sm"
             :class="{
@@ -177,19 +170,15 @@ function isActive(pathOrName) {
             'bg-accent text-brand shadow-md rounded-md': isActive('contact'),
           }"
         >
-          <button
-            class=""
+          <span
+            class="material-icons"
+            aria-hidden="true"
             :class="{
               'text-accent': !isActive('contact'),
               'text-brand': isActive('contact'),
             }"
-            aria-label="Contact"
-            title="Contact"
+            >mail</span
           >
-            <span class="material-icons" role="img" aria-label="Contact"
-              >mail</span
-            >
-          </button>
           <span
             :class="{
               'text-accent': !isActive('contact'),

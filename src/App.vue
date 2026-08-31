@@ -7,6 +7,8 @@ import Footer from './components/Footer.vue'
 
 <template>
   <div class="flex flex-col min-h-screen min-h-dvh">
+    <!-- skip link: first focusable element, lets keyboard users bypass nav -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- top mobile bar -->
     <div class="md:hidden fixed inset-x-0 top-0 bg-brand shadow-md z-50">
       <div class="max-w-4xl mx-auto flex items-center justify-between h-14 px-4">
@@ -25,11 +27,38 @@ import Footer from './components/Footer.vue'
     <Nav />
 
     <!-- add top padding for fixed bars -->
-    <main class="flex-1 pt-12 md:pt-5">
+    <main id="main-content" tabindex="-1" class="flex-1 pt-12 md:pt-5">
       <RouterView />
     </main>
 
     <Footer class="mt-auto" />
   </div>
 </template>
+
+<style>
+/* Skip link: visually hidden until focused, then revealed on top of everything */
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateY(-120%);
+  z-index: 100;
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--color-brand);
+  color: var(--color-accent);
+  border-radius: 0.375rem;
+  font-weight: 600;
+  transition: transform 150ms ease;
+}
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+/* Remove the focus ring that tabindex="-1" would otherwise show on the main region */
+#main-content:focus {
+  outline: none;
+}
+</style>
 

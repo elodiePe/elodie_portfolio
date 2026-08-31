@@ -1,11 +1,15 @@
 <template>
-  <div @click="navigateToProject" class="card card-compact bg-base-100 shadow-xl w-full sm:w-full md:w-full lg:w-full cursor-pointer">
+  <router-link
+    :to="{ name: 'Project', params: { id: projectId } }"
+    class="card card-compact bg-base-100 shadow-xl w-full sm:w-full md:w-full lg:w-full cursor-pointer block rounded-box focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
+    :aria-label="`View project: ${title}`"
+  >
     <figure class="relative w-full rounded-box transition-transform duration-300 ease-in-out transform hover:scale-105 overflow-hidden">
       <!-- Enforce a consistent aspect ratio (16:9 here). Change padding-top to e.g. 75% for 4:3 or 100% for 1:1 -->
       <div class="relative w-full" style="padding-top: 56.25%;">
           <img
             :src="image"
-            :alt="title"
+            alt=""
             class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
             :class="loading ? 'opacity-0' : 'opacity-100'"
             @load="onLoad"
@@ -23,11 +27,11 @@
             </svg>
           </div>
         </div>
-      <div class="absolute inset-x-0 bottom-0 bg-black bg-opacity-50 text-white p-2">
+      <div class="absolute inset-x-0 bottom-0 bg-black bg-opacity-60 text-white p-2">
         <h2 class="card-title text-sm sm:text-base md:text-lg">{{ title }}</h2>
       </div>
     </figure>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -55,9 +59,6 @@ export default {
     onError() {
       this.loading = false
       this.errored = true
-    },
-    navigateToProject() {
-      this.$router.push({ name: 'Project', params: { id: this.projectId } });
     }
   }
 }
