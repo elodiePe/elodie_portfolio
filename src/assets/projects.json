@@ -128,6 +128,7 @@
     {
         "id": 8,
         "title": "Bruno Pesenti's website",
+        "audio": "https://elodiepe.github.io/portfolio-images/brunopesenti_audio.wav",
         "description": "Over the last few years, I have had the privilege of collaborating with Bruno Pesenti, an independent watchmaker based in Geneva, Switzerland. Throughout this partnership, I was tasked with documenting and promoting his exceptional collection and artisanal craftsmanship. My work encompassed the creation of a comprehensive print catalog, the development of a bespoke brand identity and logo, and the design of a dedicated digital presence. </br> </br> I designed and developed a custom website to showcase Mr. Pesenti’s work through a visually immersive and user-friendly interface. Hand-coded using HTML, CSS, and JavaScript within the Vue.js framework, the platform is fully responsive across desktop and mobile devices. </br> </br>The website also features an integrated booking service, allowing clients to reserve pieces and manage payments for both products and deliveries. Supporting a global clientele, the site is available in French, English, and Italian. To facilitate easy content management, I implemented an intuitive administrative interface that enables Mr. Pesenti to add, edit, or delete inventory and manage bookings independently. I continue to maintain and update the platform to ensure it remains a high-performance tool for his business. ",
         "images": [
             "https://elodiepe.github.io/portfolio-images/project_brunopesenti-website-1.png",

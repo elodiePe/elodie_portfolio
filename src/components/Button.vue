@@ -40,8 +40,24 @@ const palettes = {
     mint:     'bg-emerald-100 text-emerald-800 hover:bg-emerald-200 focus:ring-emerald-300',
     // sky:      'bg-sky-100 text-sky-800       hover:bg-sky-200     focus:ring-sky-300',
     peach:    'bg-amber-100 text-amber-800   hover:bg-amber-200   focus:ring-amber-300',
+    accent:   'btn-accent',
 
 }
 
 const colorClasses = computed(() => palettes[props.color] || palettes.lavender)
 </script>
+
+<style scoped>
+/* Themeable button that follows the chameleon accent colour */
+.btn-accent {
+    background: var(--accent);
+    color: #fff;
+}
+.btn-accent:hover {
+    filter: brightness(1.12);
+}
+.btn-accent:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+</style>

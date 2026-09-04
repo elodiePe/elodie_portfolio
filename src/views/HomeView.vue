@@ -1,9 +1,60 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 import projects from "../data/projects-resolved.js";
 import Button from "../components/Button.vue";
+import GuidedTour from "../components/GuidedTour.vue";
+import Card from "../components/Card.vue";
+import StatsBand from "../components/StatsBand.vue";
 
 const projectsList = Array.isArray(projects) ? projects : [];
+
+// At-a-glance stats, derived from real data.
+const earliestYear = projectsList.reduce((min, p) => {
+  const y = p && p.date ? new Date(p.date).getFullYear() : NaN;
+  return !Number.isNaN(y) && y < min ? y : min;
+}, new Date().getFullYear());
+const statItems = [
+  { value: projectsList.length, suffix: "+", label: "Projects" },
+  { value: 6, label: "Disciplines" },
+  { value: new Date().getFullYear() - earliestYear, suffix: "+", label: "Years creating" },
+];
+
+const tourOpen = ref(false);
+
+// Rotating hero tagline — shows Elodie's range at a glance.
+const roleWords = [
+  "design brands",
+  "build websites",
+  "craft interfaces",
+  "paint & draw",
+  "take photos",
+  "tell stories",
+];
+const roleIndex = ref(0);
+const reduceMotion = ref(false);
+let roleTimer = null;
+
+onMounted(() => {
+  if (typeof window !== "undefined" && window.matchMedia) {
+    reduceMotion.value = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+  }
+  if (!reduceMotion.value) {
+    roleTimer = setInterval(() => {
+      roleIndex.value = (roleIndex.value + 1) % roleWords.length;
+    }, 2200);
+  }
+});
+onBeforeUnmount(() => {
+  if (roleTimer) clearInterval(roleTimer);
+});
+
+// Curated "best work" to surface on the landing page (spread across disciplines).
+const featuredIds = [36, 8, 1, 11, 5, 35];
+const featuredProjects = featuredIds
+  .map((id) => projectsList.find((p) => Number(p.id) === id))
+  .filter(Boolean);
 
 const getFirstImage = (p) => {
   // try common fields: images array, thumbnail, image
@@ -74,6 +125,19 @@ function isCapOpen(i) {
         <h1 class="hidden md:block text-5xl font-semibold text-brand pb-4">
           Elodie Perring
         </h1>
+
+        <!-- Rotating tagline: shows the range at a glance -->
+        <p class="hero-tag text-2xl md:text-3xl font-semibold mb-3">
+          <span>I </span>
+          <!-- Static, screen-reader-friendly full statement -->
+          <span class="sr-only">design brands, build websites, craft interfaces, paint, take photos and tell stories.</span>
+          <span class="hero-rotator" aria-hidden="true">
+            <transition :name="reduceMotion ? '' : 'roll'" mode="out-in">
+              <span :key="roleIndex" class="hero-word" :style="{ color: 'var(--accent)' }">{{ roleWords[roleIndex] }}</span>
+            </transition>
+          </span><span aria-hidden="true">.</span>
+        </p>
+
         <p>
           My passion is <span class="text-2xl font-semibold">creation</span>,
           whether it's developing brand identities, designing layouts, building
@@ -81,46 +145,72 @@ function isCapOpen(i) {
           experience.</p><p> I also practice painting, creating designs for clothing and
           photography.
         </p>
- 
+        <p class="mt-2 text-sm text-gray-600">
+          I hold a master's in User Experience Design and a bachelor's in Media
+          Engineering, with roots in graphic design, painting and photography.
+        </p>
+
         <div
           class="mt-6 w-full flex flex-col md:flex-row items-center justify-center md:justify-start gap-4"
         >
-          <Button class="w-full md:w-auto" @click="$router.push('/projects')"
+          <Button :color="'accent'" class="w-full md:w-auto" @click="$router.push('/projects')"
             >See all projects</Button
           >
 
           <Button
             :color="'mint'"
             class="w-full md:w-auto"
+            @click="tourOpen = true"
+          >
+            🎧 Take the guided tour
+          </Button>
+
+          <Button
+            :color="'peach'"
+            class="w-full md:w-auto"
             @click="scrollToCollaboration()"
           >
-            Do you want to start a project with me?
+            Start a project with me?
           </Button>
         </div>
       </div>
     </div>
 
-    <div class="w-full rounded-md overflow-hidden h-64 md:h-96 mt-10">
-      <div class="relative w-full h-full">
-        <img
-          v-for="p in projectsList.filter((p) =>
-            [1, 2, 3].includes(Number(p.id)),
-          )"
+    <!-- At-a-glance stats -->
+    <StatsBand :items="statItems" />
+
+    <!-- Selected work: sell the best projects right on the landing page -->
+    <section v-reveal class="mt-12 w-full">
+      <div class="flex items-end justify-between mb-4 gap-3">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-semibold text-brand">Selected work</h2>
+          <p class="text-sm text-gray-600">A few favourites — hover a card for the pitch.</p>
+        </div>
+        <RouterLink
+          to="/projects"
+          class="shrink-0 text-sm font-semibold underline-offset-2 hover:underline"
+          :style="{ color: 'var(--accent)' }"
+        >
+          See all projects →
+        </RouterLink>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4">
+        <Card
+          v-for="p in featuredProjects"
           :key="p.id"
-          :src="getFirstImage(p)"
-          :alt="p.title || 'Project ' + p.id"
-          class="slide absolute inset-0 w-full h-full object-cover"
+          :title="p.title"
+          :description="p.description"
+          :image="getFirstImage(p)"
+          :projectId="p.id.toString()"
+          :project="p"
         />
       </div>
-    </div>
+    </section>
 
-    <section class="mt-10 w-full">
-      <p class="mb-4">
-        I studied Media Engineering (bachelor), where I learned about the web
-        (UX/UI, front-end, back-end, digital marketing and project management).
-        Before that I focused mostly on graphic design, painting and
-        photography. I am currently doing a master's in User Experience Design.
-      </p>
+    <section v-reveal class="mt-10 w-full">
+      <h2 class="text-2xl md:text-3xl font-semibold text-brand mb-1">What I do</h2>
+      <p class="mb-4 text-sm text-gray-600">A few areas I love working in — tap a card to explore.</p>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div
@@ -236,6 +326,7 @@ function isCapOpen(i) {
       <div class="mt-8 flex justify-center"></div>
     </section>
     <section
+      v-reveal
       id="collaboration"
       class="mt-12 rounded-lg p-8 bg-gray-800 flex flex-col md:flex-row items-center justify-between gap-6"
     >
@@ -265,7 +356,7 @@ function isCapOpen(i) {
         class="flex-shrink-0 flex w-full sm:w-auto gap-3 flex-col sm:flex-row"
       >
         <Button
-          :color="'lavender'"
+          :color="'accent'"
           class="w-full sm:w-auto"
           @click="$router.push('/contact')"
           >Contact me</Button
@@ -279,58 +370,46 @@ function isCapOpen(i) {
         >
       </div>
     </section>
+
+    <!-- Guided tour overlay -->
+    <GuidedTour :open="tourOpen" @close="tourOpen = false" />
   </div>
 </template>
 <style>
-.slide {
+/* Rotating hero tagline */
+.hero-tag {
+  color: #241a3a;
+  min-height: 1.6em;
+}
+.hero-rotator {
+  display: inline-block;
+}
+.hero-word {
+  display: inline-block;
+  font-weight: 700;
+}
+.roll-enter-active,
+.roll-leave-active {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.roll-enter-from {
   opacity: 0;
-  transform: scale(1.02);
-  animation: fadeSlide 12s infinite;
+  transform: translateY(0.5em);
 }
-.slide:nth-of-type(1) {
-  animation-delay: 0s;
+.roll-leave-to {
+  opacity: 0;
+  transform: translateY(-0.5em);
 }
-.slide:nth-of-type(2) {
-  animation-delay: 4s;
-}
-.slide:nth-of-type(3) {
-  animation-delay: 8s;
-}
-
-@keyframes fadeSlide {
-  0% {
-    opacity: 0;
-    transform: scale(1.02);
-  }
-  6% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  30% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  36% {
-    opacity: 0;
-    transform: scale(0.98);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.98);
-  }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-/* Respect users who prefer reduced motion: show the first slide, no animation */
-@media (prefers-reduced-motion: reduce) {
-  .slide {
-    animation: none;
-    opacity: 0;
-    transform: none;
-  }
-  .slide:nth-of-type(1) {
-    opacity: 1;
-  }
-}
-
-/* Allow pointer events so buttons and links are interactive */
 </style>

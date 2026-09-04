@@ -3,6 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
 import Nav from './components/Nav.vue'
 import Footer from './components/Footer.vue'
+import ChameleonMascot from './components/ChameleonMascot.vue'
 </script>
 
 <template>
@@ -32,6 +33,9 @@ import Footer from './components/Footer.vue'
     </main>
 
     <Footer class="mt-auto" />
+
+    <!-- Signature chameleon: tap to recolour the site accent -->
+    <ChameleonMascot />
   </div>
 </template>
 

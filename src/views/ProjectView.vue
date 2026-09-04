@@ -235,6 +235,9 @@
         />
       </div>
              
+   <!-- Case-study summary: Challenge -> What I did -> Result -->
+  <CaseStudy v-if="caseStudy" :data="caseStudy" />
+
    <!-- Interactive, spoken storytelling version of the description (opt-in, inline) -->
   <div v-if="hasInteractive" class="mt-6">
     <StoryPlayer :project="project" :story="story" />
@@ -272,6 +275,7 @@
           :description="p.description"
           :image="getFirstImage(p)"
           :projectId="p.id.toString()"
+          :project="p"
         />
       </div>
       <p v-else class="text-sm text-gray-600">No similar projects.</p>
@@ -285,10 +289,12 @@ import Button from "../components/Button.vue";
 import Tag from "../components/Tag.vue";
 import Card from "../components/Card.vue";
 import StoryPlayer from "../components/StoryPlayer.vue";
+import CaseStudy from "../components/CaseStudy.vue";
 import { getStory } from "../data/stories.js";
+import { getCaseStudy } from "../data/caseStudies.js";
 
 export default {
-  components: { Button, Tag, Card, StoryPlayer },
+  components: { Button, Tag, Card, StoryPlayer, CaseStudy },
   props: ["id"],
   data() {
     return {
@@ -335,6 +341,9 @@ export default {
   computed: {
     story() {
       return this.project ? getStory(this.project.id) : null;
+    },
+    caseStudy() {
+      return this.project ? getCaseStudy(this.project.id) : null;
     },
     hasInteractive() {
       return !!(this.story || (this.project && this.project.audio));

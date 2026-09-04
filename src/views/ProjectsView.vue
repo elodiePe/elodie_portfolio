@@ -275,6 +275,7 @@ async function goToPage(n) {
         :description="project.description"
         :image="getFirstImage(project)"
         :projectId="project.id.toString()"
+        :project="project"
       />
       <p v-if="!filteredProjects.length" class="col-span-full text-center text-gray-500">
         No projects available with the selected filters.

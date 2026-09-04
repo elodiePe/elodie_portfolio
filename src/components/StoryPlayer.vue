@@ -282,8 +282,8 @@ export default {
   gap: 0.5rem;
   padding: 0.6rem 1.1rem;
   border-radius: 9999px;
-  border: 2px solid var(--color-brand);
-  background: var(--color-brand);
+  border: 2px solid var(--accent);
+  background: var(--accent);
   color: var(--color-accent);
   font-weight: 600;
   cursor: pointer;
@@ -294,7 +294,7 @@ export default {
   background: #6b21a8;
 }
 .story-trigger:focus-visible {
-  outline: 2px solid var(--color-brand);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 .story-trigger-sub {
@@ -305,7 +305,7 @@ export default {
 
 /* Inline player */
 .sp-panel {
-  border: 2px solid var(--color-brand);
+  border: 2px solid var(--accent);
   border-radius: 1rem;
   padding: 0.75rem 1rem;
   background: #fffdf7;
@@ -331,7 +331,7 @@ export default {
   border-radius: 50%;
   object-fit: contain;
   background: #fff;
-  border: 2px solid var(--color-brand);
+  border: 2px solid var(--accent);
   padding: 3px;
 }
 .sp-avatar.is-speaking .sp-face {
@@ -352,7 +352,7 @@ export default {
   width: 3px;
   height: 5px;
   border-radius: 3px;
-  background: var(--color-brand);
+  background: var(--accent);
   opacity: 0.8;
 }
 .sp-avatar.is-speaking .sp-waves span {
@@ -375,7 +375,7 @@ export default {
   height: 2.4rem;
   border-radius: 9999px;
   border: none;
-  background: var(--color-brand);
+  background: var(--accent);
   color: var(--color-accent);
   font-size: 0.9rem;
   cursor: pointer;
@@ -392,7 +392,7 @@ export default {
 }
 .sp-bar {
   width: 100%;
-  accent-color: var(--color-brand);
+  accent-color: var(--accent);
   cursor: pointer;
 }
 .sp-time {
@@ -412,7 +412,7 @@ export default {
   border-radius: 9999px;
   border: none;
   background: #efe9f7;
-  color: var(--color-brand);
+  color: var(--accent);
   cursor: pointer;
 }
 
@@ -421,7 +421,7 @@ export default {
 .sp-bar:focus-visible,
 .sp-voice select:focus-visible,
 .sp-transcript summary:focus-visible {
-  outline: 2px solid var(--color-brand);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
@@ -446,7 +446,7 @@ export default {
 }
 .sp-transcript summary {
   cursor: pointer;
-  color: var(--color-brand);
+  color: var(--accent);
   font-weight: 600;
   width: fit-content;
 }
