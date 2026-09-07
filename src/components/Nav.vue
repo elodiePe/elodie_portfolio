@@ -4,6 +4,8 @@ import { useRoute, useRouter, RouterLink } from "vue-router";
 import IconCommunity from "./icons/IconCommunity.vue";
 import IconDocumentation from "./icons/IconDocumentation.vue";
 import IconTooling from "./icons/IconTooling.vue";
+import LangToggle from "./LangToggle.vue";
+import { t } from "../i18n";
 
 const route = useRoute();
 const router = useRouter();
@@ -23,7 +25,7 @@ function isActive(pathOrName) {
   <nav
     class="hidden md:block fixed top-0 left-0 right-0 z-50"
     role="navigation"
-    aria-label="Top navigation"
+    :aria-label="t('nav.top')"
     :style="{ paddingTop: `calc(env(safe-area-inset-top, 0px))` }"
   >
     <div class="mx-auto max-w-screen-lg">
@@ -40,7 +42,7 @@ function isActive(pathOrName) {
         >
           <img
             src="../assets/elodie_logo_portfolio_white.svg"
-            alt="Portfolio logo"
+            :alt="t('nav.logo')"
             class="w-10 h-10 rounded-sm"
           />
         </RouterLink>
@@ -55,7 +57,7 @@ function isActive(pathOrName) {
             }"
           >
             <!-- <IconCommunity class="w-5 h-5" /> -->
-            <span class="hidden sm:inline text-lg">My profile</span>
+            <span class="hidden sm:inline text-lg">{{ t('nav.profile') }}</span>
           </RouterLink>
 
           <RouterLink
@@ -68,7 +70,7 @@ function isActive(pathOrName) {
             }"
           >
             <!-- <IconDocumentation class="w-5 h-5" /> -->
-            <span class="hidden sm:inline text-lg">My projects</span>
+            <span class="hidden sm:inline text-lg">{{ t('nav.projects') }}</span>
           </RouterLink>
 
           <RouterLink
@@ -81,13 +83,14 @@ function isActive(pathOrName) {
             }"
           >
             <!-- <IconTooling class="w-5 h-5" /> -->
-            <span class="hidden sm:inline text-lg">Contact me</span>
+            <span class="hidden sm:inline text-lg">{{ t('nav.contact') }}</span>
           </RouterLink>
-          
+
         </div>
         
         <!-- right side placeholder (logo / actions) - optional -->
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-3">
+          <LangToggle />
           <a href="https://ch.linkedin.com/in/elodie-perring" target="_blank" rel="noopener noreferrer" class="inline-block">
             <img src="../assets/img/linkedin.svg" alt="LinkedIn" class="w-8 h-8 hover:opacity-80 transition-opacity" />
           </a>
@@ -98,7 +101,7 @@ function isActive(pathOrName) {
   <nav
     class="fixed bottom-0 left-0 right-0 z-50 md:hidden"
     role="navigation"
-    aria-label="Mobile bottom navigation"
+    :aria-label="t('nav.mobile')"
     :style="{ paddingBottom: `calc(env(safe-area-inset-bottom, 0px))` }"
   >
     <div class="mx-auto max-w-screen-lg">
@@ -129,7 +132,7 @@ function isActive(pathOrName) {
               'text-accent': !isActive('home'),
               'text-brand': isActive('home'),
             }"
-            >My profile</span
+            >{{ t('nav.profile') }}</span
           >
         </RouterLink>
 
@@ -157,7 +160,7 @@ function isActive(pathOrName) {
               'text-accent': !isActive('projects'),
               'text-brand': isActive('projects'),
             }"
-            >My projects</span
+            >{{ t('nav.projects') }}</span
           >
         </RouterLink>
 
@@ -184,7 +187,7 @@ function isActive(pathOrName) {
               'text-accent': !isActive('contact'),
               'text-brand': isActive('contact'),
             }"
-            >Contact me</span
+            >{{ t('nav.contact') }}</span
           >
         </RouterLink>
       </div>

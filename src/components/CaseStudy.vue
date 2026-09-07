@@ -1,23 +1,23 @@
 <template>
   <section class="cs" v-reveal aria-label="Project summary">
     <div class="cs-head">
-      <span class="cs-kicker">In short</span>
+      <span class="cs-kicker">{{ $t('caseStudy.inShort') }}</span>
       <span v-if="data.role" class="cs-role">{{ data.role }}</span>
     </div>
 
     <div class="cs-grid">
       <div class="cs-col">
-        <h3 class="cs-col-title"><span aria-hidden="true">🎯</span> The challenge</h3>
+        <h3 class="cs-col-title"><span aria-hidden="true">🎯</span> {{ $t('caseStudy.challenge') }}</h3>
         <p class="cs-col-text">{{ data.challenge }}</p>
       </div>
 
       <div class="cs-col">
-        <h3 class="cs-col-title"><span aria-hidden="true">🛠️</span> What I did</h3>
+        <h3 class="cs-col-title"><span aria-hidden="true">🛠️</span> {{ $t('caseStudy.approach') }}</h3>
         <p class="cs-col-text">{{ data.approach }}</p>
       </div>
 
       <div class="cs-col cs-col--result">
-        <h3 class="cs-col-title"><span aria-hidden="true">🏆</span> The result</h3>
+        <h3 class="cs-col-title"><span aria-hidden="true">🏆</span> {{ $t('caseStudy.result') }}</h3>
         <ul class="cs-stats">
           <li v-for="(r, i) in data.results" :key="i" class="cs-stat">
             <span class="cs-stat-num">{{ r.stat }}</span>

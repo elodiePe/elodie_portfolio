@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { sendForm } from '@emailjs/browser'
+import { t } from '../i18n'
 
 const formRef = ref(null)
 const sending = ref(false)
@@ -40,7 +41,7 @@ async function onSubmit(e) {
       <div
         class="w-full h-28 md:w-full md:h-32 rounded-lg shadow-sm bg-gradient-to-br from-brand to-purple-800 relative overflow-hidden"
       >
-        <h1 class="text-4xl md:text-4xl font-bold text-center text-accent pt-10 pointer-events-none">Contact me</h1>
+        <h1 class="text-4xl md:text-4xl font-bold text-center text-accent pt-10 pointer-events-none">{{ t('contact.title') }}</h1>
       </div>
     </div>
 
@@ -49,7 +50,7 @@ async function onSubmit(e) {
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label for="from_name" class="block text-sm font-medium mb-1">
-            Name <span class="text-red-500" aria-hidden="true">*</span>
+            {{ t('contact.name') }} <span class="text-red-500" aria-hidden="true">*</span>
           </label>
           <input
             id="from_name"
@@ -58,15 +59,15 @@ async function onSubmit(e) {
             autocomplete="name"
             aria-required="true"
             aria-describedby="from_name_help"
-            placeholder="Your full name"
+            :placeholder="t('contact.namePh')"
             class="input input-bordered w-full bg-white"
           />
-          <p id="from_name_help" class="text-xs text-gray-600 mt-1">Please enter the name I can address you by.</p>
+          <p id="from_name_help" class="text-xs text-gray-600 mt-1">{{ t('contact.nameHelp') }}</p>
         </div>
 
         <div>
           <label for="from_email" class="block text-sm font-medium mb-1">
-            Email <span class="text-red-500" aria-hidden="true">*</span>
+            {{ t('contact.email') }} <span class="text-red-500" aria-hidden="true">*</span>
           </label>
           <input
             id="from_email"
@@ -76,24 +77,24 @@ async function onSubmit(e) {
             autocomplete="email"
             aria-required="true"
             aria-describedby="from_email_help"
-            placeholder="you@example.com"
+            :placeholder="t('contact.emailPh')"
             class="input input-bordered w-full bg-white"
           />
-          <p id="from_email_help" class="text-xs text-gray-600 mt-1">I will only use this to reply to your message.</p>
+          <p id="from_email_help" class="text-xs text-gray-600 mt-1">{{ t('contact.emailHelp') }}</p>
         </div>
       </div>
 
       <!-- Subject -->
       <div>
         <label for="title" class="block text-sm font-medium mb-1">
-          Subject <span class="text-red-500" aria-hidden="true">*</span>
+          {{ t('contact.subject') }} <span class="text-red-500" aria-hidden="true">*</span>
         </label>
         <input
           id="title"
           name="title"
           required
           aria-required="true"
-          placeholder="What is this about?"
+          :placeholder="t('contact.subjectPh')"
           class="input input-bordered w-full bg-white"
         />
       </div>
@@ -101,7 +102,7 @@ async function onSubmit(e) {
       <!-- Message -->
       <div>
         <label for="message" class="block text-sm font-medium mb-1">
-          Message <span class="text-red-500" aria-hidden="true">*</span>
+          {{ t('contact.message') }} <span class="text-red-500" aria-hidden="true">*</span>
         </label>
         <textarea
           id="message"
@@ -110,10 +111,10 @@ async function onSubmit(e) {
           aria-required="true"
           rows="6"
           aria-describedby="message_help"
-          placeholder="Write your message..."
+          :placeholder="t('contact.messagePh')"
           class="textarea textarea-bordered w-full bg-white"
         ></textarea>
-        <p id="message_help" class="text-xs text-gray-600 mt-1">Aim for a clear subject and a concise message — I'll get back to you shortly.</p>
+        <p id="message_help" class="text-xs text-gray-600 mt-1">{{ t('contact.messageHelp') }}</p>
       </div>
 
       <!-- Actions + status -->
@@ -129,8 +130,8 @@ async function onSubmit(e) {
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
             </svg>
-            <span v-if="sending">Sending…</span>
-            <span v-else>Send</span>
+            <span v-if="sending">{{ t('contact.sending') }}</span>
+            <span v-else>{{ t('contact.send') }}</span>
           </button>
 
           <button
@@ -139,14 +140,14 @@ async function onSubmit(e) {
             @click="formRef && formRef.reset && formRef.reset()"
             :disabled="sending"
           >
-            Reset
+            {{ t('contact.reset') }}
           </button>
         </div>
 
         <div class="text-sm" role="status" aria-live="polite">
-          <span v-if="success === true" class="text-success">Message sent — thank you!</span>
-          <span v-else-if="success === false" class="text-error">Send failed: {{ errorMsg || 'Unknown error' }}</span>
-          <span v-else class="text-muted">All fields are required.</span>
+          <span v-if="success === true" class="text-success">{{ t('contact.sent') }}</span>
+          <span v-else-if="success === false" class="text-error">{{ t('contact.failed') }} {{ errorMsg || t('contact.unknown') }}</span>
+          <span v-else class="text-muted">{{ t('contact.required') }}</span>
         </div>
       </div>
     </form>

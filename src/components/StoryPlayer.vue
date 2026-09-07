@@ -8,7 +8,7 @@
       @click="open"
     >
       <span aria-hidden="true">🎧</span>
-      <span>Let me tell you the story</span>
+      <span>{{ $t('story.trigger') }}</span>
     </button>
 
     <!-- Inline player -->
@@ -27,7 +27,7 @@
           type="button"
           class="sp-play"
           @click="toggle"
-          :aria-label="playing ? 'Pause narration' : 'Play narration'"
+          :aria-label="playing ? $t('story.pause') : $t('story.play')"
         >
           <span aria-hidden="true">{{ playing ? '❚❚' : '▶' }}</span>
         </button>
@@ -42,13 +42,13 @@
             step="0.1"
             :value="currentTime"
             @input="seek($event.target.value)"
-            aria-label="Seek narration"
+            :aria-label="$t('story.seek')"
           />
           <div class="sp-time">{{ fmt(currentTime) }} / {{ fmt(duration) }}</div>
         </div>
         <!-- Browser-voice mode: no seekable duration -->
         <div v-else class="sp-progress">
-          <span class="sp-status">{{ playing ? 'Telling the story…' : 'Ready when you are.' }}</span>
+          <span class="sp-status">{{ playing ? $t('story.telling') : $t('story.ready') }}</span>
         </div>
 
         <!-- Close -->
@@ -56,7 +56,7 @@
           type="button"
           class="sp-close"
           @click="close"
-          aria-label="Close narration"
+          :aria-label="$t('story.close')"
         >
           <span aria-hidden="true">✕</span>
         </button>
@@ -77,20 +77,20 @@
       <!-- Voice picker (browser-voice mode only) -->
       <div v-if="!audioSrc && voices.length" class="sp-voice-row">
         <label class="sp-voice">
-          <span class="sr-only">Choose a voice</span>
-          <select v-model="selectedVoiceURI" @change="onVoiceChange" aria-label="Choose a narration voice">
+          <span class="sr-only">{{ $t('story.chooseVoice') }}</span>
+          <select v-model="selectedVoiceURI" @change="onVoiceChange" :aria-label="$t('story.chooseVoice')">
             <option v-for="v in voices" :key="v.voiceURI" :value="v.voiceURI">{{ v.name }}</option>
           </select>
         </label>
       </div>
 
       <p v-if="!speechSupported && !audioSrc" class="sp-warning" role="status">
-        Your browser can't read this aloud — here's the transcript instead. 📖
+        {{ $t('story.noSpeech') }}
       </p>
 
       <!-- Transcript, collapsed (accessible captions on demand) -->
       <details v-if="scriptText" class="sp-transcript">
-        <summary>Show transcript</summary>
+        <summary>{{ $t('story.transcript') }}</summary>
         <p>{{ scriptText }}</p>
       </details>
     </div>

@@ -17,8 +17,8 @@
           <!-- header -->
           <div class="tour-head">
             <div class="tour-progress-wrap">
-              <p class="tour-eyebrow">Guided tour</p>
-              <p class="tour-count">Project {{ index + 1 }} of {{ featured.length }}</p>
+              <p class="tour-eyebrow">{{ $t('tour.eyebrow') }}</p>
+              <p class="tour-count">{{ $t('tour.project') }} {{ index + 1 }} {{ $t('tour.of') }} {{ featured.length }}</p>
               <div class="tour-progress" aria-hidden="true">
                 <span
                   v-for="(f, i) in featured"
@@ -32,7 +32,7 @@
               type="button"
               class="tour-close"
               ref="closeBtn"
-              aria-label="Close the guided tour"
+              :aria-label="$t('tour.close')"
               @click="close"
             >
               <span aria-hidden="true">✕</span>
@@ -73,21 +73,21 @@
 
           <!-- controls -->
           <div class="tour-controls">
-            <button type="button" class="tour-nav" :disabled="index === 0" @click="prev" aria-label="Previous project">
-              <span aria-hidden="true">‹ Prev</span>
+            <button type="button" class="tour-nav" :disabled="index === 0" @click="prev" :aria-label="$t('tour.prevProject')">
+              <span aria-hidden="true">{{ $t('tour.prev') }}</span>
             </button>
 
-            <button type="button" class="tour-play" @click="togglePlay" :aria-label="playing ? 'Pause' : 'Play'">
-              <span aria-hidden="true">{{ playing ? '❚❚ Pause' : '▶ Play' }}</span>
+            <button type="button" class="tour-play" @click="togglePlay" :aria-label="playing ? $t('story.pause') : $t('story.play')">
+              <span aria-hidden="true">{{ playing ? $t('tour.pause') : $t('tour.play') }}</span>
             </button>
 
-            <button type="button" class="tour-nav" @click="next" aria-label="Next project">
-              <span aria-hidden="true">{{ index === featured.length - 1 ? 'Finish ›' : 'Next ›' }}</span>
+            <button type="button" class="tour-nav" @click="next" :aria-label="$t('tour.nextProject')">
+              <span aria-hidden="true">{{ index === featured.length - 1 ? $t('tour.finish') : $t('tour.next') }}</span>
             </button>
           </div>
 
           <details v-if="current.script" class="tour-transcript">
-            <summary>Show transcript</summary>
+            <summary>{{ $t('tour.transcript') }}</summary>
             <p>{{ current.script }}</p>
           </details>
         </div>

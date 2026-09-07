@@ -5,10 +5,10 @@
         <div class="container">
           <!-- <p class="brand">Elodie Portfolio</p> -->
 
-          <nav class="footer-nav" aria-label="Footer navigation">
-            <RouterLink to="/">Home</RouterLink>
-            <RouterLink to="/projects">Projects</RouterLink>
-            <RouterLink to="/contact">Contact</RouterLink>
+          <nav class="footer-nav" :aria-label="t('nav.top')">
+            <RouterLink to="/">{{ t('nav.home') }}</RouterLink>
+            <RouterLink to="/projects">{{ t('projects.title') }}</RouterLink>
+            <RouterLink to="/contact">{{ t('nav.contact') }}</RouterLink>
           </nav>
 
           <div class="meta">
@@ -25,6 +25,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { t } from '../i18n'
 const year = ref(new Date().getFullYear())
 </script>
 

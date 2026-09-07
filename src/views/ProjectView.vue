@@ -8,13 +8,13 @@
 
 <li>
           <router-link to="/" class="text-gray-600 hover:underline"
-            >Home</router-link
+            >{{ $t('nav.home') }}</router-link
           >
         </li>
         <li class="text-gray-400">/</li>
         <li>
           <router-link to="/projects" class="text-gray-600 hover:underline"
-            >Projects</router-link
+            >{{ $t('projects.title') }}</router-link
           >
         </li>
                <li class="text-gray-400">/</li>
@@ -51,7 +51,7 @@
           >
             {{ new Date(project.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) }}
           </time>
-          <span v-else class="text-gray-400">Date unavailable</span>
+          <span v-else class="text-gray-400">{{ $t('project.dateUnavailable') }}</span>
         </div>
 
         <div v-if="project && project.tags && project.tags.length" class="hidden md:flex items-center space-x-2">
@@ -126,7 +126,7 @@
         <!-- prev / next buttons -->
         <button v-if="project.images.length > 1"
           @click="prev"
-          aria-label="Previous"
+          :aria-label="$t('project.prevImg')"
           style="
             position: absolute;
             left: 8px;
@@ -145,7 +145,7 @@
 
         <button v-if="project.images.length > 1"
           @click="next"
-          aria-label="Next"
+          :aria-label="$t('project.nextImg')"
           style="
             position: absolute;
             right: 8px;
@@ -177,7 +177,7 @@
           <button
             v-if="project.images.length > 1"
             @click="toggleAutoplay"
-            :aria-label="isPaused ? 'Play image slideshow' : 'Pause image slideshow'"
+            :aria-label="isPaused ? $t('project.playSlides') : $t('project.pauseSlides')"
             style="
               margin-right: 6px;
               background: rgba(0, 0, 0, 0.6);
@@ -200,7 +200,7 @@
             v-for="(img, idx) in project.images"
             :key="idx"
             @click="goTo(idx)"
-            :aria-label="`Go to slide ${idx + 1}`"
+            :aria-label="`${$t('project.goToSlide')} ${idx + 1}`"
             :style="{
               width: '10px',
               height: '10px',
@@ -245,7 +245,7 @@
 
    <!-- Use v-html to render markup stored in the project's description (e.g. <br/>).
      CAUTION: v-html renders raw HTML — sanitize if any content could come from users. -->
-  <div class="mt-6 project-description" v-html="project.description" style="line-height:1.5;"></div>
+  <div class="mt-6 project-description" v-html="localizedDescription" style="line-height:1.5;"></div>
   <div v-if="project.info" class="text-sm text-gray-600 pt-5 ">
       <hr class="my-6 border-t border-gray-200" style="height:1px; background:transparent;"/>
 
@@ -260,13 +260,13 @@
   </div>
   </div>
   <div v-else>
-    <p>Project not found.</p>
+    <p>{{ $t('project.notFound') }}</p>
   </div>
 
     
 
     <div class="mt-8">
-      <h2 class="text-xl font-bold mb-4">Similar Projects</h2>
+      <h2 class="text-xl font-bold mb-4">{{ $t('project.similar') }}</h2>
       <div v-if="similarProjects.length" class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4">
         <Card
           v-for="(p, index) in similarProjects"
@@ -278,7 +278,7 @@
           :project="p"
         />
       </div>
-      <p v-else class="text-sm text-gray-600">No similar projects.</p>
+      <p v-else class="text-sm text-gray-600">{{ $t('project.noSimilar') }}</p>
     </div>
   </div>
 </template>
@@ -292,6 +292,9 @@ import StoryPlayer from "../components/StoryPlayer.vue";
 import CaseStudy from "../components/CaseStudy.vue";
 import { getStory } from "../data/stories.js";
 import { getCaseStudy } from "../data/caseStudies.js";
+import { getFrCaseStudy } from "../data/caseStudies.fr.js";
+import { getFrDescription } from "../data/projectsContent.fr.js";
+import { locale, t } from "../i18n";
 
 export default {
   components: { Button, Tag, Card, StoryPlayer, CaseStudy },
@@ -343,7 +346,20 @@ export default {
       return this.project ? getStory(this.project.id) : null;
     },
     caseStudy() {
-      return this.project ? getCaseStudy(this.project.id) : null;
+      if (!this.project) return null;
+      if (locale.value === "fr") {
+        const fr = getFrCaseStudy(this.project.id);
+        if (fr) return fr;
+      }
+      return getCaseStudy(this.project.id);
+    },
+    localizedDescription() {
+      if (!this.project) return "";
+      if (locale.value === "fr") {
+        const fr = getFrDescription(this.project.id);
+        if (fr) return fr;
+      }
+      return this.project.description || "";
     },
     hasInteractive() {
       return !!(this.story || (this.project && this.project.audio));
@@ -422,10 +438,10 @@ export default {
       // fallback ancien format
       const out = [];
       if (this.project.figma) {
-        out.push({ label: "View Figma", url: this.project.figma, color: "lavender" });
+        out.push({ label: t("project.viewFigma"), url: this.project.figma, color: "lavender" });
       }
       if (this.project.website) {
-        out.push({ label: "View Website", url: this.project.website, color: "mint" });
+        out.push({ label: t("project.viewWebsite"), url: this.project.website, color: "mint" });
       }
       return out;
     }

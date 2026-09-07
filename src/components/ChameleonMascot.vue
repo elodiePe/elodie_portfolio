@@ -3,7 +3,7 @@
     <!-- little speech bubble hint (first visit) -->
     <transition name="cham-tip">
       <div v-if="showTip" class="cham-tip" role="note">
-        Tap me to change the vibe! <span aria-hidden="true">🦎</span>
+        {{ $t('cham.tip') }} <span aria-hidden="true">🦎</span>
       </div>
     </transition>
 
@@ -11,9 +11,9 @@
       type="button"
       class="cham-btn"
       @click="cycle"
-      :aria-label="`Change the accent colour. Current: ${palette[index].name}`"
+      :aria-label="`${$t('cham.change')} ${palette[index].name}`"
     >
-      <span class="sr-only" aria-live="polite">Accent colour: {{ palette[index].name }}</span>
+      <span class="sr-only" aria-live="polite">{{ $t('cham.current') }} {{ palette[index].name }}</span>
       <svg viewBox="0 0 72 64" class="cham-svg" aria-hidden="true" focusable="false">
         <g class="cham-inner">
           <!-- curled tail -->

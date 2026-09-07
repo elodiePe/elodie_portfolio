@@ -4,23 +4,28 @@ import { RouterLink, RouterView } from 'vue-router'
 import Nav from './components/Nav.vue'
 import Footer from './components/Footer.vue'
 import ChameleonMascot from './components/ChameleonMascot.vue'
+import LangToggle from './components/LangToggle.vue'
+import { t } from './i18n'
 </script>
 
 <template>
   <div class="flex flex-col min-h-screen min-h-dvh">
     <!-- skip link: first focusable element, lets keyboard users bypass nav -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link">{{ t('nav.skip') }}</a>
     <!-- top mobile bar -->
     <div class="md:hidden fixed inset-x-0 top-0 bg-brand shadow-md z-50">
       <div class="max-w-4xl mx-auto flex items-center justify-between h-14 px-4">
         <RouterLink to="/" class="flex items-center">
 
-          <img src="./assets/elodie_logo_portfolio_white.svg" alt="Logo" class="h-10 w-auto" />
+          <img src="./assets/elodie_logo_portfolio_white.svg" :alt="t('nav.logo')" class="h-10 w-auto" />
           <span class="ml-2 font-semibold text-md text-accent">Elodie Perring</span>
         </RouterLink>
-         <a href="https://linkedin.com/in/elodie-perring" target="_blank" rel="noopener noreferrer" class="inline-block">
+        <div class="flex items-center gap-2">
+          <LangToggle />
+          <a href="https://linkedin.com/in/elodie-perring" target="_blank" rel="noopener noreferrer" class="inline-block">
             <img src="./assets/img/linkedin.svg" alt="LinkedIn" class="w-8 h-8 hover:opacity-80 transition-opacity" />
           </a>
+        </div>
       </div>
     </div>
     <!-- /top mobile bar -->

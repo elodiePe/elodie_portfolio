@@ -6,6 +6,7 @@
 // fields (website, figma, tags, whether a spoken story exists).
 
 import { getStory } from "./stories.js";
+import { t } from "../i18n";
 
 // One-line, punchy hooks drawn from each project's real description.
 // Add or tweak freely — projects without an entry simply show no hook.
@@ -78,11 +79,11 @@ export function getCardMeta(project) {
   }
 
   // Real, safe "proof" badges derived from existing fields.
-  if (project.website) badges.push({ label: "Live site", icon: "↗" });
-  else if (project.figma) badges.push({ label: "Prototype" });
+  if (project.website) badges.push({ label: t("card.liveSite"), icon: "↗" });
+  else if (project.figma) badges.push({ label: t("card.prototype") });
 
   const voiced = !!(getStory(project.id) || project.audio);
-  if (voiced) badges.push({ label: "Voiced", icon: "🎧" });
+  if (voiced) badges.push({ label: t("card.voiced"), icon: "🎧" });
 
   return {
     hook: hooks[project.id] || hooks[String(project.id)] || "",

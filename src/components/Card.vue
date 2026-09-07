@@ -2,7 +2,7 @@
   <router-link
     :to="{ name: 'Project', params: { id: projectId } }"
     class="pcard group"
-    :aria-label="`View project: ${title}`"
+    :aria-label="`${$t('card.viewOf')} ${title}`"
     :style="{ '--accent': meta.accent }"
   >
     <div class="pcard-frame">
@@ -42,7 +42,7 @@
             <span v-if="b.icon" aria-hidden="true">{{ b.icon }}</span>{{ b.label }}
           </span>
         </div>
-        <span class="pcard-cta">View project <span aria-hidden="true">→</span></span>
+        <span class="pcard-cta">{{ $t('card.view') }} <span aria-hidden="true">→</span></span>
       </div>
     </div>
   </router-link>

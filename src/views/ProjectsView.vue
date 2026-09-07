@@ -5,6 +5,7 @@ import { useRoute, useRouter } from 'vue-router'
 import Card from '../components/Card.vue'
 import projectsData from '../data/projects-resolved.js'
 import Tag from '../components/TagFilter.vue'
+import { t } from '../i18n'
 
 // selected tag keys (normalized lower-case)
 const selected = ref([])
@@ -236,15 +237,15 @@ async function goToPage(n) {
     <nav aria-label="Breadcrumb" class="mb-4 text-sm">
       <ol class="flex items-center space-x-2">
         <li>
-          <router-link to="/" class="text-gray-600 hover:underline">Home</router-link>
+          <router-link to="/" class="text-gray-600 hover:underline">{{ t('nav.home') }}</router-link>
         </li>
         <li class="text-gray-400">/</li>
-        <li aria-current="page" class="text-gray-900">Projects</li>
+        <li aria-current="page" class="text-gray-900">{{ t('projects.title') }}</li>
       </ol>
     </nav>
 
     <div class="flex items-center justify-between mb-4">
-      <h1 class="font-bold text-2xl">My Projects</h1>
+      <h1 class="font-bold text-2xl">{{ t('projects.title') }}</h1>
     </div>
 
     <!-- tag filters -->
@@ -261,7 +262,7 @@ async function goToPage(n) {
       </div>
 
       <div class="ml-auto">
-        <button v-if="selected.length" @click="clearFilters" class="text-sm text-gray-500 underline">Clear filters</button>
+        <button v-if="selected.length" @click="clearFilters" class="text-sm text-gray-500 underline">{{ t('projects.clear') }}</button>
       </div>
     </div>
           <hr class="my-6 border-t border-gray-200" style="height:1px; background:transparent;"/>
@@ -278,22 +279,22 @@ async function goToPage(n) {
         :project="project"
       />
       <p v-if="!filteredProjects.length" class="col-span-full text-center text-gray-500">
-        No projects available with the selected filters.
+        {{ t('projects.empty') }}
       </p>
     </div>
 
     <!-- pagination controls -->
     <div v-if="totalPages > 1" class="mt-10 flex flex-col items-center justify-center gap-4">
       <div class="text-sm text-gray-600">
-        Showing
+        {{ t('projects.showing') }}
         <span class="font-medium">{{ ( (page-1)*pageSize + 1 ) }}</span>
         -
         <span class="font-medium">{{ Math.min(page*pageSize, filteredProjects.length) }}</span>
-        of <span class="font-medium">{{ filteredProjects.length }}</span>
+        {{ t('projects.of') }} <span class="font-medium">{{ filteredProjects.length }}</span>
       </div>
 
-      <nav aria-label="Pagination" class="flex items-center gap-2">
-        <button @click="goToPage(page-1)" :disabled="page<=1" class="px-3 py-1 rounded border disabled:opacity-50 hover:bg-brand hover:text-accent">Prev</button>
+      <nav :aria-label="t('projects.pagination')" class="flex items-center gap-2">
+        <button @click="goToPage(page-1)" :disabled="page<=1" class="px-3 py-1 rounded border disabled:opacity-50 hover:bg-brand hover:text-accent">{{ t('projects.prev') }}</button>
 
         <button
           v-for="item in pageItems"
@@ -301,14 +302,14 @@ async function goToPage(n) {
           v-if="item !== '...'"
           @click="goToPage(item)"
           :aria-current="item === page ? 'page' : undefined"
-          :aria-label="`Go to page ${item}`"
+          :aria-label="`${t('projects.goToPage')} ${item}`"
           :class="['px-3 py-1 rounded border', item===page ? 'bg-brand text-white' : '']"
         >
           {{ item }}
         </button>
         <span v-for="item in pageItems" :key="'dot-'+String(item)" v-if="item === '...'" class="px-2">…</span>
 
-        <button @click="goToPage(page+1)" :disabled="page>=totalPages" class="px-3 py-1 rounded border disabled:opacity-50 hover:bg-brand hover:text-accent">Next</button>
+        <button @click="goToPage(page+1)" :disabled="page>=totalPages" class="px-3 py-1 rounded border disabled:opacity-50 hover:bg-brand hover:text-accent">{{ t('projects.next') }}</button>
       </nav>
     </div>
   </div>

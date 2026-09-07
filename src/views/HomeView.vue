@@ -1,10 +1,11 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import projects from "../data/projects-resolved.js";
 import Button from "../components/Button.vue";
 import GuidedTour from "../components/GuidedTour.vue";
 import Card from "../components/Card.vue";
 import StatsBand from "../components/StatsBand.vue";
+import { t } from "../i18n";
 
 const projectsList = Array.isArray(projects) ? projects : [];
 
@@ -13,23 +14,16 @@ const earliestYear = projectsList.reduce((min, p) => {
   const y = p && p.date ? new Date(p.date).getFullYear() : NaN;
   return !Number.isNaN(y) && y < min ? y : min;
 }, new Date().getFullYear());
-const statItems = [
-  { value: projectsList.length, suffix: "+", label: "Projects" },
-  { value: 6, label: "Disciplines" },
-  { value: new Date().getFullYear() - earliestYear, suffix: "+", label: "Years creating" },
-];
+const statItems = computed(() => [
+  { value: projectsList.length, suffix: "+", label: t("stats.projects") },
+  { value: 6, label: t("stats.disciplines") },
+  { value: new Date().getFullYear() - earliestYear, suffix: "+", label: t("stats.years") },
+]);
 
 const tourOpen = ref(false);
 
-// Rotating hero tagline — shows Elodie's range at a glance.
-const roleWords = [
-  "design brands",
-  "build websites",
-  "craft interfaces",
-  "paint & draw",
-  "take photos",
-  "tell stories",
-];
+// Rotating hero tagline — shows Elodie's range at a glance (localized).
+const roleWords = computed(() => t("home.roleWords"));
 const roleIndex = ref(0);
 const reduceMotion = ref(false);
 let roleTimer = null;
@@ -42,7 +36,7 @@ onMounted(() => {
   }
   if (!reduceMotion.value) {
     roleTimer = setInterval(() => {
-      roleIndex.value = (roleIndex.value + 1) % roleWords.length;
+      roleIndex.value = (roleIndex.value + 1) % roleWords.value.length;
     }, 2200);
   }
 });
@@ -94,17 +88,8 @@ const scrollToCollaboration = () => {
     el.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 };
-const openCapIndex = ref(null);
-
-function toggleCap(i) {
-  if (typeof window !== "undefined" && window.innerWidth < 768) {
-    openCapIndex.value = openCapIndex.value === i ? null : i;
-  }
-}
-
-function isCapOpen(i) {
-  return openCapIndex.value === i;
-}
+// Capability cards are localized and static (no hover reveal).
+const caps = computed(() => t("home.caps"));
 </script>
 
 <template>
@@ -128,9 +113,9 @@ function isCapOpen(i) {
 
         <!-- Rotating tagline: shows the range at a glance -->
         <p class="hero-tag text-2xl md:text-3xl font-semibold mb-3">
-          <span>I </span>
+          <span>{{ $locale === 'fr' ? 'Je ' : 'I ' }}</span>
           <!-- Static, screen-reader-friendly full statement -->
-          <span class="sr-only">design brands, build websites, craft interfaces, paint, take photos and tell stories.</span>
+          <span class="sr-only">{{ t('home.roleFull') }}</span>
           <span class="hero-rotator" aria-hidden="true">
             <transition :name="reduceMotion ? '' : 'roll'" mode="out-in">
               <span :key="roleIndex" class="hero-word" :style="{ color: 'var(--accent)' }">{{ roleWords[roleIndex] }}</span>
@@ -138,23 +123,15 @@ function isCapOpen(i) {
           </span><span aria-hidden="true">.</span>
         </p>
 
-        <p>
-          My passion is <span class="text-2xl font-semibold">creation</span>,
-          whether it's developing brand identities, designing layouts, building
-          websites and designing innovative products that ensure a smooth user
-          experience.</p><p> I also practice painting, creating designs for clothing and
-          photography.
-        </p>
-        <p class="mt-2 text-sm text-gray-600">
-          I hold a master's in User Experience Design and a bachelor's in Media
-          Engineering, with roots in graphic design, painting and photography.
-        </p>
+        <p>{{ t('home.passion') }}</p>
+        <p>{{ t('home.practice') }}</p>
+        <p class="mt-2 text-sm text-gray-600">{{ t('home.bio') }}</p>
 
         <div
           class="mt-6 w-full flex flex-col md:flex-row items-center justify-center md:justify-start gap-4"
         >
           <Button :color="'accent'" class="w-full md:w-auto" @click="$router.push('/projects')"
-            >See all projects</Button
+            >{{ t('home.seeAllProjects') }}</Button
           >
 
           <Button
@@ -162,7 +139,7 @@ function isCapOpen(i) {
             class="w-full md:w-auto"
             @click="tourOpen = true"
           >
-            🎧 Take the guided tour
+            {{ t('home.takeTour') }}
           </Button>
 
           <Button
@@ -170,7 +147,7 @@ function isCapOpen(i) {
             class="w-full md:w-auto"
             @click="scrollToCollaboration()"
           >
-            Start a project with me?
+            {{ t('home.startProject') }}
           </Button>
         </div>
       </div>
@@ -183,15 +160,15 @@ function isCapOpen(i) {
     <section v-reveal class="mt-12 w-full">
       <div class="flex items-end justify-between mb-4 gap-3">
         <div>
-          <h2 class="text-2xl md:text-3xl font-semibold text-brand">Selected work</h2>
-          <p class="text-sm text-gray-600">A few favourites — hover a card for the pitch.</p>
+          <h2 class="text-2xl md:text-3xl font-semibold text-brand">{{ t('home.selectedWork') }}</h2>
+          <p class="text-sm text-gray-600">{{ t('home.selectedWorkSub') }}</p>
         </div>
         <RouterLink
           to="/projects"
           class="shrink-0 text-sm font-semibold underline-offset-2 hover:underline"
           :style="{ color: 'var(--accent)' }"
         >
-          See all projects →
+          {{ t('home.seeAll') }}
         </RouterLink>
       </div>
 
@@ -209,48 +186,16 @@ function isCapOpen(i) {
     </section>
 
     <section v-reveal class="mt-10 w-full">
-      <h2 class="text-2xl md:text-3xl font-semibold text-brand mb-1">What I do</h2>
-      <p class="mb-4 text-sm text-gray-600">A few areas I love working in — tap a card to explore.</p>
+      <h2 class="text-2xl md:text-3xl font-semibold text-brand mb-1">{{ t('home.whatIDo') }}</h2>
+      <p class="mb-4 text-sm text-gray-600">{{ t('home.whatIDoSub') }}</p>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Static info cards (no hover reveal): title + description always visible -->
         <div
-          v-for="(cap, i) in [
-            {
-              title: 'Brand & Identity',
-              desc: 'I create distinctive brand identities that express each project’s personality and values. This includes logo systems, color palettes, typography, and brand guidelines, all crafted to ensure consistency, recognition, and meaningful communication across print and digital touchpoints.',
-              tag: 'branding',
-            },
-            {
-              title: 'Web Design',
-              desc: 'I design user-centered websites for desktop and mobile, from structure to final interface. My process includes user flows, wireframes, and interactive prototypes, with a focus on usability, accessibility, and visual consistency to create clear and engaging digital experiences. ',
-              tag: 'ux, ui, coding',
-            },
-            // {
-            //   title: 'Project managment',
-            //   desc: 'Group project, individual project, agile and scrum',
-            //   tag: 'managment',
-            // },
-            {
-              title: 'Photography & painting',
-              desc: 'I  have been painting since I was six years old. I mainly create acrylic paintings. </br> Photography is also one of my passions. I have a particular fondness for the animal theme, which I love to capture both in photography and painting.',
-              tag: 'photography,painting, drawing',
-            },
-            // {
-            //   title: 'Clothing design',
-            //   desc: 'Recently, I have been working on creating design for clothing and textiles.',
-            //   tag: 'clothing',
-            // },
-            {
-              title: 'Graphism',
-              desc: 'I create thoughtful graphic design for both print and digital media, including editorial layouts, posters, brochures, and booklets. My focus is on clear visual hierarchy, strong typography, and cohesive compositions that communicate ideas effectively while reflecting each project’s unique identity.',
-              tag: 'graphism',
-            },
-          ]"
+          v-for="(cap, i) in caps"
           :key="i"
-          @click="toggleCap(i)"
-          class="group relative overflow-hidden rounded-lg cursor-pointer transform transition-all duration-300 hover:scale-105 shadow-lg"
+          class="relative overflow-hidden rounded-lg shadow-lg"
         >
-          <!-- SVG background that cycles colours every 5s (three colours => 15s cycle) -->
           <svg
             class="absolute inset-0 w-full h-full"
             preserveAspectRatio="none"
@@ -264,66 +209,25 @@ function isCapOpen(i) {
               y="0"
               width="100"
               height="100"
-              :fill="
-                [
-                  '#FDE8D9',
-                  '#FBD5E1',
-                  '#DFF7E6',
-                  '#E6F4FF',
-                  '#FFF4CC',
-                  '#F3E8FF',
-                  '#FCE7F3',
-                ][i % 7]
-              "
+              :fill="['#FDE8D9', '#DFF7E6', '#FBD5E1', '#FFF4CC'][i % 4]"
             />
           </svg>
 
-          <!-- Content layer -->
-          <div
-            class="relative z-10 h-full flex flex-col justify-center p-6 text-[#3b2418]"
-          >
-            <h2
-              class="text-lg md:text-xl font-semibold leading-tight drop-shadow-sm"
-            >
+          <div class="relative z-10 h-full flex flex-col p-6 text-[#3b2418]">
+            <h3 class="text-lg md:text-xl font-semibold leading-tight">
               {{ cap.title }}
-            </h2>
-
-            <!-- description revealed on hover -->
-            <p
-              class="mt-2 text-sm md:text-base overflow-hidden transition-all duration-300 ease-in-out
-                 md:max-h-0 md:opacity-0 md:group-hover:opacity-100 md:group-hover:max-h-96
-                 md:group-focus-within:opacity-100 md:group-focus-within:max-h-96"
-              :class="isCapOpen(i) ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'"
-              v-html="cap.desc"
-            ></p>
-
-            <!-- Mobile button: only exists when box is open -->
+            </h3>
+            <p class="mt-2 text-sm md:text-base" v-html="cap.desc"></p>
             <Button
-              v-if="isCapOpen(i)"
-              class="mt-4 w-full text-center md:hidden"
+              class="mt-4 w-full sm:w-auto sm:self-start text-center"
               color="lavender"
-              @click.stop="$router.push({ path: '/projects', query: { tags: cap.tag } })"
+              @click="$router.push({ path: '/projects', query: { tags: cap.tag } })"
             >
-              See projects
-            </Button>
-
-            <!-- Desktop button: always available (keyboard-focusable), reveals description via focus-within -->
-            <Button
-              class="mt-4 w-full md:w-auto mx-auto text-center hidden md:inline-block transition-opacity duration-300 ease-in-out"
-              color="lavender"
-              @click.stop="$router.push({ path: '/projects', query: { tags: cap.tag } })"
-            >
-              See projects
+              {{ t('home.seeProjects') }}
             </Button>
           </div>
-
-          <!-- subtle overlay to improve text contrast when needed -->
-          <div
-            class="absolute inset-0 bg-black bg-opacity-10 group-hover:bg-opacity-20 transition-colors duration-300 pointer-events-none"
-          ></div>
         </div>
       </div>
-      <div class="mt-8 flex justify-center"></div>
     </section>
     <section
       v-reveal
@@ -332,23 +236,20 @@ function isCapOpen(i) {
     >
       <div class="flex-1">
         <h2 class="text-2xl md:text-3xl font-semibold text-accent mb-2">
-          Start a project with me?
+          {{ t('home.collabTitle') }}
         </h2>
         <p class="text-sm md:text-base text-gray-300">
-          I’m open to freelance and collaborative projects focused on custom
-          creation. My expertise ranges from building professional assets like
-          Identity and Web Design, to crafting one-of-a-kind physical pieces
-          such as
+          {{ t('home.collabIntro1a') }}
           <b class="text-accent"
-            ><a href="/projects?tags=clothing">personalized clothing</a></b
+            ><a href="/projects?tags=clothing">{{ t('home.collabClothing') }}</a></b
           >
-          and
+          {{ t('home.collabAnd') }}
           <b class="text-accent"
-            ><a href="/projects?tags=painting">custom artwork</a></b
+            ><a href="/projects?tags=painting">{{ t('home.collabArtwork') }}</a></b
           >.
         </p>
         <p class="text-sm md:text-base text-gray-300">
-          Tell me about your idea and we’ll discuss how to make it happen.
+          {{ t('home.collabIntro2') }}
         </p>
       </div>
 
@@ -359,14 +260,14 @@ function isCapOpen(i) {
           :color="'accent'"
           class="w-full sm:w-auto"
           @click="$router.push('/contact')"
-          >Contact me</Button
+          >{{ t('home.collabContact') }}</Button
         >
 
         <Button
           :color="'mint'"
           class="w-full sm:w-auto"
           @click="$router.push('/projects')"
-          >See my work</Button
+          >{{ t('home.collabSeeWork') }}</Button
         >
       </div>
     </section>
