@@ -28,6 +28,7 @@ const hooks = {
   34: "A lion whose mood rises and falls with your screen time.",
   35: "Can a little friction help you outsmart email scammers?",
   36: "From pocket money to portfolios — a full-stack family app.",
+  37: "My own website and shop for my animal portrait paintings.",
 };
 
 // Discipline → display label + accent colour (for the reveal gradient).
