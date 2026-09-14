@@ -170,7 +170,6 @@ const caps = computed(() => t("home.caps"));
       <div class="flex items-end justify-between mb-4 gap-3">
         <div>
           <h2 class="text-2xl md:text-3xl font-semibold text-brand">{{ t('home.selectedWork') }}</h2>
-          <p class="text-sm text-gray-600">{{ t('home.selectedWorkSub') }}</p>
         </div>
         <RouterLink
           to="/projects"
@@ -195,8 +194,7 @@ const caps = computed(() => t("home.caps"));
     </section>
 
     <section v-reveal class="mt-10 w-full">
-      <h2 class="text-2xl md:text-3xl font-semibold text-brand mb-1">{{ t('home.whatIDo') }}</h2>
-      <p class="mb-4 text-sm text-gray-600">{{ t('home.whatIDoSub') }}</p>
+      <h2 class="text-2xl md:text-3xl font-semibold text-brand mb-4">{{ t('home.whatIDo') }}</h2>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <!-- Static info cards (no hover reveal): title + description always visible -->

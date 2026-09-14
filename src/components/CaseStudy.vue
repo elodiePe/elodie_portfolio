@@ -15,16 +15,6 @@
         <h3 class="cs-col-title"><span aria-hidden="true">🛠️</span> {{ $t('caseStudy.approach') }}</h3>
         <p class="cs-col-text">{{ data.approach }}</p>
       </div>
-
-      <div class="cs-col cs-col--result">
-        <h3 class="cs-col-title"><span aria-hidden="true">🏆</span> {{ $t('caseStudy.result') }}</h3>
-        <ul class="cs-stats">
-          <li v-for="(r, i) in data.results" :key="i" class="cs-stat">
-            <span class="cs-stat-num">{{ r.stat }}</span>
-            <span class="cs-stat-label">{{ r.label }}</span>
-          </li>
-        </ul>
-      </div>
     </div>
   </section>
 </template>
@@ -77,7 +67,7 @@ export default {
 }
 @media (min-width: 768px) {
   .cs-grid {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -94,38 +84,5 @@ export default {
   font-size: 0.92rem;
   line-height: 1.55;
   color: #4b3e63;
-}
-
-/* result column visually emphasised */
-.cs-col--result {
-  border-left: 3px solid var(--accent);
-  padding-left: 0.85rem;
-}
-@media (max-width: 767px) {
-  .cs-col--result {
-    border-left: none;
-    padding-left: 0;
-    border-top: 1px solid #ece7f5;
-    padding-top: 0.85rem;
-  }
-}
-.cs-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-.cs-stat {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.15;
-}
-.cs-stat-num {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--accent);
-}
-.cs-stat-label {
-  font-size: 0.78rem;
-  color: #6b5b8a;
 }
 </style>
