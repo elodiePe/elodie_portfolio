@@ -79,6 +79,18 @@ const caseStudies = {
       { stat: "6→16", label: "UI that grows with the child" },
     ],
   },
+  37: {
+    role: "Designer & Developer",
+    challenge:
+      "I wanted a dedicated online home for my animal portrait paintings — one where clients could browse, commission a piece, and buy directly.",
+    approach:
+      "Designed my own visual identity (palette, EP monogram, illustrations) and coded the whole bilingual site myself: gallery, bespoke portrait commissions, gift cards, and an online shop.",
+    results: [
+      { stat: "Live", label: "elodieperringart.com" },
+      { stat: "2", label: "Languages: FR / EN" },
+      { stat: "1", label: "Site designed & built solo, end to end" },
+    ],
+  },
 };
 
 export function getCaseStudy(id) {

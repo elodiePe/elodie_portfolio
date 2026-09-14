@@ -74,6 +74,18 @@ const caseStudiesFr = {
       { stat: "6→16", label: "Une UI qui grandit avec l'enfant" },
     ],
   },
+  37: {
+    role: "Designer & Developer",
+    challenge:
+      "Je voulais un espace en ligne dédié à mes portraits d'animaux — où les clients puissent parcourir la galerie, commander un portrait sur mesure et acheter directement.",
+    approach:
+      "J'ai conçu ma propre identité visuelle (palette, monogramme EP, illustrations) et codé l'intégralité du site bilingue moi-même : galerie, portraits sur mesure, bons cadeaux et boutique en ligne.",
+    results: [
+      { stat: "En ligne", label: "elodieperringart.com" },
+      { stat: "2", label: "Langues : FR / EN" },
+      { stat: "1", label: "Site conçu et codé en solo, de bout en bout" },
+    ],
+  },
 };
 
 export function getFrCaseStudy(id) {

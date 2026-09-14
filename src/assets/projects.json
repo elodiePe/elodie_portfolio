@@ -606,14 +606,17 @@
 {
     "id": 37,
     "title": "Elodie Perring Art",
-    "description": "Elodie Perring Art is my own website for my acrylic animal portraits. </br> </br> The site presents my paintings in a gallery, offers a bespoke portrait commission service so clients can have their own pet painted, sells gift cards, and includes an online shop to purchase pieces directly. </br> </br> Available in French and English, the design reflects my own visual identity — a warm, muted colour palette, a hand-drawn 'EP' monogram, and simple, realistic animal illustrations.",
+    "description": "Elodie Perring Art is my own website for my acrylic animal portraits. <b>I designed and coded the entire site myself</b>, from the brand identity to the front-end. </br> </br> The site presents my paintings in a gallery, offers a bespoke portrait commission service so clients can have their own pet painted, sells gift cards, and includes an online shop to purchase pieces directly. </br> </br> Available in French and English, the design reflects my own visual identity — a warm, muted colour palette, a hand-drawn 'EP' monogram, and simple, realistic animal illustrations.",
     "images": [
         "https://elodiepe.github.io/portfolio-images/project_elodieperringart.png"
     ],
+    "website": "https://www.elodieperringart.com",
     "tags": [
+        "UX",
+        "UI",
+        "Coding",
         "painting",
-        "branding",
-        "graphism"
+        "branding"
     ],
     "date": "2026-09-14"
 }
