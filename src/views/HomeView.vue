@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from "vue";
+import { useRouter } from "vue-router";
 import projects from "../data/projects-resolved.js";
 import Button from "../components/Button.vue";
 import GuidedTour from "../components/GuidedTour.vue";
@@ -80,6 +81,14 @@ const getFirstImage = (p) => {
   } catch {
     return img;
   }
+};
+const router = useRouter();
+const openCapLink = (cap) => {
+  if (cap.externalUrl) {
+    window.open(cap.externalUrl, "_blank", "noopener");
+    return;
+  }
+  router.push({ path: "/projects", query: { tags: cap.tag } });
 };
 const scrollToCollaboration = () => {
   if (typeof document === "undefined") return;
@@ -221,9 +230,9 @@ const caps = computed(() => t("home.caps"));
             <Button
               class="mt-4 w-full sm:w-auto sm:self-start text-center"
               color="lavender"
-              @click="$router.push({ path: '/projects', query: { tags: cap.tag } })"
+              @click="openCapLink(cap)"
             >
-              {{ t('home.seeProjects') }}
+              {{ cap.externalUrl ? t('home.seeMyArt') : t('home.seeProjects') }}
             </Button>
           </div>
         </div>
@@ -245,7 +254,7 @@ const caps = computed(() => t("home.caps"));
           >
           {{ t('home.collabAnd') }}
           <b class="text-accent"
-            ><a href="/projects?tags=painting">{{ t('home.collabArtwork') }}</a></b
+            ><a href="https://www.elodieperringart.com" target="_blank" rel="noopener">{{ t('home.collabArtwork') }}</a></b
           >.
         </p>
         <p class="text-sm md:text-base text-gray-300">

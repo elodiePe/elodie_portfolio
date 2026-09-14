@@ -32,6 +32,7 @@ export const messages = {
       whatIDo: "What I do",
       whatIDoSub: "A few areas I love working in.",
       seeProjects: "See projects",
+      seeMyArt: "See my art website",
       collabTitle: "Start a project with me?",
       collabIntro1a:
         "I'm open to freelance and collaborative projects focused on custom creation. My expertise ranges from building professional assets like Identity and Web Design, to crafting one-of-a-kind physical pieces such as",
@@ -67,6 +68,7 @@ export const messages = {
           title: "Photography & painting",
           desc: "I have been painting since I was six years old. I mainly create acrylic paintings. </br> Photography is also one of my passions. I have a particular fondness for the animal theme, which I love to capture both in photography and painting.",
           tag: "photography,painting, drawing",
+          externalUrl: "https://www.elodieperringart.com",
         },
         {
           title: "Graphism",
@@ -212,6 +214,7 @@ export const messages = {
       whatIDo: "Ce que je fais",
       whatIDoSub: "Quelques domaines que j'adore.",
       seeProjects: "Voir les projets",
+      seeMyArt: "Voir mon site d'art",
       collabTitle: "Démarrer un projet avec moi ?",
       collabIntro1a:
         "Je suis ouverte aux projets freelance et collaboratifs axés sur la création sur mesure. Mon expertise va de la conception d'atouts professionnels comme l'identité et le web design, à la réalisation de pièces physiques uniques comme des",
@@ -247,6 +250,7 @@ export const messages = {
           title: "Photographie & peinture",
           desc: "Je peins depuis l'âge de six ans, principalement à l'acrylique. </br> La photographie est aussi une de mes passions. J'ai un faible pour le thème animalier, que j'adore capturer autant en photo qu'en peinture.",
           tag: "photography,painting, drawing",
+          externalUrl: "https://www.elodieperringart.com",
         },
         {
           title: "Graphisme",

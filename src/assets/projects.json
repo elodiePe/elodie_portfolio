@@ -236,94 +236,6 @@
         "date": "2024-11-30"
     },
     {
-        "id": 13,
-        "title": "The tiger painting",
-        "description": "Acrylic on canvas, 30x30cm.",
-        "images": [
-            "https://elodiepe.github.io/portfolio-images/project_painting_tiger.png"
-        ],
-        "tags": [
-            "painting"
-        ],
-        "date": "2020-09-10"
-    },
-    {
-        "id": 14,
-        "title": "The kookaburra painting",
-        "description": "Acrylic on canvas, 100x100cm.",
-        "images": [
-            "https://elodiepe.github.io/portfolio-images/project_painting_cookaborra.png"
-        ],
-        "tags": [
-            "painting"
-        ],
-        "date": "2020-09-10"
-    },
-    {
-        "id": 15,
-        "title": "The crocodile painting",
-        "description": "Acrylic on canvas, 50x30cm.",
-        "images": [
-            "https://elodiepe.github.io/portfolio-images/project_painting_croc.png"
-        ],
-        "tags": [
-            "painting"
-        ],
-        "date": "2020-09-10"
-    },
-    {
-        "id": 16,
-        "title": "The frog painting",
-        "description": "Acrylic on canvas, 30x30cm.",
-        "images": [
-            "https://elodiepe.github.io/portfolio-images/project_painting_frog.png"
-        ],
-        "tags": [
-            "painting"
-        ],
-        "date": "2020-09-10"
-    },
-    {
-        "id": 17,
-        "title": "The swedish guard painting",
-        "description": "Acrylic on canvas, 30x20cm.",
-        "images": [
-            "https://elodiepe.github.io/portfolio-images/project_painting_guard.png"
-        ],
-        "tags": [
-            "painting"
-        ],
-        "date": "2020-09-10"
-    },
-    {
-        "id": 18,
-        "title": "The lion painting",
-        "description": "Ici il y aura la description de la peinture",
-        "images": [
-            "https://elodiepe.github.io/portfolio-images/project_painting_lion.png"
-        ],
-        "tags": [
-            "painting"
-        ],
-        "date": "2020-09-10"
-    },
-    {
-        "id": 19,
-        "title": "The portrait painting",
-        "description": "Acrylic on canvas, 100x100cm.",
-        "images": [
-            "https://elodiepe.github.io/portfolio-images/project_painting_portrait.png",
-            "https://elodiepe.github.io/portfolio-images/project_painting_portrait-2.png",
-            "https://elodiepe.github.io/portfolio-images/project_painting_portrait-3.png",
-            "https://elodiepe.github.io/portfolio-images/project_painting_portrait-4.png"
-            
-        ],
-        "tags": [
-            "painting"
-        ],
-        "date": "2019-09-10"
-    },
-    {
         "id": 20,
         "title": "Kookaburra B&W collection",
         "description": "",
@@ -343,8 +255,7 @@
             "photography"
         ],
         "inthesameprojectas": [
-            21,
-            14
+            21
         ],
         "date": "2020-09-10"
     },
@@ -367,28 +278,10 @@
             "photography"
         ],
         "inthesameprojectas": [
-            20,
-            14
+            20
         ],
         "date": "2020-09-10"
     },
-   
-
-{
-    "id": 22,
-    "title": "Toffee: painting",
-    "description": "Acrylic on canvas.",
-    "images": [
-        "https://elodiepe.github.io/portfolio-images/project_toffee-1.png",
-        "https://elodiepe.github.io/portfolio-images/project_toffee-2.png",
-        "https://elodiepe.github.io/portfolio-images/project_toffee-3.png"
-    ],
-    "tags": [
-        "painting"
-    ],
-    "date": "2026-01-01"
-
-},
 {
     "id": 23,
     "title": "Koala B&W collection",

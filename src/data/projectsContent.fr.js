@@ -28,15 +28,6 @@ const descriptionsFr = {
 
   12: "Swissquote est un groupe bancaire suisse spécialisé dans les services financiers, notamment le trading, les solutions d'investissement et les services bancaires. Le projet consistait à mener des tests d'utilisabilité sur leur application en cours de développement. </br> </br> J'ai établi des hypothèses, préparé des questions et des tâches à soumettre à deux utilisateurs testeurs aux profils différents. Pendant les entretiens, j'ai eu deux responsabilités : j'ai d'abord été modératrice, puis observatrice. </br> </br> Grâce à ce test, nous avons identifié des problèmes à résoudre ainsi que des solutions proposées.</br>Je ne peux malheureusement pas partager les résultats du test, mais je peux dire que ce fut une expérience très enrichissante qui m'a permis de mettre en pratique les connaissances acquises en cours et d'en apprendre beaucoup sur le processus des tests d'utilisabilité.",
 
-  13: "Acrylique sur toile, 30x30 cm.",
-  14: "Acrylique sur toile, 100x100 cm.",
-  15: "Acrylique sur toile, 50x30 cm.",
-  16: "Acrylique sur toile, 30x30 cm.",
-  17: "Acrylique sur toile, 30x20 cm.",
-  18: "Acrylique sur toile.",
-  19: "Acrylique sur toile, 100x100 cm.",
-  22: "Acrylique sur toile.",
-
   32: "Ateliers Colibri s'inspire de la légende amérindienne du colibri : face à un incendie de forêt dévastateur, un petit colibri transporte inlassablement des gouttes d'eau pour combattre les flammes, malgré ceux qui le traitent de fou. Quand on lui demande pourquoi, le colibri répond qu'il fait sa part. Pour ce projet, j'ai conçu un logo qui incarne ce message puissant d'action collective et de contribution individuelle. </br> L'identité visuelle capture l'essence de la légende à travers des choix de design réfléchis. J'ai créé un logo représentant un colibri stylisé dans des tons chauds et dorés, pour évoquer les aspects mythologiques et naturels de l'histoire. Ces couleurs renforcent les thèmes de chaleur, d'espoir et de résilience tout en rendant le design immédiatement reconnaissable et mémorable.  </br> Le logo a pour but d'inspirer les gens à rejoindre la mission de Mélanie : à travers des ateliers et son blog, elle accompagne chacun dans la création de produits maison naturels. Comme le colibri a fait la différence par un effort persistant, Ateliers Colibri encourage chaque personne à faire sa part — formant ensemble un océan à partir de ruisseaux individuels.",
 
   33: "En créant un site web sur la mythologie grecque, j'ai eu l'occasion de développer une identité visuelle pour ce projet. J'ai choisi de créer un logo qui représente à la fois la mythologie grecque et l'aspect commercial du projet. </br>Le logo se compose d'une silhouette de la Grèce antique agrémentée d'éléments graphiques qui évoquent les dieux et les héros de la mythologie grecque.</br> J'ai utilisé des couleurs chaudes et dorées pour renforcer l'aspect mythologique et donner une impression de richesse et de mystère. Le résultat est un logo qui reflète l'identité du projet tout en restant facilement reconnaissable et mémorable.",
