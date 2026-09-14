@@ -34,14 +34,8 @@
         <h2 class="pcard-title">{{ title }}</h2>
       </div>
 
-      <!-- reveal panel (hover / focus) -->
-      <div class="pcard-reveal">
-        <p v-if="meta.hook" class="pcard-hook">{{ meta.hook }}</p>
-        <div v-if="meta.badges.length" class="pcard-badges">
-          <span v-for="(b, i) in meta.badges" :key="i" class="pcard-badge">
-            <span v-if="b.icon" aria-hidden="true">{{ b.icon }}</span>{{ b.label }}
-          </span>
-        </div>
+      <!-- simple hover overlay -->
+      <div class="pcard-hover-overlay" aria-hidden="true">
         <span class="pcard-cta">{{ $t('card.view') }} <span aria-hidden="true">→</span></span>
       </div>
     </div>
@@ -98,16 +92,14 @@ export default {
   border-radius: 0.9rem;
   overflow: hidden;
   outline: none;
-  transform: perspective(800px);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: box-shadow 0.2s ease;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
 }
 .pcard:hover {
-  transform: perspective(800px) translateY(-4px) rotateX(2.5deg) scale(1.02);
-  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
 }
 .pcard:focus-visible {
-  box-shadow: 0 0 0 3px var(--accent), 0 16px 34px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 0 0 3px var(--accent), 0 10px 22px rgba(0, 0, 0, 0.18);
 }
 
 .pcard-frame {
@@ -123,10 +115,7 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease, opacity 0.3s ease;
-}
-.pcard:hover .pcard-img {
-  transform: scale(1.06);
+  transition: opacity 0.3s ease;
 }
 
 .pcard-state {
@@ -175,7 +164,6 @@ export default {
   z-index: 2;
   padding: 0.5rem 0.6rem;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0));
-  transition: opacity 0.25s ease;
 }
 .pcard-title {
   color: #fff;
@@ -187,86 +175,36 @@ export default {
 @media (min-width: 768px) {
   .pcard-title { font-size: 1rem; }
 }
-/* On reveal, fade the plain title bar out so the rich panel takes over */
-.pcard:hover .pcard-titlebar,
-.pcard:focus-within .pcard-titlebar {
-  opacity: 0;
-}
 
-.pcard-reveal {
+/* Simple hover: a dark overlay with a "view project" cue, nothing else moves */
+.pcard-hover-overlay {
   position: absolute;
   inset: 0;
   z-index: 3;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 0.4rem;
-  padding: 0.75rem;
-  color: #fff;
-  background: linear-gradient(
-    to top,
-    color-mix(in srgb, var(--accent) 94%, black) 0%,
-    color-mix(in srgb, var(--accent) 80%, transparent) 55%,
-    transparent 100%
-  );
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.38);
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.28s ease, transform 0.28s ease;
+  transition: opacity 0.2s ease;
   pointer-events: none;
 }
-.pcard:hover .pcard-reveal,
-.pcard:focus-within .pcard-reveal {
+.pcard:hover .pcard-hover-overlay,
+.pcard:focus-within .pcard-hover-overlay {
   opacity: 1;
-  transform: translateY(0);
-}
-.pcard-hook {
-  font-size: 0.92rem;
-  font-weight: 700;
-  line-height: 1.25;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
-}
-.pcard-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem;
-}
-.pcard-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.2rem;
-  font-size: 0.68rem;
-  font-weight: 600;
-  padding: 0.12rem 0.45rem;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.22);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(2px);
 }
 .pcard-cta {
-  font-size: 0.78rem;
+  color: #fff;
+  font-size: 0.85rem;
   font-weight: 700;
-  opacity: 0.95;
-}
-
-/* Fallback for browsers without color-mix: solid accent-ish overlay */
-@supports not (background: color-mix(in srgb, red 50%, blue)) {
-  .pcard-reveal {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.2));
-  }
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .pcard,
   .pcard-img,
-  .pcard-reveal,
-  .pcard-titlebar {
+  .pcard-hover-overlay {
     transition: none;
-  }
-  .pcard:hover {
-    transform: none;
-  }
-  .pcard:hover .pcard-img {
-    transform: none;
   }
   .pcard-spinner {
     animation: none;
