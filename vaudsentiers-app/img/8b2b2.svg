@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="Location">
+<foreignObject x="-27.1828" y="-27.1828" width="76.3656" height="76.3656"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(13.59px);clip-path:url(#bgblur_0_0_288_clip_path);height:100%;width:100%"></div></foreignObject><g id="Oval" data-figma-bg-blur-radius="27.1828">
+<path d="M11 20.5C16.2467 20.5 20.5 16.2467 20.5 11C20.5 5.75329 16.2467 1.5 11 1.5C5.75329 1.5 1.5 5.75329 1.5 11C1.5 16.2467 5.75329 20.5 11 20.5Z" fill-rule="evenodd" clip-rule="evenodd" fill="#4884DF"/>
+<use xlink:href="#stroke0_0_288" stroke="white"/>
+<use xlink:href="#stroke0_0_288" stroke="#2F57E5" stroke-opacity="0.26"/>
+</g>
+</g>
+<defs>
+<clipPath id="bgblur_0_0_288_clip_path" transform="translate(27.1828 27.1828)"><path fill-rule="evenodd" clip-rule="evenodd" d="M11 20.5C16.2467 20.5 20.5 16.2467 20.5 11C20.5 5.75329 16.2467 1.5 11 1.5C5.75329 1.5 1.5 5.75329 1.5 11C1.5 16.2467 5.75329 20.5 11 20.5Z"/>
+</clipPath><path id="stroke0_0_288" d="M11 20.5C16.2467 20.5 20.5 16.2467 20.5 11C20.5 5.75329 16.2467 1.5 11 1.5C5.75329 1.5 1.5 5.75329 1.5 11C1.5 16.2467 5.75329 20.5 11 20.5Z" stroke-width="3"/>
+</defs>
+</svg>

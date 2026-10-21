@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="12.7273" height="12.7273" viewBox="0 0 12.7273 12.7273" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="star_rate">
+<mask id="mask0_0_219" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="13" height="13">
+<rect id="Bounding box" width="12.7273" height="12.7273" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_0_219)">
+<path id="star_rate_2" d="M3.08891 11.1363L4.32187 7.10601L1.0605 4.77268H5.09081L6.36353 0.53025L7.63626 4.77268H11.6666L8.4052 7.10601L9.63816 11.1363L6.36353 8.64389L3.08891 11.1363Z" fill="#191D17"/>
+</g>
+</g>
+</svg>

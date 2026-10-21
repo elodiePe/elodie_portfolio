@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=412">
+<title>Vaud Sentiers (démo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500&family=Roboto:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{--surface:#f8fbf1;--on:#191d17;--on-var:#43483f;--primary:#3f6836;--pc:#bfefb0;--outline:#73796e;--sv:#dfe4d8;--tert:#386569}
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth;overflow-x:hidden;scrollbar-width:none}
+  html::-webkit-scrollbar{display:none}
+  body{width:412px;min-height:100vh;background:var(--surface);color:var(--on);font:400 16px/20px "Noto Sans",system-ui,sans-serif;letter-spacing:.25px;overflow-x:hidden;user-select:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
+  img{display:block}
+  .abs{position:absolute}
+  /* top: status bar and logo */
+  .top{position:fixed;left:0;top:0;width:412px;z-index:30;background:var(--surface);box-shadow:0 4px 10px rgba(0,0,0,.1)}
+  .status{height:37px;display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+  .status .t{width:54px;height:21px}.status .r{width:66.7px;height:11.3px}
+  .logo{height:80px;padding:11px 16px;position:relative}
+  .logo img{position:absolute;left:22px;top:20px;width:152px;height:40px;object-fit:cover}
+  .detail-top{position:fixed;left:0;top:0;width:412px;z-index:30;background:var(--surface)}
+  .detail-top .bar{display:flex;align-items:center;justify-content:space-between;height:44px;padding:0 16px 0 16px}
+  .detail-top .st{padding:0 16px}
+  /* search */
+  .search{position:fixed;left:0;top:117px;width:412px;z-index:20;background:var(--surface)}
+  .search .row{height:72px;display:flex;align-items:center;gap:4px;padding:5px 16px}
+  .search .row.back{padding-left:4px}
+  .search .txt{flex:1;font:400 18px/24px "Noto Sans";letter-spacing:.5px;color:var(--outline);display:flex;align-items:center;min-width:0}
+  .search .txt.on{color:var(--outline)}
+  .caret{width:1px;height:16px;background:#000;margin-left:1px;animation:blink 1s steps(2) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .ib{width:48px;height:48px;display:grid;place-items:center;flex:none}
+  .ib span{width:40px;height:40px;border-radius:100px;display:grid;place-items:center}
+  .ib.go span{background:var(--pc)}
+  .ib img{width:24px;height:24px}
+  .search .line{height:1px;background:#000}
+  /* chips */
+  .chips{height:49px;display:flex;align-items:center;gap:8px;padding:0 16px;overflow-x:auto;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:none;padding:8px 16px;border-radius:5px;border:1px solid var(--outline);font:500 14px/16px "Noto Sans";letter-spacing:.5px;color:var(--on);white-space:nowrap}
+  .chip.diff.on{background:var(--tert);border-color:var(--tert);color:#fff}
+  /* nav */
+  .nav{position:fixed;left:0;bottom:0;width:412px;height:80px;z-index:30;background:var(--sv);display:flex;gap:8px;align-items:center;padding:0 8px}
+  .nav a{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 0 16px;cursor:pointer;min-width:0}
+  .nav .pill{width:64px;height:32px;border-radius:16px;display:grid;place-items:center}
+  .nav .on .pill{background:var(--pc)}
+  .nav img{width:24px;height:24px}
+  .nav p{font:500 12px/16px "Noto Sans";letter-spacing:.5px;color:var(--on-var);text-align:center}
+  /* sections and cards */
+  .page{padding-bottom:110px}
+  h2.sec{font:500 24px/32px "Noto Sans";letter-spacing:0;padding:0 16px}
+  .row-cards{display:flex;gap:7px;overflow-x:auto;padding:9px 16px;scrollbar-width:none}
+  .row-cards::-webkit-scrollbar{display:none}
+  .card{position:relative;flex:none;width:179px;height:178px;border-radius:28px;overflow:hidden;display:block}
+  .card .ph{position:absolute;inset:0;background-size:cover;background-position:center}
+  .card .gr{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(213,213,213,.262) 19%,rgba(100,98,98,.75) 62%,rgb(38,38,38) 100%)}
+  .card .nm{position:absolute;left:6px;top:125px;width:166px;font:500 16px/20px "Noto Sans";letter-spacing:.1px;color:var(--surface)}
+  .lvl{position:absolute;right:16px;top:16px;min-width:73px}
+  .lvl b{display:block;padding:4px 16px;border-radius:5px 5px 0 0;font:500 14px/16px "Noto Sans";letter-spacing:.5px;color:#000;text-align:center}
+  .lvl i{display:block;padding:4px 17px;background:var(--surface);border-radius:0 0 5px 5px;font:500 12px/16px "Noto Sans";font-style:normal;letter-spacing:.5px;color:#000;text-align:center}
+  .grid{display:grid;grid-template-columns:repeat(2,179px);gap:7px 7px;justify-content:center;padding:0 16px}
+  .themes{display:flex;gap:7px;padding:9px 16px;overflow-x:auto;scrollbar-width:none}
+  .themes::-webkit-scrollbar{display:none}
+  .themes>div{display:flex;flex-direction:column;justify-content:space-between;height:178px;flex:none}
+  .themes button{width:179px;height:85px;border-radius:5px;display:grid;place-items:center;font:500 16px/20px "Noto Sans";letter-spacing:.1px;color:var(--on)}
+  /* detail */
+  .d{padding:0 16px 40px}
+  .d h1{font:400 30px/36px "Noto Sans";letter-spacing:0}
+  .stars{display:flex;gap:0}.stars img{width:12.7px;height:12.7px}.stars.l img{width:20px;height:20px}
+  .btns{display:flex;gap:10px;margin-top:16px}
+  .btn{height:40px;padding:6px 16px;border-radius:100px;font:500 16px/20px "Noto Sans";letter-spacing:.1px;display:flex;align-items:center;gap:8px}
+  .btn.p{background:var(--primary);color:#fff}
+  .btn.s{background:#eff7ea;border:1px solid var(--primary);color:var(--on);padding:8px 16px}
+  .btn.s img{width:24px;height:24px}
+  .shots{display:flex;gap:14px;margin:16px -16px 0;padding:8px 16px 8px 52px;overflow-x:auto;scrollbar-width:none}
+  .shots::-webkit-scrollbar{display:none}
+  .shots .big{flex:none;width:216px;height:245px;border-radius:28px;background-size:cover;background-position:center}
+  .shots .two{flex:none;width:216px;display:flex;flex-direction:column;gap:9px}
+  .shots .two div{border-radius:28px;background-size:cover;background-position:center}
+  .tt{font:400 22px/28px "Noto Sans";letter-spacing:0}
+  .tag{display:inline-block;padding:8px 16px;border-radius:5px;font:500 14px/16px "Noto Sans";letter-spacing:.5px;color:var(--on)}
+  .sect{margin-top:32px}
+  .sh{display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+  .sh .chev{width:24px;height:24px;transform:rotate(90deg);transition:transform .2s}
+  .sect.closed .chev{transform:rotate(-90deg)}
+  .sect.closed .sb{display:none}
+  .sb{margin-top:16px}
+  .imap{height:245px;border-radius:28px;background:#d8d8d8 url(img/2081a.jpg) center/cover;margin-top:12px;position:relative;overflow:hidden}
+  .mini{display:flex;gap:40px;align-items:center;margin-top:12px;font:400 14px "Roboto";letter-spacing:1px}
+  .mini span{display:flex;align-items:center;gap:2px}.mini img{width:20.6px;height:20.6px}
+  .acc{display:flex;margin-top:14px}.acc img{width:37px;height:37px}
+  .avis{background:var(--sv);border-radius:12px;padding:12px 15px 11px;margin-top:16px;color:var(--on-var)}
+  .avis .n{font:400 22px/28px "Noto Sans";letter-spacing:0;display:flex;justify-content:space-between;align-items:center}
+  .avis .when{font:400 12px/16px "Noto Sans";letter-spacing:0;margin-left:8px}
+  .avis .st{display:flex;align-items:center;margin-top:11px}
+  .util{display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:100px;border:1px solid var(--primary);background:#eff7ea;font:500 12px/16px "Noto Sans";letter-spacing:.5px;color:var(--on)}
+  .util img{width:20px;height:20px}
+  .util.off{background:transparent}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:#2b3228;color:#fff;border-radius:12px;padding:12px 18px;font:500 14px/20px "Noto Sans";opacity:0;transition:.25s;z-index:60;pointer-events:none;white-space:nowrap}
+  .toast.on{opacity:1;transform:translate(-50%,0)}
+  /* map */
+  .mapview{position:fixed;left:0;top:117px;width:412px;height:774px;overflow:hidden;background:#eceff0}
+  .mapview .bg{position:absolute;left:-73px;top:0;width:558px;height:697px;background:url(img/f69d5.jpg) center/100% 100%}
+  .pin{position:absolute;width:30px;height:37px;cursor:pointer;transition:transform .15s}
+  .pin:hover{transform:translateY(-3px)}
+  .pin.sel{transform:scale(1.25)}
+  .fbtn{position:absolute;width:40px;height:40px;border-radius:10px;background:#fff;display:grid;place-items:center;box-shadow:0 2px 48px rgba(0,0,0,.08)}
+  .peek{position:fixed;left:16px;right:16px;bottom:96px;z-index:25;transform:translateY(160%);transition:transform .3s}
+  .peek.on{transform:none}
+  .peek .c{display:flex;gap:12px;background:var(--surface);border-radius:28px;box-shadow:0 4px 20px rgba(0,0,0,.2);padding:10px;width:380px}
+  .peek .c .ph{width:96px;height:96px;border-radius:20px;background-size:cover;background-position:center;flex:none}
+  .peek .c b{font:500 16px/20px "Noto Sans";display:block;margin-top:6px}
+  .peek .c small{font:400 12px/16px "Noto Sans";color:var(--on-var)}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div class="toast" id="toast"></div>
+<script>
+(function(){
+  var q = new URLSearchParams(location.search), EN = q.get("lang") === "en";
+  var L = EN ? {
+    search:"Search for places or trails", popular:"Most popular trails", recent:"Newest places", themes:"Themes", home:"Home", map:"Map", create:"Create", lists:"Lists", profile:"Profile",
+    results:"Results", easy:"Easy", med:"Medium", hard:"Hard", start:"Start", save:"Save", saved:"Saved", desc:"Description", route:"Route", places:"The 5 places on this trail", access:"Accessibility",
+    reviews:"Reviews", info:"About this trail", artTitle:"Art in the city of Lausanne", artTxt:"Lausanne is full of little-known works of art that are in plain sight. See the city in a new light and enjoy majestic views.",
+    accTxt:"The start is at Lausanne station and the trail ends at the Ouchy metro stop.", rev1:"The trail is beautiful and very interesting!", w1:"1 week ago", w2:"1 month ago", created:"This trail was created by the City of Lausanne on 28.05.2024.", mod:"Last edited on 01.06.2024.",
+    t:["Gastronomy","Nature","Art","Museum","Panorama","History","Family","Architecture"], tags:["Gastronomy","Museums","Architecture","History","Panorama","Family","Nature","Art"],
+    s1:"Art in the city of Lausanne", s2:"The history of Yverdon-les-Bains", s3:"Walk around the lake", p1:"Platform 10", p2:"General Guisan", p3:"Parc de Milan", started:"Navigation started", savedT:"Saved to your lists", rsearch:"Search", mapOpen:"Open the trail"
+  } : {
+    search:"Rechercher des lieux ou sentiers", popular:"Les sentiers les plus populaires", recent:"Les lieux les plus récents", themes:"Les différents thèmes", home:"Accueil", map:"Carte", create:"Créer", lists:"Listes", profile:"Profil",
+    results:"Résultats", easy:"Facile", med:"Moyen", hard:"Difficile", start:"Commencer", save:"Enregistrer", saved:"Enregistré", desc:"Description", route:"Itinéraire", places:"Les 5 lieux présents dans ce sentier", access:"Accessibilité",
+    reviews:"Avis", info:"Informations sur le sentier", artTitle:"Art en ville de Lausanne", artTxt:"Lausanne regorge d’œuvres d’art inconnues bien qu’à la vue de tous. Revisitez la ville sous un nouveau jour et profitez de vues majestueuses.",
+    accTxt:"Le départ est à la gare de Lausanne et le trajet se finit à l’arrêt du métro d’Ouchy.", rev1:"Le sentier est très beau, très intéressant !", w1:"Il y a 1 semaine", w2:"Il y a 1 mois", created:"Ce sentier a été créé par la Ville de Lausanne le 28.05.2024.", mod:"Dernière modification le 01.06.2024.",
+    t:["Gastronomique","Nature","Art","Musée","Panorama","Historique","Famille","Architecture"], tags:["Gastronomique","Musées","Architecture","Historique","Panorama","Famille","Nature","Art"],
+    s1:"Art en ville de Lausanne", s2:"L’Histoire d’Yverdon-les-Bains", s3:"Randonnée autour du lac", p1:"Plateforme 10", p2:"Général Guisan", p3:"Parc de Milan", started:"Navigation lancée", savedT:"Ajouté à vos listes", rsearch:"Recherche", mapOpen:"Ouvrir le sentier"
+  };
+  var COL = ["#ff8484","#c0faae","#e5da73","#95f1eb","#d696fe","#ffb884","#facef3","#7ba9ee"];
+  var TAGCOL = {"0":"#ff8484","1":"#95f1eb","2":"#7ba9ee","3":"#ffb884","4":"#d696fe","5":"#facef3","6":"#c0faae","7":"#e5da73"};
+  var S = {view: "home", saved: false, util: true, diff: 0, tag: -1, closed: {}, sel: -1};
+  var img = function(n, c){ return '<img src="img/' + n + '" alt=""' + (c ? ' class="' + c + '"' : "") + '>'; };
+  var ph = function(n){ return 'style="background-image:url(img/' + n + ')"'; };
+  var STAR = ["5317d.svg", "8183c.svg", "08fdb.svg", "ae3b9.svg", "edb6e.svg"];
+  var starsRow = function(c){ return '<div class="stars ' + (c || "") + '">' + STAR.map(function(s){ return img(s); }).join("") + '</div>'; };
+  var rate = function(){ return '<div class="stars l">' + ["fbfb3.svg","fbfb3.svg","fbfb3.svg","1a2b7.svg","55f69.svg"].map(function(s){ return img(s); }).join("") + '</div>'; };
+
+  function lvl(c, a, b, w){ return '<div class="lvl"' + (w ? ' style="min-width:' + w + 'px"' : "") + '><b style="background:' + c + '">' + a + '</b><i>' + b + '</i></div>'; }
+  function trailCard(i, extra){
+    var d = [[L.s1, "2b0e0.jpg", "#a6cfa5", L.easy, "30min"], [L.s2, "1e788.jpg", "#afc3e1", L.med, "1h10"], [L.s3, "32050.jpg", "#dc6767", L.hard, "1h50"]][i % 3];
+    return '<button class="card" data-go="detail"><div class="ph" ' + ph(d[1]) + '></div><div class="gr"></div><div class="nm">' + d[0] + '</div>' + lvl(d[2], d[3], d[4], 73) + '</button>';
+  }
+  function placeCard(n, f){ return '<button class="card" data-go="detail"><div class="ph" ' + ph(f) + '></div><div class="gr"></div><div class="nm" style="height:16px">' + n + '</div></button>'; }
+  function top(){
+    return '<div class="top"><div class="status">' + img("5d4cc.svg", "t") + img("c9f34.svg", "r") + '</div><div class="logo">' + img("acf08.png") + '</div></div>';
+  }
+  function nav(sel){
+    var it = [["home", "69f86.svg", "fd53e.svg", L.home], ["map", "08fd2.svg", "b2a2f.svg", L.map], ["x", "f4105.svg", "f4105.svg", L.create], ["x", "20180.svg", "20180.svg", L.lists], ["x", "327bc.svg", "327bc.svg", L.profile]];
+    return '<nav class="nav">' + it.map(function(n, i){
+      var on = n[0] === sel;
+      var ic = n[0] === "home" ? (on ? "69f86.svg" : "fd53e.svg") : n[0] === "map" ? (on ? "08fd2.svg" : "b2a2f.svg") : n[1];
+      return '<a ' + (n[0] !== "x" ? 'data-go="' + n[0] + '"' : 'data-soon="1"') + ' class="' + (on ? "on" : "") + '"><div class="pill">' + img(ic) + '</div><p>' + n[3] + '</p></a>';
+    }).join("") + '</nav>';
+  }
+  function searchBar(text, go){
+    return '<div class="search"><div class="row"><div class="txt" data-go="' + go + '" style="cursor:pointer">' + text + '</div><button class="ib go" data-go="results"><span>' + img("3a6d0.svg") + '</span></button></div><div class="line"></div></div>';
+  }
+  function home(){
+    return top() + searchBar(L.search, "results") +
+      '<div class="page" style="padding-top:226px">' +
+      '<h2 class="sec">' + L.popular + '</h2><div class="row-cards">' + trailCard(0) + trailCard(1) + trailCard(2) + '</div>' +
+      '<h2 class="sec" style="margin-top:27px">' + L.recent + '</h2><div class="row-cards">' + placeCard(L.p1, "1aad4.jpg") + placeCard(L.p2, "865bb.jpg") + placeCard(L.p3, "67709.jpg") + '</div>' +
+      '<h2 class="sec" style="margin-top:27px">' + L.themes + '</h2><div class="themes">' +
+      [[0, 2], [1, 3], [4, 5], [6, 7]].map(function(p){ return '<div>' + p.map(function(k){ return '<button style="background:' + COL[k] + '" data-go="results" data-tagset="' + k + '">' + L.t[k] + '</button>'; }).join("") + '</div>'; }).join("") +
+      '</div></div>' + nav("home");
+  }
+  function results(){
+    var dif = [L.easy, L.med, L.hard].map(function(d, i){ return '<button class="chip diff ' + (S.diff === i ? "on" : "") + '" data-diff="' + i + '">' + d + '</button>'; }).join("");
+    var tg = L.tags.map(function(t, i){ var on = S.tag === i; return '<button class="chip" data-tag="' + i + '"' + (on ? ' style="background:' + TAGCOL[i] + ';border-color:' + TAGCOL[i] + '"' : "") + '>' + t + '</button>'; }).join("");
+    return top() + '<div style="padding-top:117px"><div class="search" style="position:static"><div class="row back"><button class="ib" data-go="home"><span>' + img("211fa.svg") + '</span></button><div class="txt on" style="color:var(--outline)">Château<i class="caret"></i></div><button class="ib" data-go="home"><span>' + img("8ded9.svg") + '</span></button><button class="ib go" data-go="results"><span>' + img("3a6d0.svg") + '</span></button></div><div class="line"></div>' +
+      '<div class="chips">' + dif + '</div><div class="chips" style="width:412px">' + tg + '</div></div>' +
+      '<div style="padding:16px 16px 0"><div style="display:flex;justify-content:space-between;align-items:flex-start"><h2 style="font:500 24px/32px \'Noto Sans\';letter-spacing:0">' + L.results + ' (4)</h2><button data-go="map" style="width:40px;height:40px;border-radius:10px;background:var(--sv);display:grid;place-items:center">' + img("0fee7.svg", "") + '</button></div><div style="height:1px;background:#c3c8bc;margin:7px 0 32px"></div></div>' +
+      '<div class="grid">' + trailCard(0) + trailCard(0) + trailCard(0) + trailCard(0) + '</div></div><div style="height:110px"></div>' + nav("home");
+  }
+  var PINS = [[225, 338], [305, 496], [120, 496], [360, 259], [92, 639], [98, 222]];
+  function map(){
+    return top() + searchBar(L.rsearch, "results") + '<div class="mapview"><div class="bg"></div>' +
+      '<div class="abs" style="left:104px;top:' + (314 - 117 - 1) + 'px;width:21px;height:21px">' + img("8b2b2.svg") + '</div>' +
+      PINS.map(function(p, i){ return '<div class="pin' + (S.sel === i ? " sel" : "") + '" data-pin="' + i + '" style="left:' + p[0] + 'px;top:' + (p[1] - 117) + 'px">' + img("1bd89.svg") + '</div>'; }).join("") +
+      '<div class="fbtn" style="left:356px;top:' + (208 - 117 - 0) + 'px">' + img("560b2.svg") + '</div>' +
+      '<div class="fbtn" style="left:356px;top:' + (742 - 117) + 'px">' + img("ca417.svg") + '</div></div>' +
+      '<div class="peek ' + (S.sel >= 0 ? "on" : "") + '"><button class="c" data-go="detail"><div class="ph" ' + ph("2b0e0.jpg") + '></div><div><b>' + L.s1 + '</b><small>' + L.easy + ' · 1h40 · 5km</small><br><small style="color:var(--primary);font-weight:500">' + L.mapOpen + ' →</small></div></button></div>' + nav("map");
+  }
+  function sect(key, title, body, extra){
+    return '<div class="sect ' + (S.closed[key] ? "closed" : "") + '"><div class="sh" data-sec="' + key + '"><span class="tt">' + title + '</span><span style="display:flex;align-items:center;gap:8px">' + (extra || "") + img("c136e.svg", "chev") + '</span></div><div class="sb">' + body + '</div></div>';
+  }
+  function detail(){
+    var bm = S.saved;
+    return '<div class="detail-top"><div class="st"><div class="status" style="padding:12px 0">' + img("5d4cc.svg", "t") + img("c9f34.svg", "r") + '</div></div><div class="bar"><button data-go="home" style="width:32px;height:32px;transform:rotate(-90deg)">' + img("22266.svg") + '</button><div style="display:flex;gap:14px;align-items:center"><button>' + img("f1070.svg") + '</button><button>' + img("1518b.svg") + '</button></div></div></div>' +
+      '<div class="d" style="padding-top:93px"><h1>' + L.artTitle + '</h1>' + starsRow() + '<div class="btns"><button class="btn p" data-act="start">' + L.start + '</button><button class="btn s" data-act="save">' + img(bm ? "63d06.svg" : "63d06.svg") + (bm ? L.saved : L.save) + '</button></div>' +
+      '<div class="shots"><div class="big" ' + ph("2b0e0.jpg") + '></div><div class="two"><div style="height:116px;background-image:url(img/1aad4.jpg)"></div><div style="height:120px;background-image:url(img/ea1c3.jpg)"></div></div></div>' +
+      '<div class="sect" style="margin-top:20px"><p class="tt">' + L.desc + '</p><div style="display:flex;gap:10px;margin:16px 0"><span class="tag" style="background:#ff8484">' + L.t[0] + '</span><span class="tag" style="background:#e5da73">' + L.t[2] + '</span></div><p>' + L.artTxt + '</p></div>' +
+      sect("route", L.route, '<div class="mini"><span>' + img("c92df.svg") + ' 1h40</span><span>5km</span></div><div class="imap"></div>', '<span class="tag" style="background:#a6cfa5;padding:8px 16px">' + L.easy + '</span>') +
+      '<div class="sect"><p class="tt">' + L.places + '</p><div class="row-cards" style="margin:0 -16px;padding:10px 16px">' + placeCard(L.p1, "1aad4.jpg") + placeCard(L.p1, "1aad4.jpg") + placeCard(L.p1, "1aad4.jpg") + '</div></div>' +
+      sect("acc", L.access, '<div class="acc">' + img("1e7f1.svg") + img("ea53a.svg") + img("7d2cd.svg") + '</div><p style="margin-top:34px">' + L.accTxt + '</p>') +
+      sect("rev", L.reviews + ' <small style="font:500 14px/16px \'Noto Sans\';color:var(--on-var)">(2)</small>', '<div style="display:flex;align-items:center;gap:8px;font:500 16px/20px \'Noto Sans\';color:var(--on-var)">3.5 ' + rate() + '</div>' +
+        '<div class="avis"><div class="n"><span>Julia Brassard</span><button class="util ' + (S.util ? "" : "off") + '" data-act="util">' + img("aec89.svg") + (S.util ? 1 : 0) + '</button></div><div class="st">' + rate() + '<span class="when">' + L.w1 + '</span></div><p style="margin-top:12px">' + L.rev1 + '</p></div>' +
+        '<div class="avis" style="padding-bottom:12px"><div class="n"><span>Benjamin Jar</span></div><div class="st">' + rate() + '<span class="when">' + L.w2 + '</span></div></div>') +
+      '<div class="sect" style="margin-bottom:0"><p class="tt">' + L.info + '</p><p style="margin-top:16px">' + L.created + '</p><p style="margin-top:16px">' + L.mod + '</p></div></div>';
+  }
+
+  var root = document.getElementById("root"), toastT;
+  function toast(t){ var e = document.getElementById("toast"); e.textContent = t; e.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(function(){ e.classList.remove("on"); }, 1800); }
+  function render(keep){
+    var y = window.scrollY;
+    root.innerHTML = S.view === "home" ? home() : S.view === "results" ? results() : S.view === "map" ? map() : detail();
+    window.scrollTo(0, keep ? y : 0);
+  }
+  root.addEventListener("click", function(e){
+    var t = e.target.closest("[data-go],[data-pin],[data-diff],[data-tag],[data-sec],[data-act],[data-soon]");
+    if(!t) return;
+    if(t.hasAttribute("data-soon")){ toast(EN ? "Not in this demo" : "Pas dans cette démo"); return; }
+    if(t.hasAttribute("data-tagset")) S.tag = +t.getAttribute("data-tagset");
+    if(t.hasAttribute("data-go")){ S.view = t.getAttribute("data-go"); S.sel = -1; render(); return; }
+    if(t.hasAttribute("data-pin")){ S.sel = +t.getAttribute("data-pin"); render(true); return; }
+    if(t.hasAttribute("data-diff")){ S.diff = +t.getAttribute("data-diff"); render(true); return; }
+    if(t.hasAttribute("data-tag")){ var k = +t.getAttribute("data-tag"); S.tag = S.tag === k ? -1 : k; render(true); return; }
+    if(t.hasAttribute("data-sec")){ var s = t.getAttribute("data-sec"); S.closed[s] = !S.closed[s]; render(true); return; }
+    var a = t.getAttribute("data-act");
+    if(a === "save"){ S.saved = !S.saved; render(true); if(S.saved) toast(L.savedT); }
+    else if(a === "start"){ toast(L.started); }
+    else if(a === "util"){ S.util = !S.util; render(true); }
+  });
+  window.VS = { show: function(v){ S.sel = -1; window.scrollTo(0, 0); var m = {home: ["home"], results: ["results"], map: ["map"], mapsel: ["map", 1], detail: ["detail"], detailsaved: ["detail", 0, 1], detailrev: ["detail", 0, 0, 1]}[v] || ["home"]; S.view = m[0]; if(m[1]) S.sel = 0; S.saved = !!m[2]; S.tag = -1; S.diff = 0; if(v === "results"){ S.tag = 7; } render(); if(m[3]) setTimeout(function(){ window.scrollTo({top: 1380, behavior: "smooth"}); }, 250); } };
+  render();
+})();
+</script>
+</body>
+</html>

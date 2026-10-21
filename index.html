@@ -1,18 +1,152 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-      <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elodie Portfolio</title>
-    <!-- Poppins font (regular 400 and bold 700) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<!doctype html>
+<html lang="fr" data-root="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title data-en="Elodie Perring · UX and UI designer">Elodie Perring · Designer UX et UI</title>
+<meta name="description" content="Portfolio d'Elodie Perring, designer UX et UI : des projets, leur contexte, leurs décisions et leurs résultats." data-en-content="Portfolio of Elodie Perring, UX and UI designer: projects, their context, decisions and results.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/i18n.js"></script>
+</head>
+<body data-page="home">
+<a class="skip" href="#main" data-en="Skip to content">Aller au contenu</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html"><i aria-hidden="true"></i>Elodie Perring</a>
+    <div class="tools">
+      <button class="theme" id="theme" type="button" aria-label="Changer de thème, clair ou sombre" data-en-aria-label="Switch theme, light or dark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </div>
+    <nav aria-label="Navigation principale" data-en-aria-label="Main navigation">
+      <ul>
+        <li><a href="#accueil" aria-current="true" data-en="Home">Accueil</a></li>
+        <li><a href="projets.html" data-en="Projects">Projets</a></li>
+        <li><a href="#competences" data-en="Skills">Compétences</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+  <section class="hero" id="accueil" aria-labelledby="h-accueil">
+    <div class="wrap">
+      <p class="label" data-en="UX and UI designer">Designer UX et UI</p>
+      <h1 id="h-accueil" data-en="I make everyday tools <em>simpler</em> to use.">Je rends les outils du quotidien <em>plus simples</em> à utiliser.</h1>
+      <p class="lead" data-en="I start from how people actually use things, prototype fast and ship what works, all the way to code when needed.">Je pars des usages, je prototype vite et je livre ce qui marche, jusqu'au code quand il le faut.</p>
+      <div class="btns">
+        <a class="btn fill" href="#projets" data-en="See the projects">Voir les projets</a>
+      </div>
+      <p class="facts"><span data-en="<b>Specialities</b> user research, interaction, interfaces"><b>Spécialités</b> recherche utilisateur, interaction, interfaces</span><span data-en="<b>Tools</b> Figma, HTML, CSS, JavaScript"><b>Outils</b> Figma, HTML, CSS, JavaScript</span></p>
+    </div>
+  </section>
+
+  <section id="methode" aria-labelledby="h-methode">
+    <div class="wrap">
+      <div class="head"><p class="label" data-en="How I work">Ma façon de travailler</p><h2 id="h-methode" data-en="Understand, simplify, test, ship">Comprendre, simplifier, tester, livrer</h2></div>
+      <div class="method">
+        <div><h3 data-en="Understand">Comprendre</h3><p data-en="Who uses the product, when, and under what constraints. Interviews and observation before screens.">Qui utilise le produit, dans quel moment, avec quelle contrainte. Les entretiens et l'observation avant les écrans.</p></div>
+        <div><h3 data-en="Simplify">Simplifier</h3><p data-en="Remove rather than add. One main action per screen, and words people recognise.">Retirer plutôt qu'ajouter. Une action principale par écran, et un langage que les gens reconnaissent.</p></div>
+        <div><h3 data-en="Test">Tester</h3><p data-en="Clickable prototypes early, short sessions with real people, and fixes before building.">Des prototypes cliquables tôt, des essais courts avec de vraies personnes, et des corrections avant de construire.</p></div>
+        <div><h3 data-en="Ship">Livrer</h3><p data-en="From design to launch: components, accessibility, and the code so the result looks like the mockup.">Du design à la mise en ligne : composants, accessibilité, et le code pour que le résultat ressemble à la maquette.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projets" aria-labelledby="h-projets">
+    <div class="wrap">
+      <div class="head"><p class="label" data-en="Selected projects">Projets choisis</p><h2 id="h-projets" data-en="Projects, from problem to result">Des projets, du problème au résultat</h2></div>
+      <div class="work">
+        <article class="proj" style="--p:#E8461F">
+          <div class="shot" aria-hidden="true"><img src="assets/img/pinday-hero.webp" alt="" loading="lazy"></div>
+          <div class="info">
+            <p class="label" data-en="Web app · design and development">Application web · conception et développement</p>
+            <h3><a href="projet.html?id=38">Pinday</a></h3>
+            <p data-en="Schedule, notes, slides and revision in one place for students, with data that stays in their own hands.">Emploi du temps, notes, diapositives et révision au même endroit pour les étudiants, avec des données qui restent chez eux.</p>
+            <div class="tags"><span>UX</span><span>UI</span><span>Front-end</span><span data-en="AI">IA</span></div>
+            <span class="more" aria-hidden="true" data-en="Read the case study →">Lire l'étude de cas →</span>
+          </div>
+        </article>
+        <article class="proj" id="projet-inventaire" style="--p:#8A5A2B">
+          <div class="shot" aria-hidden="true"><img src="assets/img/inventaire-collection.webp" alt="" loading="lazy"></div>
+          <div class="info">
+            <p class="label" data-en="Web app · design and development">Application web · conception et développement</p>
+            <h3><a href="projet.html?id=39">Inventaire</a></h3>
+            <p data-en="The online inventory of a Geneva watchmaker's collection, made for his phone: he finds and sorts his watches, and searches by photo with AI.">L'inventaire en ligne de la collection d'un horloger genevois, pensé pour son téléphone : il retrouve et trie ses montres, et cherche par photo grâce à l'IA.</p>
+            <div class="tags"><span>UX</span><span>UI</span><span>Front-end</span><span data-en="AI">IA</span></div>
+            <span class="more" aria-hidden="true" data-en="Read the case study →">Lire l'étude de cas →</span>
+          </div>
+        </article>
+        <article class="proj" id="projet-2" style="--p:#0E8A6D">
+          <div class="shot" aria-hidden="true"><img src="assets/img/myhouzly-hero.webp" alt="" loading="lazy"></div>
+          <div class="info">
+            <p class="label" data-en="Mobile and web app · design and development">Application mobile et web · conception et développement</p>
+            <h3><a href="projet.html?id=36">myHouzly</a></h3>
+            <p data-en="Family pocket money: parents manage everything, each child follows their own account and requests.">L'argent de poche de la famille : les parents administrent, chaque enfant suit son compte et ses demandes.</p>
+            <div class="tags"><span>UX</span><span>UI</span><span>Front-end</span></div>
+            <span class="more" aria-hidden="true" data-en="Read the case study →">Lire l'étude de cas →</span>
+          </div>
+        </article>
+        <article class="proj" id="projet-3" style="--p:#B8860B">
+          <div class="shot" aria-hidden="true"><img src="https://elodiepe.github.io/portfolio-images/project_elodieperringart.png" alt="" loading="lazy"></div>
+          <div class="info">
+            <p class="label" data-en="Website · painting · design and development">Site web · peinture · conception et développement</p>
+            <h3><a href="projet.html?id=37">Elodie Perring Art</a></h3>
+            <p data-en="My website for my acrylic animal portraits: gallery, commissions, gift cards and shop. Designed and coded by me, from visual identity to code.">Mon site pour mes portraits d'animaux à l'acrylique : galerie, commandes sur mesure, cartes cadeaux et boutique. Conçu et codé par moi, de l'identité visuelle au code.</p>
+            <div class="tags"><span>UX</span><span>UI</span><span>Code</span><span data-en="Painting">Peinture</span></div>
+            <span class="more" aria-hidden="true" data-en="See the project →">Voir le projet →</span>
+          </div>
+        </article>
+      </div>
+      <p style="margin-top:24px;text-align:center"><a class="btn" href="projets.html" data-en="See all projects">Voir tous les projets</a></p>
+    </div>
+  </section>
+
+  <section id="competences" aria-labelledby="h-comp">
+    <div class="wrap">
+      <div class="head"><p class="label" data-en="Skills">Compétences</p><h2 id="h-comp" data-en="What I can do, and with what">Ce que je sais faire, et avec quoi</h2></div>
+      <div class="cols">
+        <div><h3>UX</h3>
+          <ul class="list">
+            <li><span data-en="Interviews and observation">Entretiens et observation</span> <span data-en="research">recherche</span></li>
+            <li><span data-en="Journeys and architecture">Parcours et architecture</span> <span data-en="structure">structure</span></li>
+            <li><span data-en="Usability tests">Tests d'usage</span> <span data-en="validation">validation</span></li>
+            <li><span data-en="Accessibility">Accessibilité</span> <span>RGAA, WCAG</span></li>
+          </ul>
+        </div>
+        <div><h3 data-en="Interface and code">Interface et code</h3>
+          <ul class="list">
+            <li><span data-en="Design system">Design système</span> <span data-en="components, tokens">composants, tokens</span></li>
+            <li><span data-en="Prototyping">Prototypage</span> <span>Figma</span></li>
+            <li><span>Front-end</span> <span>HTML, CSS, JavaScript</span></li>
+            <li><span data-en="Going live">Mise en ligne</span> <span>Vercel, GitHub</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" aria-labelledby="h-contact">
+    <div class="wrap contact">
+      <p class="label">Contact</p>
+      <h2 id="h-contact" data-en="A project, a question, a chat?">Un projet, une question, un échange ?</h2>
+      <a class="big" href="https://www.linkedin.com/in/elodie-perring/" target="_blank" rel="noopener">linkedin.com/in/elodie-perring<span class="sr-only" data-en=" (new tab)"> (nouvel onglet)</span></a>
+      <p class="lead" data-en="The simplest way to reach me is a message on LinkedIn.">Le plus simple pour me joindre : un message sur LinkedIn.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Elodie Perring</span>
+    <span data-en="Handmade in HTML and CSS. Built to be read with a keyboard and a screen reader.">Fait main, en HTML et CSS. Conçu pour être lu au clavier et avec un lecteur d'écran.</span>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+<script src="assets/projects.js"></script>
+</body>
 </html>

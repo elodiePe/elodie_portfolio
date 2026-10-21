@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MyHouzly (demo)</title>
+<link rel="stylesheet" href="app.css">
+<style>
+  html{overflow-x:hidden;scroll-behavior:smooth}
+  body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
+  button{cursor:pointer;font-family:inherit}
+  input,select{font-family:inherit;font-size:16px}
+  .fade{animation:fade .35s ease both}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .pop{animation:pop .22s ease both}
+  @keyframes pop{from{opacity:0;transform:scale(.95) translateY(8px)}to{opacity:1;transform:none}}
+  ::-webkit-scrollbar{display:none}
+</style>
+</head>
+<body>
+<div id="root" class="min-h-screen bg-slate-50 text-slate-900"></div>
+<script>
+(function(){
+  /* ---------- the family of the demo: invented names, invented figures ---------- */
+  var q = new URLSearchParams(location.search), LANG = q.get("lang") === "en" ? "en" : "fr";
+  var TXT = {
+    fr: {home:"Dashboard", money:"Argent", house:"Maison", settings:"Paramètres", myReq:"Mes demandes", noSent:"Aucune demande envoyée.", make:"Faire une demande",
+      pending:"Demandes en attente", noPending:"Aucune demande en attente.", tasks:"Tâches", meals:"Repas", shop:"Courses", stocks:"Actions", clean:"Ménage",
+      cleanBanner:"Tu as du ménage à faire aujourd’hui !", cookBanner:"C’est à toi de faire à manger aujourd’hui !",
+      bal:"Mon solde", allow:"Argent de poche : {a} / semaine", txs:"Mes transactions", hist:"Voir l’historique →", savings:"Épargne",
+      modalTitle:"De l’argent", ask:"Demander", give:"Donner", withdraw:"Retrait", whom:"À qui demander ?", choose:"Choisir…", parents:"Parents",
+      amount:"Montant (CHF)", purpose:"Pour quoi faire ? (optionnel)", send:"Envoyer la demande", accept:"Accepter", refuse:"Refuser", validate:"Valider",
+      done:"Fait", undo:"annuler", swap:"Échanger", postpone:"Repousser", today:"Aujourd’hui", myTasks:"Mes tâches", create:"Créer une tâche",
+      goalTitle:"Mon objectif d’épargne", progress:"{s} sur {t}", remaining:"Encore {a} à économiser", move:"Mettre de côté",
+      reqDeposit:"Demande d’argent", reqChore:"Tâche", st:{PENDING:"En attente", APPROVED:"Acceptée", REJECTED:"Refusée"},
+      cook:"Faire à manger", laundry:"Le linge de la semaine", dish:"Vider le lave-vaisselle", with:"Avec {n}", dailyAct:"Activité du jour : linge",
+      tx:{ALLOWANCE:"Argent de poche", CHORE_REWARD:"Tâche : vider le lave-vaisselle", DEPOSIT:"Dépôt de papa", WITHDRAWAL:"Retrait"},
+      mealsTitle:"Repas de la semaine", lunch:"Midi", dinner:"Soir", shopTitle:"Liste de courses", add:"Ajouter", hello:"Léa", me:"Léa", greetMom:"Maman",
+      slotL:"Midi", slotD:"Soir", w7:"7 jours", w28:"Mois", itsYou:"🍳 C’est toi !", itsYouC:"🧺 C’est toi !", nothing:"Rien de prévu pour l’instant.", cleanTitle:"Ménage",
+      vacuum:"Passer l’aspirateur", bath:"Salle de bain", dishes2:"Vider le lave-vaisselle", all:"Tous", addedBy:"Ajouté par {n}", addProd:"Ajouter un produit", shopTitle2:"Liste de course",
+      setTitle:"Paramètres", general:"Général", appearance:"Apparence", dark:"Mode sombre", mgmt:"Mode gestion", mgmtD:"Modifier le planning des repas et du ménage.", tour:"Visite guidée", tourD:"Un rappel interactif de toutes les fonctionnalités de l’app.", review:"Revoir",
+      notifs:"Notifications", account:"Mon compte", privacy:"Confidentialité", contact:"Contact", adhd:"Mode ADHD", adhdD:"Répète une alerte urgente jusqu’à ce que tu marques ton tour de ménage ou ta tâche perso comme fait, jamais pour les repas.", adhdEvery:"Répéter toutes les (minutes)", adhdTry:"Voir l’alarme",
+      adhdCount1:"{n} tâche à faire", adhdCountN:"{n} tâches à faire", adhdLate:"dont {n} en retard", adhdLateDays:"⚠ EN RETARD · {n} JOUR", adhdToday:"À FAIRE AUJOURD’HUI", kindL:"🧺 MÉNAGE", kindP:"📝 TÂCHE PERSO", markDone:"✓ Fait !", notNow:"Pas maintenant", allDone:"Tout est fait, bravo ! 🎉",
+      persoTask:"Rendre le livre à la bibliothèque", total:"Total", myPort:"Mon portefeuille", alloc:"Répartition", sell:"Vendre", addStock:"Ajouter une action", lot:"Cadeau", titres:"titres", perTitle:"/titre",
+      yHello:"Salut Léa ! 👋", yStreak:"🔥 3 jours", yLevel:"Niveau 3/6", yPetName:"Poussin curieux", yStage:"Poussin curieux", yEvolve:"Encore un peu pour qu’il évolue en Jeune oiseau !", yPiggy:"dans ta tirelire", yAsk:"💰 Faire une demande", ySeeMore:"✨ Voir plus", ySeeLess:"🔼 Voir moins", yQuests:"🗺️ Tes quêtes du jour", yAllDone:"🎉 Bravo, toutes tes quêtes sont terminées !",
+      yMsgs:["Merci pour le câlin ! 💕", "Il est tout content de te voir !", "Il saute de joie !", "Fais tes tâches, ça le rendra fier de toi !"], yMsg0:"Il explore le monde autour de lui.",
+      moveHint:"Léa a un objectif", mon:"Lundi", tue:"Mardi", wed:"Mercredi", thu:"Jeudi", fri:"Vendredi", youCook:"Toi", chore:"Tâche · "},
+    en: {home:"Dashboard", money:"Money", house:"Home", settings:"Settings", myReq:"My requests", noSent:"No requests sent.", make:"Make a request",
+      pending:"Pending requests", noPending:"No pending requests.", tasks:"Chores", meals:"Meals", shop:"Shopping", stocks:"Stocks", clean:"Cleaning",
+      cleanBanner:"You have cleaning to do today!", cookBanner:"It’s your turn to cook today!",
+      bal:"My balance", allow:"Pocket money: {a} / week", txs:"My transactions", hist:"See history →", savings:"Savings",
+      modalTitle:"Money", ask:"Ask", give:"Give", withdraw:"Withdrawal", whom:"Who do you want to ask?", choose:"Choose…", parents:"Parents",
+      amount:"Amount (CHF)", purpose:"What for? (optional)", send:"Send request", accept:"Accept", refuse:"Decline", validate:"Approve",
+      done:"Done", undo:"undo", swap:"Swap", postpone:"Postpone", today:"Today", myTasks:"My tasks", create:"Create a task",
+      goalTitle:"My savings goal", progress:"{s} of {t}", remaining:"{a} still to save", move:"Move money",
+      reqDeposit:"Money request", reqChore:"Chore", st:{PENDING:"Pending", APPROVED:"Accepted", REJECTED:"Declined"},
+      cook:"Cook dinner", laundry:"This week’s laundry", dish:"Empty the dishwasher", with:"With {n}", dailyAct:"Activity of the day: laundry",
+      tx:{ALLOWANCE:"Pocket money", CHORE_REWARD:"Chore: empty the dishwasher", DEPOSIT:"Deposit from dad", WITHDRAWAL:"Withdrawal"},
+      mealsTitle:"This week’s meals", lunch:"Lunch", dinner:"Dinner", shopTitle:"Shopping list", add:"Add", hello:"Léa", me:"Léa", greetMom:"Mum",
+      slotL:"Lunch", slotD:"Dinner", w7:"7 days", w28:"Month", itsYou:"🍳 It’s you!", itsYouC:"🧺 It’s you!", nothing:"Nothing planned right now.", cleanTitle:"Housework",
+      vacuum:"Vacuum the living room", bath:"Bathroom", dishes2:"Empty the dishwasher", all:"All", addedBy:"Added by {n}", addProd:"Add a product", shopTitle2:"Shopping list",
+      setTitle:"Settings", general:"General", appearance:"Appearance", dark:"Dark mode", mgmt:"Management mode", mgmtD:"Edit the meal and housework planning.", tour:"Guided tour", tourD:"An interactive reminder of all the app’s features.", review:"Replay",
+      notifs:"Notifications", account:"My account", privacy:"Privacy", contact:"Contact", adhd:"ADHD mode", adhdD:"Repeats an urgent alert until you mark your housework turn or personal task as done, never for meals.", adhdEvery:"Repeat every (minutes)", adhdTry:"See the alarm",
+      adhdCount1:"{n} task to do", adhdCountN:"{n} tasks to do", adhdLate:"of which {n} late", adhdLateDays:"⚠ LATE · {n} DAY", adhdToday:"DUE TODAY", kindL:"🧺 HOUSEWORK", kindP:"📝 PERSONAL TASK", markDone:"✓ Done!", notNow:"Not now", allDone:"All done, well done! 🎉",
+      persoTask:"Return the library book", total:"Total", myPort:"My portfolio", alloc:"Allocation", sell:"Sell", addStock:"Add a stock", lot:"Gift", titres:"shares", perTitle:"/share",
+      yHello:"Hi Léa! 👋", yStreak:"🔥 3 days", yLevel:"Level 3/6", yPetName:"Curious chick", yStage:"Curious chick", yEvolve:"Just a little more and it evolves into a Young bird!", yPiggy:"in your piggy bank", yAsk:"💰 Make a request", ySeeMore:"✨ See more", ySeeLess:"🔼 See less", yQuests:"🗺️ Your quests of the day", yAllDone:"🎉 Well done, all your quests are finished!",
+      yMsgs:["Thanks for the hug! 💕", "It is so happy to see you!", "It jumps for joy!", "Do your chores, it will be proud of you!"], yMsg0:"It is exploring the world around it.",
+      moveHint:"Léa has a goal", mon:"Monday", tue:"Tuesday", wed:"Wednesday", thu:"Thursday", fri:"Friday", youCook:"You", chore:"Chore · "}
+  };
+  var T = TXT[LANG];
+  var fill = function(s, o){ return s.replace(/\{(\w+)\}/g, function(_, k){ return o[k]; }); };
+  var chf = function(c){ return "CHF " + (c / 100).toFixed(2); };
+
+  var S = {
+    role: "child", view: "home", moneyTab: "money", houseTab: "tasks", modal: false, mode: "ASK", menu: null, goalOpen: false,
+    balance: 4250, savings: 1800, goal: {title: LANG === "fr" ? "Casque audio" : "Headphones", target: 6000}, allowance: 500,
+    nextId: 10,
+    requests: [],   // sent by the child
+    parentQueue: [  // waiting for a parent
+      {id: 1, kind: "money", who: "Noé", amount: 500, comment: LANG === "fr" ? "Sortie au cinéma" : "Cinema trip", status: "PENDING"},
+      {id: 2, kind: "chore", who: "Noé", label: LANG === "fr" ? "Ranger sa chambre" : "Tidy his room", reward: "CHF 2.00", status: "PENDING"}
+    ],
+    txs: [
+      {t: "ALLOWANCE", a: 500, sign: 1, d: "12.10.2026", h: "08:00", after: 4250},
+      {t: "CHORE_REWARD", a: 200, sign: 1, d: "10.10.2026", h: "18:42", after: 3750},
+      {t: "DEPOSIT", a: 1000, sign: 1, d: "03.10.2026", h: "10:15", after: 3550},
+      {t: "WITHDRAWAL", a: 800, sign: -1, d: "27.09.2026", h: "14:20", after: 2550}
+    ],
+    openTx: null, slot: "DINNER", mview: "week", cview: "week", sets: {general: true, notifs: false, account: false, privacy: false, contact: false}, adhdOn: true, mgmt: true, openHold: 0, adhd: null,
+    yMore: false, bounce: false, petMsg: T.yMsg0,
+    persons: {"Léa": "blue", "Maman": "rose", "Noé": "amber", "Papa": "emerald"},
+    duties: [
+      {id: "d1", icon: "meal", label: T.cook, sub: fill(T.with, {n: "Papa"}) + " · " + T.today, done: false, menu: true},
+      {id: "d2", icon: "laundry", label: T.vacuum, sub: T.today, done: false, menu: true},
+      {id: "d3", icon: "chore", label: T.dish, sub: "CHF 2.00 · " + T.today, done: false, menu: true}
+    ],
+    meals: [
+      [T.mon, "Pâtes au pesto", "Gratin dauphinois"], [T.tue, "Salade composée", "Soupe de courge"], [T.wed, "Restes", "Pizza maison"],
+      [T.thu, "Riz et légumes", "Omelette"], [T.fri, "Croque-monsieur", "Raclette"]
+    ],
+    shopping: [{l: LANG === "fr" ? "Lait" : "Milk", k: LANG === "fr" ? "Frais" : "Dairy", by: "Maman", bg: "#e0f2fe", c: true}, {l: LANG === "fr" ? "Pâtes" : "Pasta", k: LANG === "fr" ? "Épicerie" : "Pantry", by: "Léa", bg: "#fef3c7"}, {l: LANG === "fr" ? "Basilic" : "Basil", k: LANG === "fr" ? "Légumes" : "Veg", by: "Papa", bg: "#dcfce7"}, {l: LANG === "fr" ? "Pommes" : "Apples", k: LANG === "fr" ? "Fruits" : "Fruit", by: "Noé", bg: "#fee2e2"}]
+  };
+
+  /* ---------- the real icons / pieces of markup of the app ---------- */
+  var ICON = {
+    dash: '<svg viewBox="0 0 24 24" fill="none" class="h-6 w-6"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" fill="currentColor"/></svg>',
+    argent: '<svg viewBox="0 0 24 24" fill="none" class="h-6 w-6"><path d="M12.025 21C11.7417 21 11.5042 20.9042 11.3125 20.7125C11.1208 20.5208 11.025 20.2833 11.025 20V18.85C10.275 18.6833 9.61667 18.3917 9.05 17.975C8.48333 17.5583 8.025 16.975 7.675 16.225C7.55833 15.9917 7.55417 15.7458 7.6625 15.4875C7.77083 15.2292 7.96667 15.0417 8.25 14.925C8.48333 14.825 8.725 14.8292 8.975 14.9375C9.225 15.0458 9.41667 15.225 9.55 15.475C9.83333 15.975 10.1917 16.3542 10.625 16.6125C11.0583 16.8708 11.5917 17 12.225 17C12.9083 17 13.4875 16.8458 13.9625 16.5375C14.4375 16.2292 14.675 15.75 14.675 15.1C14.675 14.5167 14.4917 14.0542 14.125 13.7125C13.7583 13.3708 12.9083 12.9833 11.575 12.55C10.1417 12.1 9.15833 11.5625 8.625 10.9375C8.09167 10.3125 7.825 9.55 7.825 8.65C7.825 7.56667 8.175 6.725 8.875 6.125C9.575 5.525 10.2917 5.18333 11.025 5.1V4C11.025 3.71667 11.1208 3.47917 11.3125 3.2875C11.5042 3.09583 11.7417 3 12.025 3C12.3083 3 12.5458 3.09583 12.7375 3.2875C12.9292 3.47917 13.025 3.71667 13.025 4V5.1C13.6583 5.2 14.2083 5.40417 14.675 5.7125C15.1417 6.02083 15.525 6.4 15.825 6.85C15.975 7.06667 16.0042 7.30833 15.9125 7.575C15.8208 7.84167 15.6333 8.03333 15.35 8.15C15.1167 8.25 14.875 8.25417 14.625 8.1625C14.375 8.07083 14.1417 7.90833 13.925 7.675C13.7083 7.44167 13.4542 7.2625 13.1625 7.1375C12.8708 7.0125 12.5083 6.95 12.075 6.95C11.3417 6.95 10.7833 7.1125 10.4 7.4375C10.0167 7.7625 9.825 8.16667 9.825 8.65C9.825 9.2 10.075 9.63333 10.575 9.95C11.075 10.2667 11.9417 10.6 13.175 10.95C14.325 11.2833 15.1958 11.8125 15.7875 12.5375C16.3792 13.2625 16.675 14.1 16.675 15.05C16.675 16.2333 16.325 17.1333 15.625 17.75C14.925 18.3667 14.0583 18.75 13.025 18.9V20C13.025 20.2833 12.9292 20.5208 12.7375 20.7125C12.5458 20.9042 12.3083 21 12.025 21Z" fill="currentColor"/></svg>',
+    maison: '<svg viewBox="0 0 24 24" fill="none" class="h-6 w-6"><path d="M6 19H9V14C9 13.7167 9.09583 13.4792 9.2875 13.2875C9.47917 13.0958 9.71667 13 10 13H14C14.2833 13 14.5208 13.0958 14.7125 13.2875C14.9042 13.4792 15 13.7167 15 14V19H18V10L12 5.5L6 10V19ZM4 19V10C4 9.68333 4.07083 9.38333 4.2125 9.1C4.35417 8.81667 4.55 8.58333 4.8 8.4L10.8 3.9C11.15 3.63333 11.55 3.5 12 3.5C12.45 3.5 12.85 3.63333 13.2 3.9L19.2 8.4C19.45 8.58333 19.6458 8.81667 19.7875 9.1C19.9292 9.38333 20 9.68333 20 10V19C20 19.55 19.8042 20.0208 19.4125 20.4125C19.0208 20.8042 18.55 21 18 21H14C13.7167 21 13.4792 20.9042 13.2875 20.7125C13.0958 20.5208 13 20.2833 13 20V15H11V20C11 20.2833 10.9042 20.5208 10.7125 20.7125C10.5208 20.9042 10.2833 21 10 21H6C5.45 21 4.97917 20.8042 4.5875 20.4125C4.19583 20.0208 4 19.55 4 19V10Z" fill="currentColor"/></svg>',
+    gear: '<svg viewBox="0 0 24 24" fill="none" class="h-6 w-6"><path d="M10.825 22C10.375 22 9.9875 21.85 9.6625 21.55C9.3375 21.25 9.14167 20.8833 9.075 20.45L8.85 18.8C8.63333 18.7167 8.42917 18.6167 8.2375 18.5C8.04583 18.3833 7.85833 18.2583 7.675 18.125L6.125 18.775C5.70833 18.9583 5.29167 18.975 4.875 18.825C4.45833 18.675 4.13333 18.4083 3.9 18.025L2.725 15.975C2.49167 15.5917 2.425 15.1833 2.525 14.75C2.625 14.3167 2.85 13.9583 3.2 13.675L4.525 12.675C4.50833 12.5583 4.5 12.4458 4.5 12.3375V11.6625C4.5 11.5542 4.50833 11.4417 4.525 11.325L3.2 10.325C2.85 10.0417 2.625 9.68333 2.525 9.25C2.425 8.81667 2.49167 8.40833 2.725 8.025L3.9 5.975C4.13333 5.59167 4.45833 5.325 4.875 5.175C5.29167 5.025 5.70833 5.04167 6.125 5.225L7.675 5.875C7.85833 5.74167 8.05 5.61667 8.25 5.5C8.45 5.38333 8.65 5.28333 8.85 5.2L9.075 3.55C9.14167 3.11667 9.3375 2.75 9.6625 2.45C9.9875 2.15 10.375 2 10.825 2H13.175C13.625 2 14.0125 2.15 14.3375 2.45C14.6625 2.75 14.8583 3.11667 14.925 3.55L15.15 5.2C15.3667 5.28333 15.5708 5.38333 15.7625 5.5C15.9542 5.61667 16.1417 5.74167 16.325 5.875L17.875 5.225C18.2917 5.04167 18.7083 5.025 19.125 5.175C19.5417 5.325 19.8667 5.59167 20.1 5.975L21.275 8.025C21.5083 8.40833 21.575 8.81667 21.475 9.25C21.375 9.68333 21.15 10.0417 20.8 10.325L19.475 11.325C19.4917 11.4417 19.5 11.5542 19.5 11.6625V12.3375C19.5 12.4458 19.4833 12.5583 19.45 12.675L20.775 13.675C21.125 13.9583 21.35 14.3167 21.45 14.75C21.55 15.1833 21.4833 15.5917 21.25 15.975L20.05 18.025C19.8167 18.4083 19.4917 18.675 19.075 18.825C18.6583 18.975 18.2417 18.9583 17.825 18.775L16.325 18.125C16.1417 18.2583 15.95 18.3833 15.75 18.5C15.55 18.6167 15.35 18.7167 15.15 18.8L14.925 20.45C14.8583 20.8833 14.6625 21.25 14.3375 21.55C14.0125 21.85 13.625 22 13.175 22H10.825ZM11 20H12.975L13.325 17.35C13.8417 17.2167 14.3208 17.0208 14.7625 16.7625C15.2042 16.5042 15.6083 16.1917 15.975 15.825L18.45 16.85L19.425 15.15L17.275 13.525C17.3583 13.2917 17.4167 13.0458 17.45 12.7875C17.4833 12.5292 17.5 12.2667 17.5 12C17.5 11.7333 17.4833 11.4708 17.45 11.2125C17.4167 10.9542 17.3583 10.7083 17.275 10.475L19.425 8.85L18.45 7.15L15.975 8.2C15.6083 7.81667 15.2042 7.49583 14.7625 7.2375C14.3208 6.97917 13.8417 6.78333 13.325 6.65L13 4H11.025L10.675 6.65C10.1583 6.78333 9.67917 6.97917 9.2375 7.2375C8.79583 7.49583 8.39167 7.80833 8.025 8.175L5.55 7.15L4.575 8.85L6.725 10.45C6.64167 10.7 6.58333 10.95 6.55 11.2C6.51667 11.45 6.5 11.7167 6.5 12C6.5 12.2667 6.51667 12.525 6.55 12.775C6.58333 13.025 6.64167 13.275 6.725 13.525L4.575 15.15L5.55 16.85L8.025 15.8C8.39167 16.1833 8.79583 16.5042 9.2375 16.7625C9.67917 17.0208 10.1583 17.2167 10.675 17.35L11 20ZM12.05 15.5C13.0167 15.5 13.8417 15.1583 14.525 14.475C15.2083 13.7917 15.55 12.9667 15.55 12C15.55 11.0333 15.2083 10.2083 14.525 9.525C13.8417 8.84167 13.0167 8.5 12.05 8.5C11.0667 8.5 10.2375 8.84167 9.5625 9.525C8.8875 10.2083 8.55 11.0333 8.55 12C8.55 12.9667 8.8875 13.7917 9.5625 14.475C10.2375 15.1583 11.0667 15.5 12.05 15.5Z" fill="currentColor"/></svg>',
+    plus: '<svg viewBox="0 0 30 30" fill="none" class="h-[30px] w-[30px]"><path d="M13.75 16.25H7.5C7.14583 16.25 6.84896 16.1302 6.60938 15.8906C6.36979 15.651 6.25 15.3542 6.25 15C6.25 14.6458 6.36979 14.349 6.60938 14.1094C6.84896 13.8698 7.14583 13.75 7.5 13.75H13.75V7.5C13.75 7.14583 13.8698 6.84896 14.1094 6.60938C14.349 6.36979 14.6458 6.25 15 6.25C15.3542 6.25 15.651 6.36979 15.8906 6.60938C16.1302 6.84896 16.25 7.14583 16.25 7.5V13.75H22.5C22.8542 13.75 23.151 13.8698 23.3906 14.1094C23.6302 14.349 23.75 14.6458 23.75 15C23.75 15.3542 23.6302 15.651 23.3906 15.8906C23.151 16.1302 22.8542 16.25 22.5 16.25H16.25V22.5C16.25 22.8542 16.1302 23.151 15.8906 23.3906C15.651 23.6302 15.3542 23.75 15 23.75C14.6458 23.75 14.349 23.6302 14.1094 23.3906C13.8698 23.151 13.75 22.8542 13.75 22.5V16.25Z" fill="currentColor"/></svg>',
+    logout: '<svg viewBox="0 0 24 24" fill="none" class="h-5 w-5"><path d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V5C3 4.45 3.19583 3.97917 3.5875 3.5875C3.97917 3.19583 4.45 3 5 3H11C11.2833 3 11.5208 3.09583 11.7125 3.2875C11.9042 3.47917 12 3.71667 12 4C12 4.28333 11.9042 4.52083 11.7125 4.7125C11.5208 4.90417 11.2833 5 11 5H5V19H11C11.2833 19 11.5208 19.0958 11.7125 19.2875C11.9042 19.4792 12 19.7167 12 20C12 20.2833 11.9042 20.5208 11.7125 20.7125C11.5208 20.9042 11.2833 21 11 21H5ZM17.175 13H10C9.71667 13 9.47917 12.9042 9.2875 12.7125C9.09583 12.5208 9 12.2833 9 12C9 11.7167 9.09583 11.4792 9.2875 11.2875C9.47917 11.0958 9.71667 11 10 11H17.175L15.3 9.125C15.1167 8.94167 15.025 8.71667 15.025 8.45C15.025 8.18333 15.1167 7.95 15.3 7.75C15.4833 7.55 15.7167 7.44583 16 7.4375C16.2833 7.42917 16.525 7.525 16.725 7.725L20.3 11.3C20.5 11.5 20.6 11.7333 20.6 12C20.6 12.2667 20.5 12.5 20.3 12.7L16.725 16.275C16.525 16.475 16.2875 16.5708 16.0125 16.5625C15.7375 16.5542 15.5 16.45 15.3 16.25C15.1167 16.05 15.0292 15.8125 15.0375 15.5375C15.0458 15.2625 15.1417 15.0333 15.325 14.85L17.175 13Z" fill="currentColor"/></svg>',
+    bell: '<svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M12 22a2 2 0 002-2h-4a2 2 0 002 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4a1.5 1.5 0 00-3 0v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>',
+    chev: '<svg viewBox="0 0 20 20" fill="none" class="h-5 w-5 shrink-0"><path d="M7.5 4.5l6 5.5-6 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    chevD: '<svg viewBox="0 0 24 24" fill="none" class="h-6 w-6 shrink-0 text-slate-400 transition-transform"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    kebab: '<svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4"><circle cx="10" cy="4" r="1.6"/><circle cx="10" cy="10" r="1.6"/><circle cx="10" cy="16" r="1.6"/></svg>'
+  };
+  var LOGO = '<svg width="19.5" height="26" viewBox="0 0 258.28 344.42" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="lb" cx="129.14" cy="280.93" fx="129.14" fy="280.93" r="29.45" gradientUnits="userSpaceOnUse"><stop offset=".4" stop-color="#365db0"/><stop offset=".96" stop-color="#365db0"/></radialGradient><radialGradient id="lm" cx="145.17" cy="135.37" fx="227.18" fy="306.01" r="189.33" gradientTransform="translate(-46.94 176.43) rotate(-54.42) scale(1 .98)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#cce0f4"/><stop offset=".06" stop-color="#c2deed"/><stop offset=".15" stop-color="#a9dadd"/><stop offset=".28" stop-color="#7fd3c2"/><stop offset=".4" stop-color="#4ecca3"/><stop offset=".49" stop-color="#4bc1a4"/><stop offset=".65" stop-color="#45a5a7"/><stop offset=".85" stop-color="#3b78ac"/><stop offset=".96" stop-color="#365db0"/></radialGradient></defs><path fill="#f9ed69" d="M133.41,87.02c22.01-3.81,16.83-40.62-7.54-36.72-22.71,3.64-19.05,41.32,7.54,36.72Z"/><path fill="url(#lb)" stroke="#000" stroke-miterlimit="10" d="M160.66,266.32c-2.75.43-7,6.18-9.55,8.17-13.14,10.29-29.28,10.24-42.68.36-4.45-3.28-8.54-11.32-15.25-6.98-11.08,7.14,11.53,21.52,17.6,24.1,13.02,5.53,29.24,4.76,41.56-2.1,3.95-2.2,15.24-11.08,15.71-15.27.52-4.63-2.49-9.05-7.39-8.28Z"/><path fill="url(#lm)" stroke="#000" stroke-miterlimit="10" d="M195.05,174.26c.7-.81,1.37-1.64,2.03-2.48M167.82,202.04c3.2-2.18,6.63-4,10.6-5.03,13.5-3.53,27.73-.03,37.84,9.55-11.73,13.46-27.07,25.68-46.18,21.42-2.3-.51-23.37-9.07-21.92-11.24M110.12,217.16c-7.49,4.95-18.89,11.65-28,11.88-21.34.54-40.67-20.9-63.94-7.4-26.16,15.18-18.86,50.52-4.31,71.42,47.09,67.67,181.64,67.66,229.68.88,19.45-27.04,18.7-63.27-.58-90.17,14.67-28.08,19.73-60.13,6.81-89.95-6.31-14.57-16.6-26.66-27.27-38.18-9.61-10.37-20.41-19.74-30.1-30.05l-2.04-2.34c-23.59-21.07-45.78-56.94-82.28-36.84-12.17,6.7-26.98,24.24-37.3,34.35C42.39,68.55,6.95,96.63,1.42,138.57c-1.12,8.48-3.42,24.27,9.19,25.15,15.23,1.07,11.22-17.94,13.06-27.67,4.48-23.79,22.7-41.01,38.66-57.75,14.68-15.4,34.36-36.18,50.44-49.51,25.4-21.07,39.32,10.75,57.51,23.89l2.63,2.64c21.37,24.35,59.72,51.06,62.82,85.81,1.43,16.04-1.9,31.87-8.38,46.41-9.67-7.17-20.42-11.4-32.29-13.27M148.16,216.74c7.31-3.95,12.96-10.13,19.66-14.7l29.26-30.26c13.5-17.18,19.41-39.91,4.89-58.82-19.43-25.31-54.03-21.9-71.97,2.95-8.28-6.65-15.07-14.98-25.88-18.32-33.59-10.38-63.62,19.74-54.42,53.52,4.01,14.72,21.43,33.31,32.53,43.53,8.76,8.07,18.29,15.49,27.89,22.52M129.15,204.94c-16.15-11.47-32.53-24.04-45.54-39.09-3.89-4.5-10.06-12.42-12.28-17.79-5.46-13.2.78-28.89,15.58-31.03,18.59-2.69,23.14,13.06,35.16,21.87,13.28,9.74,23.32-12.36,33.44-18.74,17.51-11.03,37.09,3.83,32.95,24.1-2.5,12.25-27.68,36.22-37.64,44.62-2.48,2.09-20.33,16.14-21.68,16.06M151.13,320.95c-40.58,5.19-103.59-6.38-123.44-47.03-6.43-13.18-10.37-38.44,11.89-34.87,14.36,2.3,25.34,11.87,42.65,11.28,16.57-.56,32.7-10.56,46.18-19.28,18.81,10.68,36.07,22.11,58.85,18.14,14.73-2.57,27.59-10.9,38.34-20.93,1.54-1.44,2.13-4.74,4.82-4.46,23.89,55.27-31.34,91.02-79.29,97.15Z"/></svg>';
+
+  var img = function(n, cls){ return '<img src="img/' + n + '" alt="" aria-hidden="true" class="' + cls + '">'; };
+  var iconFor = {meal: "repas.svg", laundry: "maison.svg", chore: "taches.svg"};
+
+  /* ---------- views (same classes as the real components) ---------- */
+  function header(){
+    return '<header class="sticky top-0 z-20 flex items-center justify-between gap-2 border-b border-slate-200/60 bg-slate-50/90 px-3 py-3 backdrop-blur-sm">' +
+      '<a data-go="home" class="flex shrink-0 items-center gap-2 truncate text-base font-semibold text-brand-600">' + LOGO + 'MyHouzly</a>' +
+      '<div class="flex shrink-0 items-center gap-1"><span class="flex h-9 w-9 items-center justify-center">' + ICON.bell + '</span>' +
+      '<button type="button" data-act="role" aria-label="logout" class="flex h-9 w-9 items-center justify-center rounded-full hover:bg-slate-100">' + ICON.logout + '</button></div></header>';
+  }
+  function nav(){
+    var tabs = [["home", ICON.dash, T.home], ["money", ICON.argent, T.money], ["house", ICON.maison, T.house], ["settings", ICON.gear, T.settings]];
+    var cls = "flex flex-1 flex-col items-center justify-center gap-1 rounded-[10px] py-2 text-xs font-normal transition-colors";
+    var badge = S.role === "parent" ? S.parentQueue.filter(function(r){ return r.status === "PENDING"; }).length : 0;
+    return '<nav class="fixed inset-x-0 bottom-0 z-30 flex gap-2.5 border-t border-slate-200 bg-white px-3.5 py-2.5 pb-[calc(0.625rem+env(safe-area-inset-bottom))]">' +
+      tabs.map(function(t){
+        var on = S.view === t[0];
+        return '<a data-go="' + t[0] + '" class="' + cls + ' relative ' + (on ? "bg-[#365DB0] text-white" : "text-black") + '">' + t[1] + t[2] +
+          (t[0] === "home" && badge ? '<span class="absolute -right-1.5 -top-1.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-600 px-1 text-[10px] font-semibold text-white">' + badge + '</span>' : "") + '</a>';
+      }).join("") + '</nav>';
+  }
+  var fab = function(act, label){
+    return '<button type="button" data-act="' + act + '" class="fixed bottom-[calc(92px+env(safe-area-inset-bottom))] right-4 z-40 flex items-center gap-2.5 rounded-xl bg-[#365DB0] p-5 text-white shadow-lg hover:opacity-90">' + ICON.plus + '<span class="font-semibold">' + label + '</span></button>';
+  };
+  function greeting(){
+    return '<div class="flex items-center gap-2.5">' + img("hi-bubble.png", "h-10 w-10 object-contain") + '<h1 class="text-2xl font-bold">' + (S.role === "parent" ? T.greetMom : T.hello) + '</h1></div>';
+  }
+  function banners(){
+    var cook = S.duties[0], lau = S.duties[1];
+    return '<div class="flex flex-col gap-2">' +
+      (!lau.done ? '<a data-go="house" class="flex items-center justify-between gap-3 rounded-xl bg-gradient-to-r from-[#4daae4] to-[#42718e] p-2.5 text-white shadow-md hover:opacity-95"><div class="flex items-center gap-3">' + img("menage-banner.png", "h-6 w-6 object-contain") + '<div><p class="text-sm font-semibold">' + T.cleanBanner + '</p></div></div>' + ICON.chev + '</a>' : "") +
+      (!cook.done ? '<a data-go="house" class="flex items-center justify-between gap-3 rounded-xl bg-gradient-to-r from-[#f6cf32] to-[#eb840e] p-2.5 text-white shadow-md hover:opacity-95"><div class="flex items-center gap-3">' + img("repas.svg", "h-6 w-6 object-contain") + '<div><p class="text-sm font-semibold">' + T.cookBanner + '</p></div></div>' + ICON.chev + '</a>' : "") +
+      '</div>';
+  }
+  function quick(){
+    var item = function(go, ic, l){ return '<a data-go="' + go + '" class="flex flex-col items-center gap-2 rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm hover:bg-slate-50">' + img(ic, "h-6 w-6 object-contain") + '<span class="text-sm font-medium">' + l + '</span></a>'; };
+    var sc = function(go, tab, ic, l){ return '<a data-go="' + go + '" data-tab="' + tab + '" class="flex flex-col items-center gap-1 rounded-2xl border border-slate-200 bg-white p-3 text-center shadow-sm hover:bg-slate-50">' + img(ic, "h-6 w-6 object-contain") + '<span class="text-xs font-medium">' + l + '</span></a>'; };
+    return '<div class="grid grid-cols-3 gap-3">' + item("money", "argent.svg", T.money) + item("house", "maison.svg", T.house) + item("settings", "parametres.svg", T.settings) + '</div>' +
+      '<section><div class="grid gap-2 grid-cols-4">' + sc("house", "tasks", "taches.svg", T.tasks) + sc("house", "meals", "repas.svg", T.meals) + sc("house", "shop", "courses.svg", T.shop) + sc("money", "stocks", "actions.png", T.stocks) + '</div></section>';
+  }
+  var badge = function(t){ return '<span class="mb-1 inline-block rounded-full bg-slate-200 px-2 py-0.5 text-[11px] font-medium uppercase tracking-wide text-slate-600">' + t + '</span>'; };
+  var BG = {PENDING: "bg-amber-50", APPROVED: "bg-emerald-50", REJECTED: "bg-red-50"};
+  var TC = {PENDING: "font-semibold text-blue-600", APPROVED: "font-semibold text-emerald-600", REJECTED: "font-semibold text-red-600"};
+  function reqLi(r, parent){
+    var body = badge(r.kind === "chore" ? T.reqChore : T.reqDeposit) +
+      '<p class="font-medium">' + (r.kind === "chore" ? r.who + " · " + r.label : (parent ? r.who + " → " + T.parents : T.me + " → " + T.parents)) + '</p>' +
+      '<p class="text-sm text-slate-500">' + (r.kind === "chore" ? r.reward : chf(r.amount) + (r.comment ? " · " + r.comment : "")) + (parent && r.kind === "chore" ? "" : " · 21.10.2026 · ") +
+      (parent && r.kind === "chore" ? "" : '<span class="' + TC[r.status] + '">' + T.st[r.status] + '</span>') + '</p>';
+    var acts = parent && r.status === "PENDING"
+      ? '<div class="flex shrink-0 gap-2"><button type="button" data-act="ok" data-id="' + r.id + '" class="rounded-full bg-emerald-100 px-3 py-1 text-sm font-medium text-emerald-700 hover:bg-emerald-200">' + (r.kind === "chore" ? T.validate : T.accept) + '</button><button type="button" data-act="no" data-id="' + r.id + '" class="rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-700 hover:bg-red-200">' + T.refuse + '</button></div>' : "";
+    return '<li class="fade relative flex items-center justify-between rounded-xl border border-slate-200 p-3 shadow-sm ' + (parent && r.status !== "PENDING" ? BG[r.status] : BG[r.status]) + '"><div>' + body + '</div>' + acts + '</li>';
+  }
+  function homeChild(){
+    return '<div class="space-y-8">' + greeting() + banners() + quick() +
+      '<section><h2 class="mb-5 text-lg font-semibold">' + T.myReq + '</h2>' +
+      (S.requests.length ? '<ul class="flex flex-col gap-2">' + S.requests.map(function(r){ return reqLi(r, false); }).join("") + '</ul>' :
+        '<p class="rounded-xl border border-dashed border-slate-300 p-6 text-center text-slate-500">' + T.noSent + '</p>') + '</section></div>' + fab("ask", T.make);
+  }
+  function homeParent(){
+    var q = S.parentQueue;
+    return '<div class="space-y-8">' + greeting() + quick() +
+      '<section><h2 class="mb-3 text-lg font-semibold">' + T.pending + '</h2>' +
+      (q.filter(function(r){ return r.status === "PENDING"; }).length === 0 ? '<p class="rounded-xl border border-dashed border-slate-300 p-6 text-center text-slate-500">' + T.noPending + '</p>' : "") +
+      '<ul class="flex flex-col gap-3">' + q.map(function(r){ return reqLi(r, true); }).join("") + '</ul></section></div>';
+  }
+  function subTabs(list, active, key){
+    return '<div class="mb-6 flex gap-1 rounded-full border border-slate-200 bg-white p-1">' + list.map(function(t){
+      return '<button type="button" data-' + key + '="' + t[0] + '" class="' + (active === t[0] ? "flex-1 rounded-full bg-[#365DB0] px-4 py-1.5 text-sm font-medium text-white" : "flex-1 rounded-full px-4 py-1.5 text-sm font-medium text-slate-500 hover:bg-slate-100") + '">' + t[1] + '</button>';
+    }).join("") + '</div>';
+  }
+  function money(){
+    var tabs = subTabs([["money", T.money], ["stocks", T.stocks], ["savings", T.savings]], S.moneyTab, "mtab"), body = "";
+    if(S.moneyTab === "money"){
+      body = '<div class="space-y-8"><div class="rounded-2xl bg-gradient-to-r from-[#365DB0] to-[#17274a] p-4 text-center text-white shadow-md"><p class="text-xs text-brand-100 ">' + T.bal + '</p><p class="mt-1 text-xl font-bold">' + chf(S.balance) + '</p><p class="mt-1 text-xs text-brand-100">' + fill(T.allow, {a: chf(S.allowance)}) + '</p></div>' +
+        '<section><div class="mb-5 flex items-center justify-between"><h2 class="text-lg font-semibold">' + T.txs + '</h2><a class="text-sm text-brand-600">' + T.hist + '</a></div><div class="flex flex-col gap-3">' +
+        S.txs.map(function(t, i){
+          var col = t.sign > 0 ? "#347312" : "#731212", open = S.openTx === i;
+          return '<div data-tx="' + i + '" class="fade rounded-[10px] border p-2.5 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)] cursor-pointer ' + (open ? "bg-[#fbfbfb]" : "bg-white") + '" style="border-color:' + col + ';border-width:' + (open ? 3 : 1) + 'px"><div class="flex items-center gap-5"><div class="flex flex-1 items-start justify-between"><div class="flex flex-col gap-[5px]"><p class="font-semibold text-[15px] text-black">' + T.tx[t.t] + '</p><p class="text-[10px] text-[#323232]">' + t.d + ' · ' + t.h + '</p></div><div class="flex flex-col items-end gap-[5px]"><p class="font-semibold text-[15px]" style="color:' + col + '">' + (t.sign > 0 ? "+" : "−") + chf(t.a) + '</p><p class="text-[10px] text-[#323232]">' + chf(t.after) + '</p></div></div>' + ICON.chevD.replace("transition-transform", "transition-transform" + (open ? " rotate-90" : "")) + '</div>' +
+            (open ? '<p class="mt-2.5 font-mono text-[10px] text-slate-400">ref. TX-' + (2041 - i) + '</p>' : "") + '</div>';
+        }).join("") + '</div></section></div>' + fab("ask", T.make);
+    } else if(S.moneyTab === "savings"){
+      var pct = Math.min(100, Math.round(S.savings / S.goal.target * 100)), rem = Math.max(0, S.goal.target - S.savings);
+      body = '<section><h2 class="mb-3 text-lg font-semibold">' + T.goalTitle + '</h2><div class="fade overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"><div class="flex h-40 w-full items-center justify-center bg-gradient-to-br from-brand-100 to-brand-200 text-6xl">🎧</div><div class="p-4"><p class="font-semibold">' + S.goal.title + '</p><div class="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-slate-100"><div class="h-full rounded-full bg-brand-600 transition-all" style="width:' + pct + '%"></div></div><p class="mt-2 text-sm text-slate-500">' + fill(T.progress, {s: chf(S.savings), t: chf(S.goal.target)}) + '</p><p class="mt-1 text-sm font-medium">' + fill(T.remaining, {a: chf(rem)}) + '</p></div></div>' +
+        '<button type="button" data-act="save" class="fixed bottom-[calc(92px+env(safe-area-inset-bottom))] right-4 z-40 flex h-[44px] items-center gap-2.5 rounded-[10px] border-2 border-[#365DB0] bg-white px-5 text-sm font-semibold text-[#365DB0] shadow-lg hover:bg-slate-50">' + T.move + ' CHF 5</button></section>';
+    } else {
+      var H = [["AAPL", 3, "Apple Inc", "#8e44ad", "CHF 612.40", "+CHF 38.20", [[1, "CHF 154.20", "-CHF 3.10 (-2.0%)"], [2, "CHF 151.00", "+CHF 41.30 (+13.7%)"]]], ["NESN", 2, "Nestlé SA", "#4caf50", "CHF 188.00", "+CHF 4.50", [[2, "CHF 92.00", "+CHF 4.50 (+2.4%)"]]]];
+      body = '<div class="space-y-8"><div class="flex flex-row items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-[#365DB0] to-[#17274a] p-4 text-white shadow-md"><div class="relative h-14 w-14 shrink-0"><svg viewBox="0 0 36 36" class="h-14 w-14 -rotate-90"><circle cx="18" cy="18" r="14" fill="none" stroke="#8e44ad" stroke-width="7" stroke-dasharray="75 88"/><circle cx="18" cy="18" r="14" fill="none" stroke="#4caf50" stroke-width="7" stroke-dasharray="13 88" stroke-dashoffset="-75"/></svg></div><div class="min-w-0 text-left"><p class="text-xs text-brand-100">' + T.myPort + '</p><p class="mt-0.5 text-lg font-bold">CHF 800.40</p><span class="mt-1 inline-flex items-center gap-1 rounded-full bg-emerald-600 px-2.5 py-0.5 text-[11px] font-medium">▲ CHF 42.70 (+5.6%)</span></div></div>' +
+        '<section><h2 class="mb-5 text-lg font-semibold">' + T.alloc + '</h2><ul class="flex flex-col gap-2">' + H.map(function(x, i){
+          var open = S.openHold === i + 1;
+          return '<li data-hold="' + (i + 1) + '" class="fade cursor-pointer rounded-[10px] border p-2.5 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)] bg-white" style="border-color:#565656"><div class="flex items-center gap-5"><span class="h-[13px] w-[13px] shrink-0 rounded-full" style="background:' + x[3] + '"></span><div class="flex flex-1 items-start justify-between gap-2"><div class="min-w-0"><p class="flex flex-wrap items-baseline gap-[5px]"><span class="font-semibold text-[15px] text-black">' + x[0] + ' (' + x[1] + ')</span><span class="truncate text-xs" style="color:#323232">' + x[2] + '</span></p><p class="text-[10px]" style="color:#323232">' + x[4] + ' · <span style="color:#347312">' + x[5] + '</span></p></div></div>' + ICON.chevD.replace("transition-transform", "transition-transform" + (open ? " rotate-90" : "")) + '</div>' +
+          (open ? '<div class="mt-2.5 flex flex-col gap-2.5 pt-2.5">' + x[6].map(function(l){ return '<div class="rounded-[10px] border p-2.5 text-xs" style="border-color:#565656"><div class="flex items-start justify-between"><span class="font-bold text-black">' + T.lot + ' · ' + l[0] + ' ' + T.titres + '</span><span style="color:#323232">27.08.2026</span></div><div class="mt-2.5 flex items-start justify-between"><span style="color:#323232">' + l[1] + T.perTitle + '</span><span style="color:' + (l[2].charAt(0) === "-" ? "#731212" : "#347312") + '">' + l[2] + '</span></div></div>'; }).join("") + '</div>' : "") + '</li>';
+        }).join("") + '</ul></section></div>' +
+        '<button type="button" class="fixed bottom-[calc(176px+env(safe-area-inset-bottom))] right-4 z-40 flex items-center gap-2.5 rounded-[10px] border-2 border-[#365DB0] bg-white p-2 text-[#365DB0] shadow-lg"><span class="px-3 font-semibold">— ' + T.sell + '</span></button>' + fab("none", T.addStock);
+    }
+    return '<div class="space-y-6">' + tabs + body + '</div>';
+  }
+  function duty(d, i){
+    var pill = d.icon === "chore" || true ? '<button type="button" data-act="done" data-id="' + d.id + '" class="shrink-0 rounded-full border-[1.5px] px-3.5 py-1.5 text-xs font-bold ' + (d.done ? "border-[#365DB0] bg-[#365DB0] text-white" : "border-[#365DB0] bg-white text-[#365DB0]") + '">' + (d.done ? T.undo : T.done) + '</button>' : "";
+    var menu = '<div class="relative shrink-0"><button type="button" data-act="menu" data-id="' + d.id + '" class="flex h-8 w-8 items-center justify-center rounded-full text-slate-500 hover:bg-slate-100">' + ICON.kebab + '</button>' +
+      (S.menu === d.id && !d.done ? '<div class="pop absolute right-0 top-full z-50 mt-1 w-40 overflow-hidden rounded-xl border border-slate-200 bg-white py-1 shadow-xl"><button type="button" data-act="swap" data-id="' + d.id + '" class="block w-full px-3 py-2 text-left text-sm text-slate-700 hover:bg-slate-100">' + T.swap + '</button>' + (d.icon !== "meal" ? '<button type="button" data-act="swap" data-id="' + d.id + '" class="block w-full px-3 py-2 text-left text-sm text-slate-700 hover:bg-slate-100">' + T.postpone + '</button>' : "") + '</div>' : "") + '</div>';
+    return '<li class="fade flex items-center gap-3 rounded-[10px] border border-[#787878] p-2.5 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)] ' + (d.done ? "bg-[#b7b9b6]" : "bg-white") + '">' + img(iconFor[d.icon], "shrink-0 h-7 w-7") +
+      '<div class="min-w-0 flex-1 text-left"><p class="truncate text-[15px] font-semibold text-black">' + d.label + '</p><p class="text-[10px] text-[#323232]">' + d.sub + '</p></div>' + pill + menu + '</li>';
+  }
+  var PC = {blue: ["border-blue-400 bg-blue-100", "text-blue-800"], rose: ["border-rose-400 bg-rose-100", "text-rose-800"], amber: ["border-amber-400 bg-amber-100", "text-amber-800"], emerald: ["border-emerald-400 bg-emerald-100", "text-emerald-800"]};
+  var dayLabel = function(off){ var d = new Date(Date.UTC(2026, 9, 21 + off)); return d.toLocaleDateString(LANG === "fr" ? "fr-CH" : "en-GB", {weekday: "short", day: "numeric", month: "short", timeZone: "UTC"}); };
+  var seg = function(list, active, key, small){
+    return '<div class="flex gap-1 rounded-full border border-slate-200 bg-white p-1">' + list.map(function(o){
+      return '<button type="button" data-' + key + '="' + o[0] + '" class="' + (active === o[0] ? "rounded-full bg-brand-600 px-3 py-1 " + (small ? "text-xs" : "text-sm font-semibold") + " font-medium text-white" : "rounded-full px-3 py-1 " + (small ? "text-xs" : "text-sm") + " font-medium text-slate-500 hover:bg-slate-100") + '">' + o[1] + '</button>';
+    }).join("") + '</div>';
+  };
+  function turnCard(off, who, sub, mine){
+    var one = who.length === 1, st = one ? PC[S.persons[who[0]]] : null;
+    var cls = mine ? "flex items-center justify-between rounded-2xl border-2 border-l-8 p-3 shadow-md " : "flex items-center justify-between rounded-2xl border border-l-8 p-3 shadow-sm ";
+    cls += st ? st[0] : (mine ? "border-slate-400 bg-slate-100" : "border-slate-200/70 bg-white");
+    return '<li class="fade ' + cls + '"><span class="text-sm font-medium"><span class="capitalize">' + dayLabel(off) + '</span>' + (sub ? '<span class="block text-xs text-slate-500">' + sub + '</span>' : "") + '</span><span class="' + (st ? "text-sm font-bold " + st[1] : "text-sm text-slate-500") + '">' + (mine ? (sub ? T.itsYouC : T.itsYou) : (who.length ? who.join(" + ") : "—")) + '</span></li>';
+  }
+  var DINNER = [["Léa", "Papa"], ["Maman"], ["Noé"], ["Papa"], ["Léa"], ["Maman"], ["Noé"]];
+  var LUNCH = [[], [], [], [], ["Papa"], ["Maman"], []];
+  function mealsList(){
+    var n = S.mview === "week" ? 7 : 28, rows = [];
+    for(var i = 0; i < n; i++){
+      var who = (S.slot === "DINNER" ? DINNER : LUNCH)[i % 7];
+      rows.push(turnCard(i, who, null, i === 0 && who.indexOf("Léa") >= 0));
+    }
+    return '<section><div class="mb-3 flex items-center justify-between gap-2">' + seg([["LUNCH", T.slotL], ["DINNER", T.slotD]], S.slot, "slot") + seg([["week", T.w7], ["month", T.w28]], S.mview, "mview", true) + '</div><ul class="grid grid-cols-1 gap-2 mb-5">' + rows.join("") + '</ul></section>';
+  }
+  var CLEAN = [[0, ["Léa"], T.vacuum], [3, ["Noé"], T.bath], [3, ["Papa"], T.vacuum], [7, ["Maman"], T.vacuum], [10, ["Léa"], T.bath], [10, ["Noé"], T.vacuum], [14, ["Papa"], T.vacuum], [17, ["Maman"], T.bath], [21, ["Léa"], T.vacuum], [24, ["Noé"], T.bath]];
+  function cleanList(){
+    var lim = S.cview === "week" ? 7 : 28;
+    var rows = CLEAN.filter(function(c){ return c[0] < lim; }).map(function(c){ return turnCard(c[0], c[1], c[2], c[0] === 0); });
+    return '<section class="space-y-6"><div><div class="mb-3 flex items-center justify-between"><h2 class="text-lg font-semibold">' + T.cleanTitle + '</h2>' + seg([["week", T.w7], ["month", T.w28]], S.cview, "cview", true) + '</div><ul class="grid grid-cols-1 gap-2">' + rows.join("") + '</ul></div></section>';
+  }
+  function shopList(){
+    var chips = [T.all, "Migros", "Coop"].map(function(c, i){ return '<button type="button" class="' + (i === 0 ? "rounded-full bg-brand-600 px-3 py-1.5 text-sm font-semibold text-white" : "rounded-full border border-slate-300 px-3 py-1.5 text-sm text-slate-600") + '">' + c + '</button>'; }).join("");
+    var rows = S.shopping.slice().sort(function(a, b){ return (a.c ? 1 : 0) - (b.c ? 1 : 0); }).map(function(s){
+      var i = S.shopping.indexOf(s);
+      return '<li data-shop="' + i + '" class="fade flex cursor-pointer items-center justify-between rounded-2xl p-3 ' + (s.c ? "border border-slate-300 bg-slate-200" : "border border-slate-200/70 shadow-sm") + '" ' + (s.c ? "" : 'style="background-color:' + s.bg + '"') + '><label class="flex flex-1 items-center gap-3"><span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border-2 border-slate-400 bg-white text-sm text-brand-600">' + (s.c ? "✓" : "") + '</span><span><span class="flex items-center gap-1.5"><span class="text-sm font-semibold' + (s.c ? " line-through" : "") + '">' + s.l + '</span><span class="rounded-full bg-indigo-50 px-2 py-0.5 text-[10px] font-semibold text-indigo-700">' + s.k + '</span></span><span class="block text-xs text-slate-500">' + fill(T.addedBy, {n: s.by}) + '</span></span></label>' + ICON.kebab + '</li>';
+    }).join("");
+    return '<section><div class="mb-3 flex items-center justify-between"><h2 class="text-lg font-semibold">' + T.shopTitle2 + '</h2></div><div class="mb-3 flex flex-wrap gap-2">' + chips + '</div><ul class="mb-24 flex flex-col gap-2">' + rows + '</ul></section>' + fab("none", T.addProd);
+  }
+  function house(){
+    var tabs = subTabs([["tasks", T.tasks], ["meals", T.meals], ["shop", T.shop], ["clean", T.clean]], S.houseTab, "htab"), body = "";
+    if(S.houseTab === "tasks"){
+      body = '<div class="space-y-8"><div class="space-y-4"><div class="flex flex-wrap items-center justify-between gap-2"><h2 class="text-lg font-semibold">' + T.myTasks + '</h2><span class="flex h-[30px] items-center gap-1 rounded-[8px] bg-[#365DB0] px-[15px] text-sm font-semibold text-white">' + T.today + '<svg viewBox="0 0 24 24" fill="none" class="h-4 w-4 rotate-90"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div><ul class="flex flex-col gap-2">' + S.duties.map(duty).join("") + '</ul></div></div>' + fab("none", T.create);
+    } else if(S.houseTab === "meals") body = mealsList();
+    else if(S.houseTab === "shop") body = shopList();
+    else body = cleanList();
+    return '<div class="space-y-6">' + tabs + body + '</div>';
+  }
+  function section(key, title, inner){
+    var open = S.sets[key];
+    return '<section class="overflow-hidden rounded-2xl border border-slate-200"><button type="button" data-sec="' + key + '" aria-expanded="' + open + '" class="flex w-full items-center justify-between bg-white px-4 py-3 text-left hover:bg-slate-50"><span class="text-xs font-semibold uppercase tracking-wide text-slate-400">' + title + '</span><svg viewBox="0 0 20 20" fill="none" class="h-4 w-4 shrink-0 text-slate-400 transition-transform ' + (open ? "rotate-180" : "") + '"><path d="M5.5 8l4.5 4.5L14.5 8" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' + (open ? '<div class="space-y-3 bg-slate-50 p-3">' + inner + '</div>' : "") + '</section>';
+  }
+  var sw = function(on, key){ return '<button type="button" data-sw="' + key + '" aria-pressed="' + on + '" class="flex shrink-0 items-center"><span class="' + (on ? "relative inline-flex h-5 w-9 shrink-0 items-center rounded-full bg-brand-600 transition-colors" : "relative inline-flex h-5 w-9 shrink-0 items-center rounded-full bg-slate-300 transition-colors") + '"><span class="' + (on ? "inline-block h-4 w-4 translate-x-4 transform rounded-full bg-white transition-transform" : "inline-block h-4 w-4 translate-x-0.5 transform rounded-full bg-white transition-transform") + '"></span></span></button>'; };
+  var card = 'flex items-center justify-between rounded-xl border border-slate-200 bg-white p-4 shadow-sm';
+  function settings(){
+    var general = '<div class="' + card + '"><span class="text-sm font-medium">' + T.appearance + '</span><span class="flex items-center gap-2 rounded-full border border-slate-300 px-3 py-1 text-sm">🌙 ' + T.dark + '</span></div>' +
+      '<div class="mt-3 ' + card + '"><div><span class="text-sm font-medium">' + T.mgmt + '</span><p class="text-xs text-slate-500">' + T.mgmtD + '</p></div>' + sw(S.mgmt, "mgmt") + '</div>' +
+      '<div class="mt-3 ' + card + '"><div><span class="text-sm font-medium">' + T.tour + '</span><p class="text-xs text-slate-500">' + T.tourD + '</p></div><button type="button" class="shrink-0 rounded-full border border-slate-300 px-3 py-1 text-sm hover:bg-slate-100">' + T.review + '</button></div>';
+    var account = '<div class="' + card + '"><div><span class="text-sm font-medium">' + T.adhd + '</span><p class="text-xs text-slate-500">' + T.adhdD + '</p></div>' + sw(S.adhdOn, "adhd") + '</div>' +
+      (S.adhdOn ? '<div class="mt-3 ' + card + '"><span class="text-sm font-medium">' + T.adhdEvery + '</span><input type="number" value="30" class="w-16 rounded-lg border border-slate-300 bg-white px-2 py-1 text-right text-sm"></div><button type="button" data-act="adhd" class="mt-3 w-full rounded-full bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700">' + T.adhdTry + '</button>' : "");
+    var plain = function(t){ return '<div class="' + card + '"><p class="text-sm text-slate-600">' + t + '</p></div>'; };
+    return '<div class="space-y-4"><h1 class="text-2xl font-bold">' + T.setTitle + '</h1>' + section("general", T.general, general) + section("notifs", T.notifs, plain("Push")) + section("account", T.account, account) + section("privacy", T.privacy, plain("—")) + section("contact", T.contact, plain("contact@myhouzly.ch")) + '</div>';
+  }
+  function adhdScreen(){
+    var items = S.adhd; if(!items) return "";
+    var late = items.filter(function(i){ return i.late; }).length, anyLate = late > 0;
+    var head = items.length
+      ? '<img src="img/hi-bubble.png" alt="" style="display:block;margin:0 auto 10px;width:46px;height:46px;object-fit:contain"><p style="margin:0;text-align:center;color:#fff;font-size:26px;font-weight:800;line-height:1.15">' + fill(items.length === 1 ? T.adhdCount1 : T.adhdCountN, {n: items.length}) + '</p>' + (anyLate ? '<p style="margin:2px 0 0;text-align:center;color:#fca5a5;font-size:14px;font-weight:600">' + fill(T.adhdLate, {n: late}) + '</p>' : "")
+      : '<p style="margin:90px 0 0;text-align:center;color:#fff;font-size:26px;font-weight:800;line-height:1.2">' + T.allDone + '</p>';
+    var cards = items.map(function(i, idx){
+      return '<div class="fade" style="border-radius:20px;padding:16px;background:' + (i.late ? "#3b1219" : "#1e293b") + ';border:2px solid ' + (i.late ? "#ef4444" : "#334155") + '">' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="color:#cbd5e1;font-size:12px;font-weight:700;letter-spacing:.5px">' + (i.k === "l" ? T.kindL : T.kindP) + '</span><span style="color:#94a3b8;font-size:12px;font-weight:700">' + (idx + 1) + '/' + items.length + '</span></div>' +
+        '<span style="display:inline-block;border-radius:999px;padding:5px 12px;margin-bottom:10px;font-size:12px;font-weight:800;letter-spacing:.5px;background:' + (i.late ? "#ef4444" : "#60a5fa") + ';color:' + (i.late ? "#fff" : "#0f172a") + '">' + (i.late ? fill(T.adhdLateDays, {n: i.late}) : T.adhdToday) + '</span>' +
+        '<p style="margin:0;color:#fff;font-size:24px;font-weight:800;line-height:30px">' + i.t + '</p>' +
+        '<button type="button" data-adhd-done="' + idx + '" style="display:block;width:100%;margin-top:14px;padding:14px 0;border:0;border-radius:14px;background:#22a06b;color:#fff;font-size:17px;font-weight:800;text-align:center">' + T.markDone + '</button></div>';
+    }).join("");
+    return '<div style="position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;box-sizing:border-box;padding:48px 20px 20px;background:' + (anyLate ? "#2a0d12" : "#0f172a") + '"><div style="padding-bottom:14px">' + head + '</div>' +
+      '<div style="flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px;padding:4px 0">' + cards + '</div>' +
+      (items.length ? '<button type="button" data-act="adhdClose" style="display:block;width:100%;margin-top:12px;padding:14px 0;border-radius:14px;border:2px solid #475569;background:transparent;color:#cbd5e1;font-size:15px;font-weight:600;text-align:center">' + T.notNow + '</button>' : "") + '</div>';
+  }
+  /* the interface for the youngest: one page, a companion that grows with the savings, the money request, the day's quests */
+  function young(){
+    var done = S.duties.filter(function(d){ return d.done; }).length, all = S.duties.length === done;
+    var pct = Math.min(100, Math.round((S.balance - 2000) / (5000 - 2000) * 100));
+    var pet = '<div class="relative flex w-full flex-col items-center overflow-hidden rounded-3xl bg-gradient-to-br from-sky-400 via-brand-500 to-brand-700 p-6 text-white shadow-lg">' +
+      '<span class="absolute right-3 top-3 flex items-center gap-1 rounded-full bg-white/20 px-2.5 py-1 text-xs font-bold">' + T.yStreak + '</span>' +
+      '<span class="absolute left-3 top-3 rounded-full bg-white/20 px-2.5 py-1 text-xs font-bold">' + T.yLevel + '</span>' +
+      '<div class="mt-6 flex items-center gap-1.5"><p class="text-lg font-bold">' + T.yPetName + '</p></div><p class="text-xs text-brand-100">' + T.yStage + '</p>' +
+      '<button type="button" data-act="pet" class="mt-2 text-8xl drop-shadow-lg" style="background:none;border:0;line-height:1.1;' + (S.bounce ? "animation:pop .5s ease" : "") + '">🐥</button>' +
+      '<div class="mt-2 min-h-10 max-w-xs text-center"><p class="text-sm text-brand-50">💬 ' + S.petMsg + '</p></div>' +
+      '<div class="mt-3 w-full max-w-xs"><div class="h-2.5 w-full overflow-hidden rounded-full bg-white/25"><div class="h-full rounded-full bg-white" style="width:' + pct + '%"></div></div><p class="mt-1 text-xs text-brand-100">' + T.yEvolve + '</p></div>' +
+      '<p class="mt-3 text-4xl font-extrabold">' + chf(S.balance) + '</p><p class="text-xs text-brand-100">' + T.yPiggy + '</p></div>';
+    var more = S.yMore ? '<div class="flex w-full flex-col gap-6 overflow-hidden"><div class="w-full text-left"><h2 class="mb-2 text-lg font-semibold">' + T.yQuests + '</h2>' + (all ? '<p class="mb-2 rounded-xl bg-emerald-100 p-4 text-center font-medium text-emerald-700">' + T.yAllDone + '</p>' : "") + '<ul class="flex flex-col gap-2">' + S.duties.map(duty).join("") + '</ul></div></div>' : "";
+    return '<div class="mx-auto flex max-w-md flex-col items-center gap-6 px-4 py-8 text-center"><p class="text-2xl font-bold">' + T.yHello + '</p>' + pet +
+      '<button type="button" data-act="ask" class="w-full rounded-2xl bg-brand-600 py-5 text-xl font-bold text-white shadow-md hover:bg-brand-700">' + T.yAsk + '</button>' +
+      '<button type="button" data-act="more" class="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-brand-300 py-3 text-base font-semibold text-brand-700 hover:bg-brand-50">' + (S.yMore ? T.ySeeLess : T.ySeeMore) + (!S.yMore && !all ? '<span class="flex h-5 min-w-5 items-center justify-center rounded-full bg-amber-500 px-1 text-xs font-bold text-white">' + (S.duties.length - done) + '</span>' : "") + '</button>' + more + '</div>';
+  }
+  function modal(){
+    if(!S.modal) return "";
+    var seg = [["ASK", T.ask], ["GIVE", T.give], ["WITHDRAW", T.withdraw]].map(function(o){
+      return '<button type="button" data-mode="' + o[0] + '" class="flex-1 rounded-lg border px-3 py-2 text-sm font-medium ' + (S.mode === o[0] ? "border-brand-600 bg-brand-50 text-brand-700" : "border-slate-300 text-slate-600") + '">' + o[1] + '</button>';
+    }).join("");
+    var who = S.mode === "WITHDRAW" ? "" : '<label class="text-sm font-medium" for="mTo">' + T.whom + '</label><select id="mTo" class="rounded-lg border border-slate-300 bg-white px-3 py-2"><option value="P">' + T.parents + '</option><option value="N">Noé</option></select>';
+    return '<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" data-act="closeM"><div class="pop max-h-[85vh] w-full max-w-sm overflow-y-auto rounded-2xl bg-white p-6 shadow-xl" data-keep="1"><div class="mb-4 flex items-center justify-between"><h2 class="text-lg font-semibold">' + T.modalTitle + '</h2><button type="button" data-act="closeM" class="text-slate-400 hover:text-slate-600">✕</button></div>' +
+      '<form id="mForm" class="flex flex-col gap-3"><div class="flex gap-2">' + seg + '</div>' + who +
+      '<label class="text-sm font-medium" for="mAmt">' + T.amount + '</label><input id="mAmt" type="number" step="0.01" value="" placeholder="" class="rounded-lg border border-slate-300 bg-white px-3 py-2">' +
+      '<label class="text-sm font-medium" for="mWhy">' + T.purpose + '</label><input id="mWhy" type="text" class="rounded-lg border border-slate-300 bg-white px-3 py-2">' +
+      '<button type="submit" class="mt-2 rounded-full bg-brand-600 px-4 py-2 font-medium text-white hover:bg-brand-700">' + T.send + '</button></form></div></div>';
+  }
+
+  var root = document.getElementById("root"), scrollY0 = 0;
+  function render(keepScroll){
+    var y = window.scrollY;
+    var main = S.view === "young" ? young() : S.view === "home" ? (S.role === "parent" ? homeParent() : homeChild()) : S.view === "money" ? money() : S.view === "house" ? house() : settings();
+    root.innerHTML = header() + '<main class="mx-auto max-w-3xl px-4 py-6 pb-[calc(15rem+env(safe-area-inset-bottom))]">' + main + '</main>' + (S.view === "young" ? "" : nav()) + modal() + adhdScreen();
+    if(keepScroll) window.scrollTo(0, y);
+  }
+
+  root.addEventListener("click", function(e){
+    var t = e.target.closest("[data-go],[data-act],[data-mtab],[data-htab],[data-mode],[data-tx],[data-shop],[data-slot],[data-mview],[data-cview],[data-sec],[data-sw],[data-hold],[data-adhd-done]");
+    if(!t){ if(S.menu){ S.menu = null; render(true); } return; }
+    if(t.hasAttribute("data-act") && t.getAttribute("data-act") === "closeM" && e.target.closest("[data-keep]") && t === e.target.closest("[data-act]") && t.tagName !== "BUTTON") return;
+    if(t.hasAttribute("data-go")){ var v = t.getAttribute("data-go"), tab = t.getAttribute("data-tab"); S.view = v; S.menu = null; if(tab){ if(v === "money") S.moneyTab = tab; if(v === "house") S.houseTab = tab; } window.scrollTo(0, 0); render(); return; }
+    if(t.hasAttribute("data-mtab")){ S.moneyTab = t.getAttribute("data-mtab"); render(); return; }
+    if(t.hasAttribute("data-htab")){ S.houseTab = t.getAttribute("data-htab"); render(); return; }
+    if(t.hasAttribute("data-mode")){ S.mode = t.getAttribute("data-mode"); var a = document.getElementById("mAmt"), w = document.getElementById("mWhy"), av = a && a.value, wv = w && w.value; render(true); a = document.getElementById("mAmt"); w = document.getElementById("mWhy"); if(a) a.value = av || ""; if(w) w.value = wv || ""; return; }
+    if(t.hasAttribute("data-slot")){ S.slot = t.getAttribute("data-slot"); render(true); return; }
+    if(t.hasAttribute("data-mview")){ S.mview = t.getAttribute("data-mview"); render(true); return; }
+    if(t.hasAttribute("data-cview")){ S.cview = t.getAttribute("data-cview"); render(true); return; }
+    if(t.hasAttribute("data-sec")){ var k = t.getAttribute("data-sec"); S.sets[k] = !S.sets[k]; render(true); return; }
+    if(t.hasAttribute("data-sw")){ var w = t.getAttribute("data-sw"); if(w === "adhd") S.adhdOn = !S.adhdOn; else S.mgmt = !S.mgmt; render(true); return; }
+    if(t.hasAttribute("data-hold")){ var hn = +t.getAttribute("data-hold"); S.openHold = S.openHold === hn ? 0 : hn; render(true); return; }
+    if(t.hasAttribute("data-adhd-done")){ S.adhd.splice(+t.getAttribute("data-adhd-done"), 1); render(true); if(!S.adhd.length) setTimeout(function(){ S.adhd = null; render(true); }, 1600); return; }
+    if(t.hasAttribute("data-tx")){ var i = +t.getAttribute("data-tx"); S.openTx = S.openTx === i ? null : i; render(true); return; }
+    if(t.hasAttribute("data-shop")){ var s = S.shopping[+t.getAttribute("data-shop")]; s.c = !s.c; render(true); return; }
+    var act = t.getAttribute("data-act"), id = t.getAttribute("data-id");
+    if(act === "ask"){ S.modal = true; S.mode = "ASK"; render(true); }
+    else if(act === "closeM"){ if(e.target.closest("[data-keep]") && t.tagName !== "BUTTON") return; S.modal = false; render(true); }
+    else if(act === "done"){ var d = S.duties.filter(function(x){ return x.id === id; })[0]; d.done = !d.done; render(true); }
+    else if(act === "pet"){ S.petMsg = T.yMsgs[Math.floor(Math.random() * T.yMsgs.length)]; S.bounce = true; render(true); S.bounce = false; clearTimeout(window.__pt); window.__pt = setTimeout(function(){ S.petMsg = T.yMsg0; render(true); }, 2500); }
+    else if(act === "more"){ S.yMore = !S.yMore; render(true); }
+    else if(act === "adhd"){ S.adhd = [{k: "l", t: T.vacuum, late: 1}, {k: "p", t: T.persoTask, late: 0}]; render(true); }
+    else if(act === "adhdClose"){ S.adhd = null; render(true); }
+    else if(act === "menu"){ S.menu = S.menu === id ? null : id; render(true); }
+    else if(act === "swap"){ S.menu = null; render(true); }
+    else if(act === "save"){ if(S.balance >= 500){ S.balance -= 500; S.savings += 500; } render(true); }
+    else if(act === "role"){ S.role = S.role === "child" ? "parent" : "child"; S.view = "home"; window.scrollTo(0, 0); render(); }
+    else if(act === "ok" || act === "no"){ var r = S.parentQueue.filter(function(x){ return String(x.id) === id; })[0]; r.status = act === "ok" ? "APPROVED" : "REJECTED";
+      if(r.kind === "money" && act === "ok" && r.mine){ S.balance += r.amount; S.txs.unshift({t: "DEPOSIT", a: r.amount, sign: 1, d: "21.10.2026", h: "17:30", after: S.balance}); }
+      var mine = S.requests.filter(function(x){ return x.id === r.id; })[0]; if(mine) mine.status = r.status; render(true); }
+  });
+  root.addEventListener("submit", function(e){
+    e.preventDefault();
+    var amt = Math.round(parseFloat(document.getElementById("mAmt").value || "0") * 100); if(!(amt > 0)) amt = 500;
+    var why = document.getElementById("mWhy").value.trim();
+    var r = {id: S.nextId++, kind: "money", who: T.me, amount: amt, comment: why, status: "PENDING", mine: true};
+    S.requests.unshift(r); S.parentQueue.unshift({id: r.id, kind: "money", who: T.me, amount: amt, comment: why, status: "PENDING", mine: true});
+    S.modal = false; S.view = "home"; window.scrollTo(0, 0); render();
+  });
+
+  /* what the story calls: show(view) puts the app in a given state, like a person getting there */
+  window.MH = {
+    show: function(v){
+      S.modal = false; S.menu = null; S.openTx = null; S.adhd = null; window.scrollTo(0, 0);
+      var o = {
+        home: function(){ S.role = "child"; S.view = "home"; },
+        request: function(){ S.role = "child"; S.view = "home"; S.modal = true; S.mode = "ASK"; },
+        money: function(){ S.role = "child"; S.view = "money"; S.moneyTab = "money"; },
+        savings: function(){ S.role = "child"; S.view = "money"; S.moneyTab = "savings"; },
+        tasks: function(){ S.role = "child"; S.view = "house"; S.houseTab = "tasks"; },
+        parent: function(){ S.role = "parent"; S.view = "home"; },
+        stocks: function(){ S.role = "child"; S.view = "money"; S.moneyTab = "stocks"; S.openHold = 1; },
+        meals: function(){ S.role = "child"; S.view = "house"; S.houseTab = "meals"; S.slot = "DINNER"; },
+        clean: function(){ S.role = "child"; S.view = "house"; S.houseTab = "clean"; },
+        shop: function(){ S.role = "child"; S.view = "house"; S.houseTab = "shop"; },
+        settings: function(){ S.role = "child"; S.view = "settings"; S.sets.account = true; S.sets.general = false; },
+        young: function(){ S.role = "child"; S.view = "young"; S.yMore = false; },
+        adhd: function(){ S.role = "child"; S.view = "home"; S.adhd = [{k: "l", t: T.vacuum, late: 1}, {k: "p", t: T.persoTask, late: 0}]; }
+      }[v] || function(){}; o(); render();
+      if(v === "request") setTimeout(function(){ var a = document.getElementById("mAmt"); if(a && !a.value){ a.value = "5"; var w = document.getElementById("mWhy"); if(w) w.value = LANG === "fr" ? "Une glace avec Camille" : "An ice cream with Camille"; } }, 350);
+    }
+  };
+  render();
+  if(q.get("view")) window.MH.show(q.get("view"));
+  window.parent !== window && window.parent.postMessage({mh: "ready"}, "*");
+})();
+</script>
+</body>
+</html>

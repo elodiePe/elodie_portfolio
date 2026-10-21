@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="fr" data-root="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title data-en="All projects · Elodie Perring">Tous les projets · Elodie Perring</title>
+<meta name="description" content="Tous les projets d'Elodie Perring, designer UX et UI, avec un filtre par discipline." data-en-content="All the projects of Elodie Perring, UX and UI designer, with a filter by discipline.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/i18n.js"></script>
+</head>
+<body data-page="projets">
+<a class="skip" href="#main" data-en="Skip to content">Aller au contenu</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html"><i aria-hidden="true"></i>Elodie Perring</a>
+    <div class="tools">
+      <button class="theme" id="theme" type="button" aria-label="Changer de thème, clair ou sombre" data-en-aria-label="Switch theme, light or dark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </div>
+    <nav aria-label="Navigation principale" data-en-aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html" data-en="Home">Accueil</a></li>
+        <li><a href="projets.html" aria-current="page" data-en="Projects">Projets</a></li>
+        <li><a href="index.html#competences" data-en="Skills">Compétences</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+  <section class="hero" aria-labelledby="h-projets">
+    <div class="wrap">
+      <a class="back" href="index.html" data-en="← Home">← Accueil</a>
+      <p class="label">Portfolio</p>
+      <h1 id="h-projets" style="font-size:clamp(34px,9vw,64px)" data-en="All projects">Tous les projets</h1>
+      </div>
+  </section>
+
+  <section id="liste-projets" aria-labelledby="h-liste">
+    <div class="wrap">
+      <h2 class="sr-only" id="h-liste" data-en="List of projects">Liste des projets</h2>
+      <form class="search" role="search" action="#" onsubmit="return false">
+        <label class="sr-only" for="search" data-en="Search a project">Rechercher un projet</label>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="search" type="search" inputmode="search" enterkeyhint="search" autocomplete="off" placeholder="Rechercher un projet…">
+      </form>
+      <div class="filters" id="chips" role="group" aria-label="Filtrer les projets par type" data-en-aria-label="Filter projects by type"></div>
+      <p class="count label" id="count" role="status" aria-live="polite"></p>
+      <ul class="work cards" id="liste"></ul>
+      <p class="empty" id="empty" hidden data-en="No project in this discipline yet.">Aucun projet pour cette discipline pour l'instant.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Elodie Perring</span>
+    <span data-en="Built to be read with a keyboard and a screen reader.">Conçu pour être lu au clavier et avec un lecteur d'écran.</span>
+  </div>
+</footer>
+
+<script src="assets/projects.js"></script>
+<script src="assets/projects-view.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>

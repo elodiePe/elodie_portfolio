@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="star_rate_half">
+<mask id="mask0_0_202" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
+<rect id="Bounding box" width="20" height="20" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_0_202)">
+<path id="star_rate_half_2" d="M10 6.58333V11.5L12 13.0417L11.25 10.5L13.125 9.16667H10.7917L10 6.58333ZM4.85417 17.5L6.79167 11.1667L1.66667 7.5H8L10 0.833333L12 7.5H18.3333L13.2083 11.1667L15.1458 17.5L10 13.5833L4.85417 17.5Z" fill="#191D17"/>
+</g>
+</g>
+</svg>
