@@ -234,7 +234,7 @@
 .lp-wrap .screen.pinday{display:none}
 .lp-wrap .u-bar{margin:0}
 @media (max-width:899px){
-  .story[data-device="laptop"] .story-stage{grid-template-columns:minmax(0,1fr);grid-template-areas:"frame" "tabs" "dots";row-gap:26px}
+  .story[data-device="laptop"] .story-stage{grid-template-columns:minmax(0,1fr);grid-template-areas:"tabs" "frame" "card" "dots";row-gap:18px}
   .story[data-device="laptop"] .story-tabs{grid-auto-flow:column}
   .story[data-device="laptop"] .story-dots{justify-content:center;padding-top:0}
   .story[data-device="laptop"] .story-mood{right:-6px;top:-8px}
@@ -245,10 +245,54 @@
 
 /* phones and tablets: the phone on top, centred, and its buttons under it (not side by side) */
 @media (max-width:899px){
-  .story-stage{grid-template-columns:minmax(0,1fr);grid-template-areas:"frame" "tabs" "dots";grid-template-rows:auto;justify-items:center;row-gap:22px;column-gap:0}
+  .story-stage{grid-template-columns:minmax(0,1fr);grid-template-areas:"tabs" "frame" "card" "dots";grid-template-rows:auto;justify-items:center;row-gap:16px;column-gap:0}
+  .phone-frame{--s:.8}
   .story-tabs{grid-auto-flow:column;width:min(292px,100%);max-width:none}
   .story-dots{justify-content:center;padding-top:0}
 }
 
 /* phones: the demo notes under the mockup are left out */
 @media (max-width:599px){.story-legend,.story-foot{display:none!important}}
+
+/* the titles of the steps of a story: smaller too */
+.step h4{font-size:clamp(19px,2.2vw,28px)}
+
+
+/* small screens: one step at a time under the mockup, and a full screen button */
+.story-card{display:none}
+@media (max-width:899px){
+  .story-card{display:grid;grid-area:card;width:min(360px,100%);gap:8px;padding:16px 16px 12px;border:1px solid var(--line);border-radius:18px;background:var(--surface);touch-action:pan-y}
+  .story-card h4{margin:0;font:700 19px/1.18 var(--f-display);letter-spacing:-.01em}
+  .story-card p{margin:0;color:var(--muted);font-size:15px;line-height:1.45}
+  .story-card .step-top{display:flex;align-items:center;gap:10px}
+  .story-card .when{font:600 13px var(--f-mono);color:var(--muted)}
+  .story-card .tag{padding:3px 10px;border:1px solid var(--line);border-radius:999px;font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .story-card .tag.a{border-color:var(--p);color:var(--p)}
+  .story-card .count{margin-left:auto;font:600 13px var(--f-mono);color:var(--muted)}
+  .story-nav{display:flex;align-items:center;gap:8px;margin-top:6px}
+  .story-nav button{all:unset;box-sizing:border-box;min-width:44px;height:44px;display:grid;place-items:center;border:1.5px solid var(--line);border-radius:999px;font:600 22px var(--f-body);cursor:pointer;color:var(--ink)}
+  .story-nav button:focus-visible{outline:2px solid var(--p);outline-offset:2px}
+  .story-nav button[disabled]{opacity:.3;pointer-events:none}
+  .story-nav .fs{margin-left:auto;padding:0 16px;font-size:14px;white-space:nowrap}
+  .story-nav .fs[hidden]{display:none}
+
+  body.story-fs{overflow:hidden}
+  .story.fs .story-stage{position:fixed;inset:0;z-index:200;background:var(--bg);padding:max(10px,env(safe-area-inset-top)) 12px max(10px,env(safe-area-inset-bottom));grid-template-rows:auto minmax(0,1fr) auto auto;row-gap:10px;border:0;align-items:center;overflow:hidden}
+  .story.fs .phone-frame{box-shadow:none!important;align-self:center}
+  .story.fs .story-mood{display:none}
+  .story.fs .story-card{padding:12px 14px 10px;gap:4px}
+  .story.fs .story-card p{font-size:14px}
+  .story.fs .story-dots{padding-top:0}
+}
+}
+@media (max-width:599px){ .phone-frame{--s:.7} .story-stage{row-gap:12px} .story-card{padding:14px 14px 10px;gap:6px} .story-card h4{font-size:18px} .story-card p{font-size:14.5px} }
+
+/* small screens: the mockup and its card stay pinned under the menu; the page scrolls through one empty slot per step */
+@media (max-width:899px){
+  .story-grid{display:block}
+  .story-stage{position:sticky;top:calc(var(--nav) + 44px);z-index:5;background:var(--bg);padding:8px 0 10px;border-bottom:1px solid var(--line)}
+  .story-steps{display:block;visibility:hidden}
+  .story-steps .step{display:block;height:44vh;min-height:0;padding:0;border:0;overflow:hidden}
+  .story.fs .story-stage{position:fixed}
+}
+@media (max-width:599px){ .phone-frame{--s:.6} .story:not(.fs) .story-dots{display:none} .story-stage{row-gap:10px;padding:6px 0 8px} }

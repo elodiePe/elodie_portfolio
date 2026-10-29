@@ -43,9 +43,10 @@ p{margin:0}
 .tools{display:flex;gap:8px;align-items:center}
 .nav nav{grid-column:1/-1;margin-inline:calc(var(--gutter) * -1);padding-inline:var(--gutter);overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .nav nav::-webkit-scrollbar{display:none}
-.nav ul{display:flex;gap:2px;list-style:none;margin:0;padding:0 0 8px;width:max-content}
-.nav li a{display:flex;align-items:center;min-height:40px;padding:0 8px;border-radius:999px;text-decoration:none;font-size:14px;color:var(--muted);white-space:nowrap}
-.nav li a:hover,.nav li a[aria-current]{color:var(--ink);background:var(--soft)}
+.nav ul{display:flex;gap:8px;list-style:none;margin:0;padding:0 0 10px;width:max-content}
+.nav li a{display:flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;text-decoration:none;font-size:14px;color:var(--muted);white-space:nowrap;transition:background .2s,color .2s}
+.nav li a[aria-current]{color:var(--ink);background:var(--soft)}
+@media (hover:hover){.nav li a:hover{color:var(--ink);background:var(--soft)}}
 .theme,.lang{border:1px solid var(--line);background:none;color:var(--ink);height:44px;border-radius:999px;cursor:pointer;display:grid;place-items:center;font:600 13px var(--f-mono);letter-spacing:.04em}
 .theme{width:44px;border-radius:50%}
 .lang{min-width:48px;padding:0 12px}
@@ -344,10 +345,8 @@ figure.video{aspect-ratio:16/9}
 
 /* ---- phones: less to read, easier to reach (the desktop keeps everything) ---- */
 @media (max-width:599px){
-  .nav li:has(a[href$="#competences"]){display:none}
   .hero{padding-block:28px 28px}
   .hero .facts{display:none}
-  #methode,#competences{display:none}
   .work{gap:14px}
   .proj{gap:10px;padding:10px}
   .proj .shot{aspect-ratio:16/10}
@@ -362,12 +361,124 @@ figure.video{aspect-ratio:16/9}
   footer .wrap span:last-child{display:none}
   .contact a.big{font-size:clamp(17px,5vw,22px)}
   .story-legend,.story-foot{display:none}
+  /* text sizes made for a phone */
+  h1{font-size:clamp(26px,7.2vw,30px);line-height:1.12}
+  .hero h1{font-size:clamp(30px,8.2vw,35px)}
+  h2{font-size:clamp(22px,6vw,25px)}
+  h3{font-size:17px}
+  .lead{font-size:17px;line-height:1.5}
+  .label{font-size:11px}
+  .cs h2{font-size:clamp(21px,5.6vw,24px)}
+  .cs p,.cs li{font-size:16px}
+  .cs-hero{padding-block:24px 20px}
+  .btn{font-size:15px;min-height:46px}
   /* the list of all projects: two small cards per row, the picture and the title, the rest is one tap away */
-  .work.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-  .work.cards .proj{padding:8px;gap:8px;border-radius:var(--r)}
-  .work.cards .proj .shot{aspect-ratio:4/3;border-radius:calc(var(--r) - 4px)}
-  .work.cards .proj .info{padding:0 2px 4px;gap:2px}
-  .work.cards .proj .info p,.work.cards .proj .more{display:none}
-  .work.cards .proj h3{font-size:15px;line-height:1.25}
+  .work{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .work .proj{padding:8px;gap:8px;border-radius:var(--r)}
+  .work .proj .shot{aspect-ratio:4/3;border-radius:calc(var(--r) - 4px)}
+  .work .proj .info{padding:0 2px 4px;gap:2px}
+  .work .proj .info p,.work .proj .more{display:none}
+  .work .proj h3{font-size:15px;line-height:1.25}
   [data-page="projets"] .hero .lead{display:none}
 }
+
+/* home, wide screens: the text on the left, the projects on the right */
+.hero-art{display:none}
+@media (min-width:900px){
+  [data-page="home"] .hero .wrap{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center}
+  [data-page="home"] .hero h1{font-size:clamp(34px,3.9vw,54px);line-height:1.1}
+  .hero h1{font-size:clamp(32px,3.6vw,48px)}
+  [data-page="home"] .hero .lead{font-size:clamp(17px,1.5vw,20px);max-width:46ch}
+  [data-page="home"] .hero .facts{font-size:14px}
+  .hero-text{display:grid;gap:24px}
+  .hero-art{display:block;position:relative;height:min(560px,62vh);min-height:440px}
+  .hero-art a{position:absolute;display:block;width:76%;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--surface);box-shadow:0 36px 70px -34px rgba(0,0,0,.55);transition:transform .35s}
+  .hero-art img{display:block;width:100%;height:auto}
+  .hero-art .c1{top:0;right:0;transform:rotate(3.5deg)}
+  .hero-art .c2{top:30%;left:0;transform:rotate(-3deg);z-index:2}
+  .hero-art .c3{bottom:0;right:4%;transform:rotate(2deg);z-index:3}
+  .hero-art a:hover{transform:rotate(0) translateY(-6px)}
+}
+.hero-text{display:grid;gap:24px}
+
+/* the covers float, follow the pointer a little, and take turns in front (site.js) */
+@media (min-width:900px){
+  .hero-art a{transform:translate(var(--dx,0px),var(--dy,0px)) rotate(var(--r,0deg));transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .4s;animation:hero-float 7s ease-in-out infinite;will-change:transform}
+  .hero-art .c1{--r:3.5deg;animation-delay:-1.5s}
+  .hero-art .c2{--r:-3deg;animation-delay:-4s;animation-duration:8s}
+  .hero-art .c3{--r:2deg;animation-delay:-6s;animation-duration:6.5s}
+  .hero-art a:hover,.hero-art a.front{--r:0deg;transform:translate(var(--dx,0px),var(--dy,0px)) rotate(0deg) scale(1.06);z-index:6;box-shadow:0 44px 80px -30px rgba(0,0,0,.65)}
+}
+@keyframes hero-float{0%,100%{translate:0 0}50%{translate:0 -12px}}
+@media (prefers-reduced-motion:reduce){.hero-art a{animation:none!important;transition:none!important}}
+
+/* titles of a project: a smaller type */
+.cs-hero h1{font-size:clamp(24px,3.4vw,42px);line-height:1.12}
+.cs h2{font-size:clamp(21px,2.6vw,28px)}
+.proj h3{font-size:17px}
+@media (max-width:599px){ .cs-hero h1{font-size:clamp(23px,6vw,26px)} .cs h2{font-size:clamp(20px,5.2vw,22px)} .work .proj h3{font-size:14px} }
+[data-page="projets"] .hero{padding-block:clamp(32px,6vw,72px) clamp(24px,4vw,40px)}
+
+/* the list of all projects: even spaces from the top to the cards */
+[data-page="projets"] .hero .wrap{gap:12px}
+[data-page="projets"] .hero{padding-block:clamp(28px,5vw,56px) clamp(24px,4vw,36px)}
+#liste-projets{padding-block:clamp(24px,4vw,40px) clamp(48px,7vw,88px)}
+#liste-projets .search{margin-bottom:16px}
+#liste-projets .count{margin:16px 0 22px}
+
+/* the home page: a Pinday screen drawn line by line, then coloured (large screens only) */
+.hero .hero-demo{display:grid;place-items:center;min-width:0;margin-top:8px}
+.hero-draw{max-width:230px}
+@media (min-width:900px){.hero-draw{max-width:none}}
+.hero-draw{width:min(100%,340px);height:auto;overflow:visible;transition:opacity .6s}
+.hero-draw.out{opacity:0}
+.hero-draw .ln,.hero-draw .dm{fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+.hero-draw .dm{stroke:var(--p);stroke-width:1.5}
+.hero-draw .gd{fill:none;stroke:var(--muted);stroke-width:1;stroke-dasharray:.02 .02;opacity:0}
+.hero-draw .fl{opacity:0}
+.hero-draw .tx{font:500 11px var(--f-body);fill:#6b6560;opacity:0}
+.hero-draw .tx.h1{font:700 18px var(--f-display);fill:#1b1a19}
+.hero-draw .tx.t{font:600 12px var(--f-body);fill:#1b1a19}
+.hero-draw .tx.sm{font:600 9px var(--f-body);fill:#1b1a19}
+.hero-draw .tx.av{font:700 10px var(--f-body);fill:#E8461F}
+.hero-draw .tx.btn{font:600 13px var(--f-body);fill:#fff}
+.hero-draw .tx.tb{font:500 8.5px var(--f-body)}
+.hero-draw.go .tx{animation:hd-fill .5s ease-out var(--d) forwards}
+.hero-draw .tg{font:500 12px var(--f-mono);fill:var(--p);opacity:0}
+.hero-draw.go .ln{animation:hd-draw .9s ease-out var(--d) forwards,hd-ink .5s ease-out 5.2s forwards}
+.hero-draw.go .ph{animation:hd-draw .9s ease-out var(--d) forwards,hd-ink .5s ease-out 5.2s forwards,hd-ph .4s ease-out 6.3s forwards}
+.hero-draw.go .soft{animation:hd-draw .9s ease-out var(--d) forwards,hd-ink .5s ease-out 5.2s forwards,hd-soft .5s ease-out 6.2s forwards}
+.hero-draw.go .dm{animation:hd-draw .9s ease-out var(--d) forwards}
+.hero-draw.go .gd{animation:hd-guide 4s ease-out var(--d) forwards}
+.hero-draw.go .fl{animation:hd-fill .7s ease-out var(--d) forwards}
+.hero-draw.go .tg{animation:hd-fill .5s ease-out var(--d) forwards}
+.hero-draw.go .ln{stroke-dasharray:1;}
+@keyframes hd-draw{to{stroke-dashoffset:0}}
+@keyframes hd-ink{to{stroke:#2a2f3a}}
+@keyframes hd-ph{to{opacity:0}}
+@keyframes hd-soft{to{stroke:transparent}}
+@keyframes hd-guide{0%{opacity:0}15%{opacity:.5}80%{opacity:.5}100%{opacity:0}}
+@keyframes hd-fill{to{opacity:var(--o,1)}}
+.hero-draw.still .ln,.hero-draw.still .dm{stroke-dashoffset:0;animation:none}
+.hero-draw.still .ln{stroke:#2a2f3a}
+.hero-draw.still .fl,.hero-draw.still .tg,.hero-draw.still .tx{opacity:1;animation:none}
+.hero-draw.still .ph{opacity:0}.hero-draw.still .soft{stroke:transparent}
+@media (max-width:899px){
+  [data-page="home"] .hero .wrap{grid-template-columns:minmax(0,1fr)}
+  [data-page="home"] .hero-text{display:contents}
+  [data-page="home"] .hero-text .btns{order:3}
+  [data-page="home"] .hero .hero-demo{order:2}
+}
+.hd-wrap{position:relative;width:100%;max-width:230px}
+@media (min-width:900px){.hd-wrap{max-width:340px}}
+.hd-wrap .hero-draw{display:block;width:100%;max-width:none}
+.hd-screen{position:absolute;left:15.33%;top:6.3%;width:69.33%;height:87.41%;overflow:hidden;border-radius:13.5%/5.9%;background:#fff;opacity:0;transition:opacity .9s;pointer-events:none}
+.hd-screen.show{opacity:1}
+.hd-wrap:has(.hd-screen.show) .dm,.hd-wrap:has(.hd-screen.show) .tg{opacity:0!important;transition:opacity .6s}
+/* depth: the phone is turned a little, with a slab behind it for its thickness and a soft shadow on the ground */
+.hero-demo{perspective:1100px}
+.hd-wrap{transform-style:preserve-3d;transform:rotateY(-18deg) rotateX(7deg) rotateZ(2deg);transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.hd-wrap:hover{transform:rotateY(-6deg) rotateX(2deg) rotateZ(0)}
+.hd-wrap::before{content:"";position:absolute;left:13.33%;top:5.19%;width:73.33%;height:89.63%;border-radius:15.5%/7%;background:linear-gradient(90deg,#3a3d46,#1b1d22);transform:translateZ(-22px) translateX(10px);box-shadow:0 0 0 1px #4a4e59}
+.hd-wrap::after{content:"";position:absolute;left:18%;right:8%;bottom:-4%;height:7%;background:radial-gradient(closest-side,rgba(0,0,0,.55),transparent);transform:translateZ(-40px);filter:blur(6px)}
+@media (prefers-reduced-motion:reduce){.hd-wrap{transition:none}}

@@ -135,7 +135,6 @@
       document.title = ptitle + " · Elodie Perring";
       title.textContent = ptitle;
       var kinds = tagsOf(p).map(label).join(", ");
-      document.getElementById("p-meta").textContent = T("Étude de cas · ", "Case study · ") + (S.status || kinds || T("Projet", "Project")) + (year(p) ? " · " + year(p) : "");
       var leadEl = document.getElementById("p-lead"), lead = S.resume && S.resume.reponse ? S.resume.reponse : excerpt(p, 190);
       if(lead) leadEl.textContent = lead; else leadEl.innerHTML = TODO("une phrase qui résume le projet", "one sentence that sums up the project");
 
@@ -156,6 +155,7 @@
       var date = p.date ? new Date(p.date).toLocaleDateString(EN ? "en-GB" : "fr-FR", {month:"long", year:"numeric"}) : "";
       var facts = [[T("Rôle", "Role"), S.role, T("ton rôle", "your role")], [T("Durée", "Duration"), S.duree, T("la durée", "the duration")],
                    [T("Outils", "Tools"), S.tools, T("les outils", "the tools")], [T("Statut", "Status"), S.status || date, T("le statut", "the status")]];
+      if(S.equipe) facts.splice(1, 0, [T("Équipe", "Team"), S.equipe, ""]);
       if(S.hideEmpty) facts = facts.filter(function(f){ return f[1]; });
       document.getElementById("p-info").innerHTML = facts.map(function(f){
         return "<div><span>" + f[0] + "</span><b>" + (f[1] ? esc(f[1]) : '<span class="todo">' + T("à compléter : ", "to complete: ") + esc(f[2]) + '</span>') + "</b></div>";

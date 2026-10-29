@@ -4,6 +4,7 @@ window.STUDIES_EN = {
     slider: true,
     legendes: ["The collection: search, filters, sorting, and a piece's page with a large image.", "AI search (a description or a photo) and statistics: the 10 most valuable items."],
     role: "Research, design and development",
+    equipe: "Individual",
     duree: "July 2026",
     tools: "Next.js, React, TypeScript, Google Sheets and Drive, Claude Haiku 5.5, Vercel",
     status: "Live, private access",
@@ -43,8 +44,9 @@ window.STUDIES_EN = {
     slider: true,
     legendes: ["Pinday on a computer and on a phone.", "Notes: write straight in the preview, with the slides next to it.", "Revision: summaries, flashcards and quizzes for each course.", "Pinday on a phone: schedule, notes, revision, exams."],
     role: "Product design, design and development",
+    equipe: "Individual",
     duree: "October 2026",
-    tools: "JavaScript, Google Drive and Sheets, Cloudflare, Liveblocks, AI",
+    tools: "JavaScript, Google Drive and Sheets, Cloudflare, Liveblocks, Stripe, AI",
     status: "Live, in French and English",
     resume: {
       probleme: "As a student, I saw how hard it is to stay organised and to take notes that really help, especially with slides.",
@@ -78,9 +80,10 @@ window.STUDIES_EN = {
   36: {
     slider: true,
     role: "Product design, design and development",
+    equipe: "Individual",
     duree: "July to October 2026",
     tools: "TypeScript, React, React Native, Tailwind CSS, PostgreSQL",
-    status: "In development, soon on the Play Store",
+    status: "Available on the Play Store and as a web app",
     resume: {
       probleme: "In a home there is a lot to do and to think about: the children's money, chores, meals, shopping.",
       reponse: "A single app that brings together everything a family needs day to day.",
@@ -98,7 +101,7 @@ window.STUDIES_EN = {
       ["Understand", "Pocket money used to be tracked in an external app, with a history that had to be kept. I wanted a tool of our own, simple enough for a child and reliable enough for a parent. Another problem came up at home: children forget that they have things to do."],
       ["Define the needs", "Two needs: lighten parents' mental load by bringing everything together, and give each child a clear account they understand on their own."],
       ["Design for each person", "For children: simple access (a family code, their first name, then a four-digit code), a big balance, and written requests instead of discussions. One interface per age: the youngest's keeps only the money, the points, the reward and the tasks. For parents: control, and modules to switch on only according to their needs. One rule: an operation is never deleted, it is corrected, so the history stays readable by everyone."],
-      ["Test and adjust", "The app is used by my family and is still in development. During testing it became clear that notifications with buttons right inside them would make the app simpler to use: you can answer without opening it. I also added the option of receiving an email every month with how the accounts have evolved."]
+      ["Test and adjust", "The app is live and used by my family. During testing it became clear that notifications with buttons right inside them would make the app simpler to use: you can answer without opening it. I also added the option of receiving an email every month with how the accounts have evolved."]
     ],
     reponses: [
       ["I don't want to keep everything in my head", "One place for the children's money, chores, meals and shopping.", "All in one place"],
@@ -115,6 +118,7 @@ window.STUDIES_EN = {
     includes: [2],
     slider: true,
     role: "Experience design (UX) and interface design (UI), visual identity",
+    equipe: "5 people",
     tools: "Figma, Google's design system",
     status: "Web application",
     resume: {
@@ -147,6 +151,7 @@ window.STUDIES_EN = {
   },
   35: {
     role: "Research (master's thesis)",
+    equipe: "Pair",
     duree: "November 2025 to July 2026",
     tools: "SUS, UEQ-S",
     status: "Thesis, Jönköping University",
@@ -193,6 +198,7 @@ window.STUDIES_EN = {
     slider: true,
     hideEmpty: true,
     role: "Information architecture and prototype of the online wiki",
+    equipe: "4 people",
     duree: "February 2025",
     tools: "Figma, print",
     status: "Card game",
@@ -237,6 +243,7 @@ window.STUDIES_EN = {
     slider: true,
     hideEmpty: true,
     role: "REST API and Vue.js interface development",
+    equipe: "4 people",
     duree: "January to February 2025",
     tools: "Vue.js, REST API",
     status: "Finished project, to improve",
@@ -261,6 +268,7 @@ window.STUDIES_EN = {
     slider: true,
     hideEmpty: true,
     role: "AI video creator",
+    equipe: "3 people",
     duree: "February 2025",
     tools: "ChatGPT, MidJourney, Runway, Adobe Premiere Pro, ElevenLabs",
     status: "Video",
@@ -354,6 +362,7 @@ window.STUDIES_EN = {
     slider: true,
     hideEmpty: true,
     role: "Creation of the series “Coach like a woman”",
+    equipe: "8 people",
     tools: "Drawing, video",
     status: "School project with UEFA and Amazon",
     resume: {
@@ -375,6 +384,7 @@ window.STUDIES_EN = {
     slider: true,
     hideEmpty: true,
     role: "Usability tests: moderator, then observer",
+    equipe: "4 people",
     status: "Testing assignment",
     resume: {
       probleme: "Test the usability of a banking app under development.",
@@ -435,6 +445,7 @@ window.STUDIES_EN = {
     slider: true,
     hideEmpty: true,
     role: "Design and development",
+    equipe: "Individual",
     tools: "Flutter, Android",
     status: "Android application",
     resume: {

@@ -13,6 +13,25 @@
   var navEl = document.querySelector(".nav");
   var setNav = function(){ if(navEl) root.style.setProperty("--nav", (navEl.getBoundingClientRect().height - 1) + "px"); };
   setNav(); window.addEventListener("resize", setNav); window.addEventListener("load", setNav);
+
+  // the home page: the covers on the right follow the pointer a little and take turns in front
+  var heroArt = document.querySelector(".hero-art");
+  if(heroArt && !matchMedia("(prefers-reduced-motion:reduce)").matches){
+    var cards = [].slice.call(heroArt.children), depth = [14, 26, 38], heroEl = document.getElementById("accueil"), over = false, turn = 0;
+    var wide = function(){ return matchMedia("(min-width:900px)").matches; };
+    heroEl.addEventListener("mousemove", function(e){
+      if(!wide()) return;
+      var r = heroEl.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width - .5, ny = (e.clientY - r.top) / r.height - .5;
+      cards.forEach(function(c, i){ c.style.setProperty("--dx", (-nx * depth[i] * 2).toFixed(1) + "px"); c.style.setProperty("--dy", (-ny * depth[i] * 2).toFixed(1) + "px"); });
+    });
+    heroEl.addEventListener("mouseleave", function(){ cards.forEach(function(c){ c.style.setProperty("--dx", "0px"); c.style.setProperty("--dy", "0px"); }); });
+    heroArt.addEventListener("mouseenter", function(){ over = true; cards.forEach(function(c){ c.classList.remove("front"); }); });
+    heroArt.addEventListener("mouseleave", function(){ over = false; });
+    setInterval(function(){
+      if(over || document.hidden || !wide()) return;
+      cards.forEach(function(c){ c.classList.remove("front"); }); cards[turn % cards.length].classList.add("front"); turn++;
+    }, 3200);
+  }
   var year = document.getElementById("year"); if(year) year.textContent = new Date().getFullYear();
 
   // the menu shows where you are: on the home page it follows the section you are reading

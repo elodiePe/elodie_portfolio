@@ -11,6 +11,7 @@ window.STUDIES = {
     slider: true,
     legendes: ["La collection : recherche, filtres, tri, et la fiche d'une pièce avec une grande image.", "La recherche par IA (une description ou une photo) et les statistiques : les 10 objets les plus précieux."],
     role: "Recherche, conception et développement",
+    equipe: "Individuel",
     duree: "Juillet 2026",
     tools: "Next.js, React, TypeScript, Google Sheets et Drive, Claude Haiku 5.5, Vercel",
     status: "En ligne, accès privé",
@@ -50,8 +51,9 @@ window.STUDIES = {
     slider: true,
     legendes: ["Pinday sur ordinateur et sur téléphone.", "Les notes : écrire dans l'aperçu, avec les diapositives à côté.", "La révision : résumés, cartes et quiz pour chaque cours.", "Pinday sur téléphone : emploi du temps, notes, révision, examens."],
     role: "Conception produit, design et développement",
+    equipe: "Individuel",
     duree: "Octobre 2026",
-    tools: "JavaScript, Google Drive et Sheets, Cloudflare, Liveblocks, IA",
+    tools: "JavaScript, Google Drive et Sheets, Cloudflare, Liveblocks, Stripe, IA",
     status: "En ligne, en français et en anglais",
     resume: {
       probleme: "Étudiante, j'ai vu à quel point il est difficile de rester organisé et de prendre des notes qui servent vraiment, surtout avec des slides.",
@@ -85,9 +87,10 @@ window.STUDIES = {
   36: {
     slider: true,
     role: "Conception produit, design et développement",
+    equipe: "Individuel",
     duree: "Juillet à octobre 2026",
     tools: "TypeScript, React, React Native, Tailwind CSS, PostgreSQL",
-    status: "En développement, bientôt sur le Play Store",
+    status: "Disponible sur le Play Store et en application web",
     resume: {
       probleme: "Dans une maison, il y a beaucoup à faire et à penser : l'argent des enfants, les tâches, les repas, les courses.",
       reponse: "Une seule application qui centralise tout ce dont une famille a besoin au quotidien.",
@@ -105,7 +108,7 @@ window.STUDIES = {
       ["Comprendre", "Avant, l'argent de poche était suivi dans une application externe, avec un historique qu'il fallait pouvoir garder. Je voulais un outil à nous, simple pour un enfant et assez fiable pour un parent. Un autre problème est revenu à la maison : les enfants oublient qu'ils ont des choses à faire."],
       ["Définir les besoins", "Deux besoins : alléger la charge mentale des parents en centralisant tout, et donner à chaque enfant un compte clair, qu'il comprend seul."],
       ["Concevoir pour chacun", "Pour les enfants : un accès simple (un code famille, son prénom, puis un code à quatre chiffres), un solde en grand, et des demandes écrites plutôt que des discussions. Une interface par âge : celle des plus jeunes ne garde que l'argent, les points, la récompense et les tâches. Pour les parents : le contrôle, et des modules à activer seulement selon leurs besoins. Une règle : on ne supprime jamais une opération, on la corrige, pour que l'historique reste lisible par tous."],
-      ["Tester et ajuster", "L'application est utilisée par ma famille et encore en développement. Pendant les tests, il est apparu clairement que des notifications avec des boutons directement dedans simplifieraient l'usage : on répond sans ouvrir l'application. J'ai aussi ajouté le choix de recevoir chaque mois un e-mail avec l'évolution des comptes."]
+      ["Tester et ajuster", "L'application est en ligne et utilisée par ma famille. Pendant les tests, il est apparu clairement que des notifications avec des boutons directement dedans simplifieraient l'usage : on répond sans ouvrir l'application. J'ai aussi ajouté le choix de recevoir chaque mois un e-mail avec l'évolution des comptes."]
     ],
     reponses: [
       ["Je ne veux plus tout garder en tête", "Un seul endroit pour l'argent des enfants, les tâches, les repas et les courses.", "Tout au même endroit"],
@@ -122,6 +125,7 @@ window.STUDIES = {
     includes: [2],
     slider: true,
     role: "Conception de l'expérience (UX) et de l'interface (UI), identité visuelle",
+    equipe: "5 personnes",
     tools: "Figma, système de design de Google",
     status: "Application web",
     resume: {
@@ -154,6 +158,7 @@ window.STUDIES = {
   },
   35: {
     role: "Recherche (mémoire de master)",
+    equipe: "Binôme",
     duree: "Novembre 2025 à juillet 2026",
     tools: "SUS, UEQ-S",
     status: "Mémoire, Jönköping University",
@@ -200,6 +205,7 @@ window.STUDIES = {
     slider: true,
     hideEmpty: true,
     role: "Architecture de l'information et prototype du wiki en ligne",
+    equipe: "4 personnes",
     duree: "Février 2025",
     tools: "Figma, impression",
     status: "Jeu de cartes",
@@ -244,6 +250,7 @@ window.STUDIES = {
     slider: true,
     hideEmpty: true,
     role: "Développement de l'API REST et de l'interface en Vue.js",
+    equipe: "4 personnes",
     duree: "Janvier à février 2025",
     tools: "Vue.js, API REST",
     status: "Projet terminé, à améliorer",
@@ -268,6 +275,7 @@ window.STUDIES = {
     slider: true,
     hideEmpty: true,
     role: "Création de vidéo par IA",
+    equipe: "3 personnes",
     duree: "Février 2025",
     tools: "ChatGPT, MidJourney, Runway, Adobe Premiere Pro, ElevenLabs",
     status: "Vidéo",
@@ -361,6 +369,7 @@ window.STUDIES = {
     slider: true,
     hideEmpty: true,
     role: "Création de la série « Coach like a woman »",
+    equipe: "8 personnes",
     tools: "Dessin, vidéo",
     status: "Projet d'école avec UEFA et Amazon",
     resume: {
@@ -382,6 +391,7 @@ window.STUDIES = {
     slider: true,
     hideEmpty: true,
     role: "Tests d'utilisabilité : modération, puis observation",
+    equipe: "4 personnes",
     status: "Mission de test",
     resume: {
       probleme: "Tester l'utilisabilité d'une application bancaire en cours de développement.",
@@ -442,6 +452,7 @@ window.STUDIES = {
     slider: true,
     hideEmpty: true,
     role: "Conception et développement",
+    equipe: "Individuel",
     tools: "Flutter, Android",
     status: "Application Android",
     resume: {

@@ -130,7 +130,8 @@
     box.appendChild(head);
 
     var grid = el("div", "story-grid"), stage = el("div", "story-stage"), steps = el("ol", "story-steps");
-    var solo = S.device === "laptop";   // a story told on a laptop only: no phone
+    // a story told on a laptop only: no phone, except on a small screen, where the app is shown in its phone version (a laptop would be too small to touch)
+    var solo = S.device === "laptop" && window.matchMedia("(min-width:600px)").matches;
     var frame = el("div", solo ? "laptop-frame solo" : "phone-frame");
     var bar = el("div", "statusbar"), time = el("span", "time", ""), sig = el("span", "sig", "●●●● ▮"); bar.appendChild(time); bar.appendChild(sig);
     var hostWrap = el("div", "screen-wrap");
@@ -172,6 +173,46 @@
     }
     stage.appendChild(el("p", "story-legend", S.legend || ""));
 
+    // on a small screen the list of steps gives way to one card at a time (swipe, arrows, dots), under the mockup, and a full screen button
+    var EN = window.I18N && I18N.lang === "en";
+    var card = el("div", "story-card"), cardTop = el("div", "step-top"), cardWhen = el("span", "when"), cardTag = el("span", "tag");
+    var cardH = el("h4"), cardP = el("p"), cardNav = el("div", "story-nav");
+    var prevBtn = el("button", null, "\u2039"), nextBtn = el("button", null, "\u203A"), fsBtn = el("button", "fs", "");
+    prevBtn.type = nextBtn.type = fsBtn.type = "button";
+    prevBtn.setAttribute("aria-label", EN ? "Previous step" : "Étape précédente"); nextBtn.setAttribute("aria-label", EN ? "Next step" : "Étape suivante");
+    var fsOpen = EN ? "Full screen" : "Plein écran", fsClose = EN ? "Close" : "Fermer";
+    fsBtn.textContent = "\u2922  " + fsOpen; fsBtn.hidden = solo;
+    var cardCount = el("span", "count"); cardTop.appendChild(cardWhen); cardTop.appendChild(cardTag); cardTop.appendChild(cardCount);
+    cardNav.appendChild(prevBtn); cardNav.appendChild(nextBtn); cardNav.appendChild(fsBtn);
+    card.appendChild(cardTop); card.appendChild(cardH); card.appendChild(cardP); card.appendChild(cardNav);
+    card.setAttribute("aria-live", "polite");
+    stage.appendChild(card);
+    // full screen: the phone keeps its own size and is scaled to the room left by the tabs, the card and the dots
+    var fitFs = function(){
+      if(!box.classList.contains("fs")) return;
+      var st = stage.getBoundingClientRect(), cs = getComputedStyle(stage);
+      var padV = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom), padH = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight), gap = parseFloat(cs.rowGap) || 10;
+      var availH = st.height - padV - tabs.offsetHeight - card.offsetHeight - dots.offsetHeight - gap * 3 - 6, availW = st.width - padH - 8;
+      frame.style.setProperty("--s", Math.max(.5, Math.min(availW / 292, availH / 600, 1.5)).toFixed(3));
+    };
+    var setFs = function(on){
+      box.classList.toggle("fs", on); document.body.classList.toggle("story-fs", on);
+      fsBtn.textContent = on ? "\u2715  " + fsClose : "\u2922  " + fsOpen;
+      if(on) setTimeout(fitFs, 30); else { frame.style.removeProperty("--s"); stage.scrollIntoView({block: "start"}); }
+    };
+    window.addEventListener("resize", fitFs);
+    window.addEventListener("orientationchange", function(){ setTimeout(fitFs, 200); });
+    fsBtn.addEventListener("click", function(){ setFs(!box.classList.contains("fs")); });
+    document.addEventListener("keydown", function(e){ if(e.key === "Escape" && box.classList.contains("fs")) setFs(false); });
+    var tx = 0, ty = 0;
+    card.addEventListener("touchstart", function(e){ tx = e.changedTouches[0].clientX; ty = e.changedTouches[0].clientY; }, {passive: true});
+    card.addEventListener("touchend", function(e){
+      var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+      if(Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) step(dx < 0 ? Math.min(cur + 1, S.steps.length - 1) : Math.max(cur - 1, 0));
+    }, {passive: true});
+    prevBtn.addEventListener("click", function(){ step(Math.max(cur - 1, 0)); });
+    nextBtn.addEventListener("click", function(){ step(Math.min(cur + 1, S.steps.length - 1)); });
+
     var lis = [], dotEls = [], cur = -1;
     S.steps.forEach(function(s, i){
       var li = el("li", "step " + s.k); li.setAttribute("data-i", i);
@@ -187,6 +228,8 @@
     function go(i){
       if(i === cur) return; cur = i; var s = S.steps[i];
       time.textContent = s.w;
+      cardWhen.textContent = s.w; cardTag.textContent = s.k === "p" ? (S.before || "Avant") : (S.after || "Après"); cardTag.className = "tag " + s.k;
+      cardCount.textContent = (i + 1) + " / " + S.steps.length; cardH.textContent = s.t; cardP.textContent = s.x; prevBtn.disabled = i === 0; nextBtn.disabled = i === S.steps.length - 1;
       mood.textContent = s.m || (s.k === "p" ? "😣" : "😊"); mood.classList.remove("hop"); void mood.offsetWidth; mood.classList.add("hop");
       frame.classList.toggle("pain", s.k === "p"); frame.classList.toggle("ans", s.k === "a");
       if(s.th) frame.setAttribute("data-theme", s.th); else frame.removeAttribute("data-theme");
@@ -218,7 +261,14 @@
         else if(embeds[k]) embeds[k].hide();
       });
     }
-    function jump(i){ if(i < 0) return; go(i); if(window.matchMedia("(min-width:900px)").matches) lis[i].scrollIntoView({block: "center", behavior: reduced ? "auto" : "smooth"}); }
+    // on a small screen the mockup stays pinned under the menu and the page scrolls through one empty slot per step: scrolling down brings the next card
+    function slotTo(i){
+      var nav = document.querySelector(".nav"), toc = document.querySelector(".toc");
+      var bandY = (nav ? nav.offsetHeight : 0) + (toc ? toc.offsetHeight : 0) + stage.offsetHeight + 24;
+      window.scrollTo(0, lis[i].getBoundingClientRect().top + window.pageYOffset - bandY + 6);
+    }
+    function step(i){ go(i); if(!window.matchMedia("(min-width:900px)").matches && !box.classList.contains("fs")) slotTo(i); }
+    function jump(i){ if(i < 0) return; go(i); if(!window.matchMedia("(min-width:900px)").matches && !box.classList.contains("fs")) slotTo(i); if(window.matchMedia("(min-width:900px)").matches) lis[i].scrollIntoView({block: "center", behavior: reduced ? "auto" : "smooth"}); }
     go(0);
     // the step that is "read" is the one in a band of the screen: the middle on a large screen, just under the phone on a small one
     var io = null;
@@ -228,7 +278,7 @@
       var h = window.innerHeight, top, bottom;
       var lap = false;
       if(window.matchMedia("(min-width:900px)").matches && !lap){ top = h * .42; bottom = h * .42; }
-      else { var nav = document.querySelector(".nav"), toc = document.querySelector(".toc"); top = Math.min(h * .75, (nav ? nav.offsetHeight : 0) + (lap || !toc ? 0 : toc.offsetHeight) + stage.offsetHeight + 12); bottom = Math.max(0, h - top - 170); }
+      else { var nav = document.querySelector(".nav"), toc = document.querySelector(".toc"); top = Math.min(h * .85, (nav ? nav.offsetHeight : 0) + (toc ? toc.offsetHeight : 0) + stage.offsetHeight + 24); bottom = Math.max(0, h - top - 2); }
       io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) go(Number(e.target.getAttribute("data-i"))); }); }, {rootMargin: "-" + Math.round(top) + "px 0px -" + Math.round(bottom) + "px 0px"});
       lis.forEach(function(l){ io.observe(l); });
     }
